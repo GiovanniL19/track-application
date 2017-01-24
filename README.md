@@ -1,5 +1,5 @@
-# track
-Train management application for mobile
+# Track
+A Train management application for mobile with a stunning user interface and smart features such as predictions and recommendations
 
 
 #Background
