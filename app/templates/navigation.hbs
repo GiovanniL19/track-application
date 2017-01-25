@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="col-xs-2">
+      <ul class="nav navbar-nav">
+        {{#side-menu-toggle}}
+          <li><a href="#" ><img src="assets/icons/menuIcon.png" width="34px"></a></li>
+        {{/side-menu-toggle}}
+      </ul>
+    </div>
+
+    <div class="col-xs-10 text-right">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" class="selected">{{material-design-icon name='directions-transit'}}</a></li>
+        <li><a href="#">{{material-design-icon name='query-builder'}}</a></li>
+        <li><a href="#">{{material-design-icon name='star'}}</a></li>
+        <li><a href="#">{{material-design-icon name='face'}}</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{{#side-menu width="100%"}}
+  <header class="navbar">
+    <div class="col-xs-2">
+      <ul class="nav navbar-nav">
+        {{#side-menu-toggle}}
+          <li><a href="#" ><img src="assets/icons/closeMenuIcon.png" width="23px"></a></li>
+        {{/side-menu-toggle}}
+      </ul>
+    </div>
+
+    <div class="col-xs-10 text-right">
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </header>
+  <ul class="nav">
+    <li class="with-icon">{{material-design-icon name='directions-transit'}} <p>Find Trains</p></li>
+    <li class="with-icon">{{material-design-icon name='track-changes'}} <p>Predicted Journeys</p></li>
+    <li class="with-icon">{{material-design-icon name='query-builder'}} <p>Arrival & Departure Board</p></li>
+    <li class="with-icon">{{material-design-icon name='star'}} <p>Starred Routes</p></li>
+    <li class="with-icon">{{material-design-icon name='face'}} <p>Account</p></li>
+
+  </ul>
+{{/side-menu}}

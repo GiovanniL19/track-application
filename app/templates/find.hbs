@@ -1,0 +1,24 @@
+<div class="search">
+  <div class="row">
+    <div class="col-xs-5">
+      <h5>Where to today?</h5>
+    </div>
+
+    <div class="col-xs-7">
+
+    </div>
+  </div>
+  <div class="row input-fields">
+    <div class="form-group">
+      <label for="from">From</label>
+      <div class="input-group">
+        {{input type="text" class="form-control" value=fromStation id="from" placeholder="e.g London Euston" describedby="from"}}
+        <span class="input-group-addon" id="from">{{material-design-icon name='my-location'}}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="to">To</label>
+      {{input type="text" class="form-control" value=toStation id="to" placeholder="e.g Liverpool Lime Street"}}
+    </div>
+  </div>
+</div>
