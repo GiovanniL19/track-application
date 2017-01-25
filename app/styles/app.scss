@@ -29,7 +29,7 @@ $navHeight: 4.5em;
     height: 3.5em;
     width: 100%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
+    color:white;
   &:focus{
       outline:0;
       background: #FF5859;
@@ -135,7 +135,7 @@ h5{
 /* 3: Find */
 .search{
   background: $darkBlue;
-  min-height: 20em;
+  height: 23em;
   padding: 1.5em 0em;
   .date-time{
     .form-control {
@@ -215,16 +215,28 @@ h5{
 }
 
 /* 2: Cards */
-.cards{
-  margin-top:1em;
-  overflow:auto;
-  height: 38vh;
+.cards-head {
+  height: 2em;
+  margin-top: 1em;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  @include btn;
+  .btn-generate{
+    height: 2.5em;
+    width: 6em;
+    margin-top:-1em;
+  }
   h5{
     font-size:0.8em;
     color:$font;
     font-weight:400;
     margin-bottom:1em;
   }
+}
+.cards{
+  padding-top: 0.5em;
+  overflow:auto;
+  height: 38vh;
   .card{
     background: white;
     margin: 0 auto;
