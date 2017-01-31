@@ -56,7 +56,6 @@ $navHeight: 4.5em;
       margin-bottom: 1em;
     }
     .card-train {
-      padding:0.8em 0;
       height: auto;
       .good{
         color:$green;
@@ -65,8 +64,7 @@ $navHeight: 4.5em;
         color:$red;
       }
       .platform{
-        padding-left:1.6em;
-        padding-bottom: 0.2em;
+        padding:0.5em 0 0.2em 1.6em;
         font-weight: 600;
         font-size:0.9em;
       }
@@ -78,6 +76,7 @@ $navHeight: 4.5em;
       .status{
         font-weight:bold;
         text-align:right;
+        font-size:0.8em;
       }
       .destination{
         padding-left:1.5em;
