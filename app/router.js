@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('find');
   this.route('navigation');
+  this.route('board');
 });
 
 export default Router;

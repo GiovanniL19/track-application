@@ -6,48 +6,119 @@ $lighterBlue: #304355;
 $red: #F64747;
 $font: #545454;
 $backColour: #F7F7F7;
+$green: #3EC791;
+
 $navHeight: 4.5em;
 
 @mixin inputFields() {
-  .form-control{
+  .form-control {
     height: 4em;
     border-radius: 2px;
     border: none;
     color: $font;
     font-weight: bold;
     font-size: 0.9em;
-    &:focus{
-      outline:0;
+    &:focus {
+      outline: 0;
     }
   }
 }
+
 @mixin btn() {
-  .btn{
+  .btn {
     border-radius: 0.2em;
     border: none;
     background: $red;
     height: 3.5em;
     width: 100%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    color:white;
-  &:focus{
-      outline:0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: white;
+    &:focus {
+      outline: 0;
       background: #FF5859;
     }
   }
 }
 
+@mixin cards() {
+  .cards {
+    padding-top: 0.5em;
+    overflow: auto;
+    height: 38vh;
+    padding-bottom: 2em;
+    .card {
+      background: white;
+      margin: 0 auto;
+      width: 90%;
+      border-radius: 2px;
+      box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
+      height: 5.5em;
+      margin-bottom: 1em;
+    }
+    .card-train {
+      padding:0.8em 0;
+      height: auto;
+      .good{
+        color:$green;
+      }
+      .bad{
+        color:$red;
+      }
+      .platform{
+        padding-left:1.6em;
+        padding-bottom: 0.2em;
+        font-weight: 600;
+        font-size:0.9em;
+      }
+      .time{
+        font-size: 1.3em;
+        font-weight:600;
+        padding:0em 0 0.3em 0.3em;
+      }
+      .status{
+        font-weight:bold;
+        text-align:right;
+      }
+      .destination{
+        padding-left:1.5em;
+        font-size: 0.9em;
+      }
+    }
+    .card-recommended {
+      .no-route{
+        line-height:5.3em;
+      }
+      .icon {
+        line-height: 6em;
+        color: $red;
+      }
+      .from-to {
+        margin-top: 0.9em;
+        font-size: 0.9em;
+        line-height: 2em;
+        padding-left: 2em;
+        color: $font;
+      }
+      .stations {
+        margin-top: 0.9em;
+        font-size: 0.9em;
+        line-height: 2em;
+        p {
+          color: $font;
+        }
+      }
+    }
+  }
+}
 
 /* 1: General */
 .content {
   margin-top: $navHeight - 0.1;
 }
-*{
-  margin:0;
-  padding:0;
-  -webkit-transition: ease-in-out 0.1s;
-  &:focus{
-    outline:0;
+
+* {
+  &:focus {
+    outline: 0;
   }
   a {
     &:focus {
@@ -55,22 +126,25 @@ $navHeight: 4.5em;
     }
   }
 }
-body, html{
-  overflow:hidden;
-  height:100vh;
-  background:$backColour;
-  color:$font;
+
+body, html {
+  overflow: hidden;
+  height: 100vh;
+  background: $backColour;
+  color: $font;
 }
-h5{
-  margin:0;
-  color:white;
-  height:1.3em;
+
+h5 {
+  margin: 0;
+  color: white;
+  height: 1.3em;
 }
 
 *:not(input):not(textarea) {
   -webkit-user-select: none; /* disable selection/Copy of UIWebView */
   -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
 }
+
 //Fixes gutter issue
 .row {
   margin-left: 0px;
@@ -78,15 +152,15 @@ h5{
 }
 
 /* 2: Navigation */
-.side-menu{
+.side-menu {
   background: $darkBlue;
-  box-shadow:none;
-  .nav{
-    .with-icon{
-      padding:1em;
-      color:white;
-      line-height:1.5em;
-      p{
+  box-shadow: none;
+  .nav {
+    .with-icon {
+      padding: 1em;
+      color: white;
+      line-height: 1.5em;
+      p {
         margin: 0 0 10px;
         display: inline;
         position: absolute;
@@ -96,18 +170,22 @@ h5{
     }
   }
 }
-.side-menu-toggle{
-  padding-left:1em;
+
+.side-menu-toggle {
+  padding-left: 1em;
 }
+
 .container-fluid {
   padding-left: 0;
   padding-right: 0;
 }
+
 .navbar-default {
+  -webkit-transition: ease-in-out 0.1s;
   background: $lighterBlue;
   border: none;
   height: $navHeight;
-  margin:0;
+  margin: 0;
   .nav {
     li {
       display: inline-block;
@@ -120,9 +198,9 @@ h5{
           color: white;
         }
         &:focus {
-          outline:0;
-          color:white;
-          border:none;
+          outline: 0;
+          color: white;
+          border: none;
         }
         &:active {
           transform: scale(1.1);
@@ -132,140 +210,198 @@ h5{
   }
 }
 
-/* 3: Find */
-.search{
-  background: $darkBlue;
-  height: 23em;
-  padding: 1.5em 0em;
-  .date-time{
-    .form-control {
-      background: white;
-      width: 9em;
-      font-size: 11px;
-      font-weight: bold;
-      float: right;
-      box-shadow: none;
-      border: none;
-      left: 0.5em;
-    }
-    .input-group-addon{
-      background:white;
-      border:none;
-      border-top-right-radius:2px;
-      border-bottom-right-radius:2px;
-      .mdi{
-        font-size:20px;
+/* 3: Cards*/
+@include cards;
+
+/* 4: Search */
+.find {
+  .search {
+    background: $darkBlue;
+    height: 23em;
+    padding: 1.5em 0em;
+    .date-time {
+      .form-control {
+        background: white;
+        width: 9em;
+        font-size: 11px;
+        font-weight: bold;
+        float: right;
+        box-shadow: none;
+        border: none;
+        left: 0.5em;
       }
-    }
-  }
-  label{
-    color:white;
-    font-weight:400;
-    font-size:11px;
-  }
-  .form-group{
-    @include inputFields;
-    margin:0;
-    padding: 0.5em 1em;
-    .input-group{
-      width:100%;
-      .form-control{
-        border-radius:2px;
-        border-top-right-radius:0;
-        border-bottom-right-radius:0;
-      }
-      .input-group-addon{
-        background: $red;
-        color:white;
-        border:none;
-        border-radius:0;
-        border-top-right-radius:2px;
-        border-bottom-right-radius:2px;
-        width: 4em;
+      .input-group-addon {
+        background: white;
+        border: none;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
         .mdi {
           font-size: 20px;
         }
       }
     }
-  }
-  .submit{
-    padding:1em;
-    @include btn;
-    .buttons{
-      margin:0;
-      padding:0;
+    label {
+      color: white;
+      font-weight: 400;
+      font-size: 11px;
     }
-    .btn-star{
-      background: $lighterBlue;
-      color:white;
-      margin:0 0 0 0.5em;
-      width: 90%;
-      height: 3.5em;
-      line-height: 3.5em;
-    }
-
-  }
-  small{
-    color: white;
-    font-size: 9px;
-    display: block;
-    padding: 0;
-    margin: 0;
-  }
-}
-
-/* 2: Cards */
-.cards-head {
-  height: 2em;
-  margin-top: 1em;
-  padding: 0.5em;
-  margin-bottom: 0.5em;
-  @include btn;
-  .btn-generate{
-    height: 2.5em;
-    width: 6em;
-    margin-top:-1em;
-  }
-  h5{
-    font-size:0.8em;
-    color:$font;
-    font-weight:400;
-    margin-bottom:1em;
-  }
-}
-.cards{
-  padding-top: 0.5em;
-  overflow:auto;
-  height: 38vh;
-  padding-bottom:2em;
-  .card{
-    background: white;
-    margin: 0 auto;
-    width: 90%;
-    border-radius: 2px;
-    box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
-    height: 5.5em;
-    margin-bottom: 1em;
-  }
-  .card-recommended{
-    .icon{
-      line-height: 5.5em;
-      color:$red;
-    }
-    .from-to{
-      margin-top:0.9em;
-      font-size:0.9em;
-      line-height:2em;
-      padding-left:2em;
-      color:$font;
-    }
-    .stations{
-      margin-top:0.9em;
-      font-size:0.9em;
-      line-height:2em;
-      p{
-        color:$font;
+    .form-group {
+      @include inputFields;
+      margin: 0;
+      padding: 0.5em 1em;
+      .input-group {
+        width: 100%;
+        .form-control {
+          border-radius: 2px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        .input-group-addon {
+          background: $red;
+          color: white;
+          border: none;
+          border-radius: 0;
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+          width: 4em;
+          .mdi {
+            font-size: 20px;
+          }
+        }
       }
     }
+    .submit {
+      padding: 1em;
+      @include btn;
+      .buttons {
+        margin: 0;
+        padding: 0;
+      }
+      .btn-star {
+        background: $lighterBlue;
+        color: white;
+        margin: 0 0 0 0.5em;
+        width: 90%;
+        height: 3.5em;
+        line-height: 3.5em;
+      }
+
+    }
+    small {
+      color: white;
+      font-size: 9px;
+      display: block;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .cards-head {
+    height: 2em;
+    margin-top: 1em;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    @include btn;
+    .btn-generate {
+      height: 2.5em;
+      width: 6em;
+      margin-top: -1em;
+    }
+    h5 {
+      font-size: 0.8em;
+      color: $font;
+      font-weight: 400;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+/* 5: Board Search*/
+.board {
+  overflow-y:scroll;
+  height:100vh;
+  padding-bottom: 2em;
+  .board-search {
+    background: $darkBlue;
+    padding: 1.5em 0em;
+    .col {
+      margin: 0;
+      padding: 0;
+    }
+    .type {
+      margin-left: 1em;
+      width: 90%;
+    }
+    .form-group {
+      @include inputFields;
+      margin: 0;
+      padding: 0.5em 1em;
+      .input-group {
+        width: 100%;
+        .form-control {
+          border-radius: 2px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+    .date-time {
+      .form-control {
+        background: white;
+        width: 9em;
+        font-size: 11px;
+        font-weight: bold;
+        float: right;
+        box-shadow: none;
+        border: none;
+        left: 0.5em;
+      }
+    }
+    label {
+      color: white;
+      font-weight: 400;
+      font-size: 11px;
+    }
+    .submit {
+      padding: 1em;
+      @include btn;
+      .buttons {
+        margin: 0;
+        padding: 0;
+      }
+      .btn-star {
+        background: $lighterBlue;
+        color: white;
+        margin: 0 0 0 0.5em;
+        width: 90%;
+        height: 3.5em;
+        line-height: 3.5em;
+      }
+
+    }
+    small {
+      color: white;
+      font-size: 9px;
+      display: block;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .cards-head {
+    @include btn;
+    .btn-message {
+      height: 2.5em;
+      width: 6em;
+      margin-top: -2em;
+    }
+    h5 {
+      font-size: 0.8em;
+      color: $font;
+      font-weight: 400;
+      margin-bottom: 1em;
+    }
+  }
+  .cards {
+    overflow: hidden;
+    height: auto;
   }
 }
