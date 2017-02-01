@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
   toStation: "",
   dateTime: "",
   actions: {
-
+    showDateTimeSelect: function(){
+      Ember.$('#timeDateSelect').modal();
+    }
   }
 });

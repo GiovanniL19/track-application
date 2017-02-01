@@ -33,6 +33,7 @@ $navHeight: 4.5em;
     width: 100%;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     color: white;
+    text-transform: uppercase;
     &:focus {
       outline: 0;
       background: #FF5859;
@@ -107,6 +108,22 @@ $navHeight: 4.5em;
         }
       }
     }
+  }
+}
+
+/* 0: Modal */
+.modal-dialog {
+  top: 30%;
+  .modal-content {
+    border-radius: 3px;
+  }
+  .modal-header{
+    border:none;
+  }
+  .modal-footer{
+    border:none;
+    text-align:center;
+    @include btn;
   }
 }
 
