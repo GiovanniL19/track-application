@@ -10,6 +10,9 @@ export default Ember.Route.extend({
     }catch(e){
       console.log(e);
     }
-    controller.transitionToRoute("find");
+
+    if(this.get('router.url') === "/"){
+      controller.transitionToRoute("find");
+    }
   }
 });
