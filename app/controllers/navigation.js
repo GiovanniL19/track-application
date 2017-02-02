@@ -35,6 +35,20 @@ export default Ember.Controller.extend({
     "12:00",
     "12:30"
   ],
+  message: "",
+
+  messageObserver: function(){
+    if(this.get("message")){
+
+      let controller = this;
+
+      setTimeout(function(){
+        controller.set("message", null);
+      }, 5000);
+    }
+  }.observes("message"),
+
+
   actions:{
     selectTime: function(value){
       this.set("timeSelected", value);
@@ -78,8 +92,13 @@ export default Ember.Controller.extend({
       //Combine time and date and get timestamp
       var timestamp = moment(getDateTimestamp + " " + formatTime, "DD/MM/YYYY HH:mm").unix();
 
-      //Send timestamp to find controller
-      this.set("find.dateTime", timestamp);
+      if(timestamp < moment().unix()){
+        console.log("date is in past");
+        this.set("message", "The departure time cannot be in the past");
+      }else{
+        //Send timestamp to find controller
+        this.set("find.dateTime", timestamp);
+      }
     }
   }
 });
