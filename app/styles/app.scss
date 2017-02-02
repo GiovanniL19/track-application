@@ -34,6 +34,9 @@ $navHeight: 4.5em;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     color: white;
     text-transform: uppercase;
+    &:active{
+      background: #FF5859;
+    }
     &:focus {
       outline: 0;
       background: #FF5859;
@@ -111,11 +114,51 @@ $navHeight: 4.5em;
   }
 }
 
+.datepicker-inline {
+  width: 100%;
+}
+.datepicker table {
+  width: 100%;
+  tr > td {
+    padding: 1em;
+  }
+  tr td.today {
+    background: $lighterBlue !important;
+    border: none;
+    color: white;
+    border-radius: 0;
+  }
+  tr td.active.active {
+    background: $red !important;
+    border: none;
+    color:white;
+    border-radius: 0;
+  }
+}
+
 /* 0: Modal */
 .modal-dialog {
-  top: 30%;
+  .close {
+    opacity:1;
+    box-shadow: none;
+    color:$font;
+  }
   .modal-content {
     border-radius: 3px;
+    color: white;
+    margin-top: 30%;
+    h4{
+      text-align:center;
+      color:$font;
+    }
+    .form-control{
+      margin: 1em 0;
+      border-radius: 2px;
+      box-shadow: none;
+      border: none;
+      height: 4em;
+      background: #f3f3f3;
+    }
   }
   .modal-header{
     border:none;
@@ -124,6 +167,15 @@ $navHeight: 4.5em;
     border:none;
     text-align:center;
     @include btn;
+    .btn-primary{
+      background:$lighterBlue;
+      border:none;
+      box-shadow:none;
+      color: white;
+      &:focus, &:active{
+        background:white;
+      }
+    }
   }
 }
 
@@ -219,7 +271,7 @@ h5 {
           border: none;
         }
         &:active {
-          transform: scale(1.1);
+          transform: scale(1.2);
         }
       }
     }

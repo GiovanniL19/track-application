@@ -1,12 +1,48 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  find: Ember.inject.controller(),
   page:{
     find: true,
     board: false
   },
-
+  date: null,
+  timeSelected: "1:00",
+  timeType: "AM",
+  timeList: [
+    "1:00",
+    "1:30",
+    "2:00",
+    "2:30",
+    "3:00",
+    "3:30",
+    "4:00",
+    "4:30",
+    "5:00",
+    "5:30",
+    "6:00",
+    "6:30",
+    "7:00",
+    "7:30",
+    "8:00",
+    "8:30",
+    "9:00",
+    "9:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "12:00",
+    "12:30"
+  ],
   actions:{
+    selectTime: function(value){
+      this.set("timeSelected", value);
+    },
+    selectType: function(value){
+      this.set("timeType", value);
+      console.log(this.get("date"));
+    },
     changePage: function(route){
       //Resets page type
       this.set("page", {
@@ -27,7 +63,23 @@ export default Ember.Controller.extend({
 
       //Transition to route
       this.transitionToRoute(route);
+    },
+    finaliseInput: function(){
+      Ember.$("#timeDateSelect").modal("hide");
 
+      //Get time and date from user input
+      var time = this.get("timeSelected") + " " + this.get("timeType");
+      var date = this.get("date");
+
+      //Format time and date separate
+      var formatTime  = moment(time, "hh:mm A").format("HH:mm");
+      var getDateTimestamp = moment(date).format("DD/MM/YYYY");
+
+      //Combine time and date and get timestamp
+      var timestamp = moment(getDateTimestamp + " " + formatTime, "DD/MM/YYYY HH:mm").unix();
+
+      //Send timestamp to find controller
+      this.set("find.dateTime", timestamp);
     }
   }
 });

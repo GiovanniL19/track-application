@@ -13,7 +13,10 @@
         </div>
         <div class="col-xs-4 col">
           <label for="type" class="type">Board</label>
-          {{input type="text" class="form-control type" value=type placeholder="Departure" describedby="type"}}
+          <select class="form-control type" onchange={{action 'selectType' value="target.value"}} describedby="type">
+            <option value="AM">Departures</option>
+            <option value="PM">Arrivals</option>
+          </select>
         </div>
       </div>
 
