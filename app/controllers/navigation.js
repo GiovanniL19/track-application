@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  session: Ember.inject.service('session'),
   find: Ember.inject.controller(),
   page:{
     find: true,
@@ -47,8 +48,13 @@ export default Ember.Controller.extend({
       }, 5000);
     }
   }.observes("message"),
-
-
+  isLoggedIn: function(){
+    if(this.get('session.isAuthenticated')){
+      return true;
+    }else{
+      return false;
+    }
+  }.property('session'),
   actions:{
     selectTime: function(value){
       this.set("timeSelected", value);

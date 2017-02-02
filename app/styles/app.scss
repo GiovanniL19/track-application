@@ -89,7 +89,10 @@ $navHeight: 4.5em;
     }
     .card-recommended {
       .no-route{
-        line-height:5.3em;
+        margin-top: 1.3em;
+        padding-left: 2em;
+        font-size:1em;
+        color:#888;
       }
       .icon {
         line-height: 6em;
@@ -122,9 +125,9 @@ $navHeight: 4.5em;
   height: 4em;
   margin: 0;
   color: white;
-  background: #22313f;
-  border-radius: 0;
+  background: $lighterBlue;
   border: none;
+  border-radius: 0;
   font-weight: bold;
   .close{
     opacity:1;
@@ -201,6 +204,14 @@ $navHeight: 4.5em;
 /* 1: General */
 .content {
   margin-top: $navHeight - 0.1;
+}
+.listMessage{
+  padding:1em;
+  h5{
+    margin-top:20%;
+    color:#888;
+    font-weight:300;
+  }
 }
 
 * {
@@ -302,6 +313,29 @@ h5 {
 
 /* 4: Search */
 .find {
+  height: 92vh;
+  .listMessage{
+    background: url("images/scene.png") top no-repeat;
+    background-size:cover;
+    height:45vh;
+    padding:1em;
+    h5{
+      margin:0;
+      color:white;
+      font-weight:300;
+      font-size:1.1em;
+    }
+    a{
+      font-weight:bold;
+      margin-top:1em;
+      color: white;
+      display: block;
+      &:focus, &:active, &:hover{
+        text-decoration: none;
+        transform: scale(1.2);
+      }
+    }
+  }
   .search {
     background: $darkBlue;
     height: 23em;

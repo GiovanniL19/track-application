@@ -35,43 +35,50 @@
     </div>
   </div>
 
-  <div class="row cards-head">
-    <div class="col-xs-8">
-      <h5>Recommended Routes</h5>
+  {{#unless navigation.isLoggedIn}}
+    <div class="listMessage text-center">
+      <h5>Where could Track take you?</h5>
+      <a>{{material-design-icon name='face'}} <br>Login Here</a>
     </div>
-    <div class="col-xs-4 text-right">
-      <button class="btn btn-generate">{{material-design-icon name='track-changes'}}</button>
+  {{else}}
+    <div class="row cards-head">
+      <div class="col-xs-8">
+        <h5>Recommended Routes</h5>
+      </div>
+      <div class="col-xs-4 text-right">
+        <button class="btn btn-generate">{{material-design-icon name='sync'}}</button>
+      </div>
     </div>
-  </div>
 
-  <div class="cards">
-    {{#each recommendedRoutes as |card|}}
-      <div class="card card-recommended row">
-        <div class="col-xs-1 icon">
-          {{material-design-icon name='track-changes'}}
+    <div class="cards">
+      {{#each recommendedRoutes as |card|}}
+        <div class="card card-recommended row">
+          <div class="col-xs-1 icon">
+            {{material-design-icon name='cloud'}}
+          </div>
+          <div class="col-xs-2 from-to">
+            <p>
+              From: <br>
+              To:
+            </p>
+          </div>
+          <div class="col-xs-8 stations">
+            <p>
+              <strong>London Euston (EUS)</strong><br>
+              <strong>Liverpool Lime Street (LIV)</strong>
+            </p>
+          </div>
         </div>
-        <div class="col-xs-2 from-to">
-          <p>
-            From: <br>
-            To:
-          </p>
+      {{else}}
+        <div class="card card-recommended row">
+          <div class="col-xs-1 icon">
+            {{material-design-icon name='cloud-off'}}
+          </div>
+          <div class="col-xs-10 no-route">
+            Looks like their is a problem connecting to our servers, please try again
+          </div>
         </div>
-        <div class="col-xs-8 stations">
-          <p>
-            <strong>London Euston (EUS)</strong><br>
-            <strong>Liverpool Lime Street (LIV)</strong>
-          </p>
-        </div>
-      </div>
-    {{else}}
-      <div class="card card-recommended row">
-        <div class="col-xs-1 icon">
-          {{material-design-icon name='track-changes'}}
-        </div>
-        <div class="col-xs-10 no-route">
-          <strong>No Routes to recommended</strong>
-        </div>
-      </div>
-    {{/each}}
-  </div>
+      {{/each}}
+    </div>
+  {{/unless}}
 </div>

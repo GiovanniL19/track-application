@@ -44,9 +44,32 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
 
+  if (environment === 'production' || environment === 'release'){
+    //Sets up authentication
+    ENV['ember-simple-auth'] = {
+      authorizer: 'authorizer:token'
+    };
+    ENV['ember-simple-auth-token'] = {
+      serverTokenEndpoint: 'http://localhost:3002/auth'
+    };
+
+    //Minify the CSS and JavaScript
+    minifyCSS: {
+      enabled: true
+    }
+    minifyJS: {
+      enabled: true
+    }
+
+  }else{
+    //Sets up authentication
+    ENV['ember-simple-auth'] = {
+      authorizer: 'authorizer:token'
+    };
+    ENV['ember-simple-auth-token'] = {
+      serverTokenEndpoint: 'http://localhost:3002/auth'
+    };
   }
-
   return ENV;
 };

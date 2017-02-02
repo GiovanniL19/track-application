@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
 
   actions: {
     showDateTimeSelect: function(){
+      this.set("navigation.date", moment(Date.now())).format("DD/MM/YYYY");
       Ember.$('#timeDateSelect').modal();
     }
   }
