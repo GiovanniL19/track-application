@@ -9,6 +9,7 @@ export default DS.Model.extend({
   firstName: DS.attr("string"),
   lastName: DS.attr("string"),
   email: DS.attr("string"),
+  image: DS.attr("string"),
 
   //Login details
   username: DS.attr("string"),
@@ -21,5 +22,9 @@ export default DS.Model.extend({
 
   //Routes
   staredRoutes: DS.hasMany("route", {async: true, defaultValue: [], inverse: "stared"}),
-  routesHistory: DS.hasMany("route", {async: true, defaultValue: [], inverse: "history"})
+  routesHistory: DS.hasMany("route", {async: true, defaultValue: [], inverse: "history"}),
+
+  fullName: function(){
+    return this.get("firstName") + " " + this.get("lastName");
+  }.property("firstName", "lastName")
 });

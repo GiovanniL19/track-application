@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('navigation');
   this.route('board');
   this.route('likes');
+  this.route('account');
 });
 
 export default Router;

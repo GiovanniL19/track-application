@@ -2,10 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
+  sideMenu: Ember.inject.service(),
   find: Ember.inject.controller(),
   page:{
     find: true,
-    board: false
+    board: false,
+    likes: false,
+    account: false
   },
   date: null,
   timeSelected: "1:00",
@@ -83,6 +86,11 @@ export default Ember.Controller.extend({
 
       //Transition to route
       this.transitionToRoute(route);
+
+      //Close menu when linked clicked if menu is open
+      if(this.get("sideMenu.isOpen")){
+        this.get("sideMenu").close();
+      }
     },
     finaliseInput: function(){
       Ember.$("#timeDateSelect").modal("hide");

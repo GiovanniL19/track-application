@@ -13,7 +13,7 @@
         <li><a {{action "changePage" "find"}} class="{{if page.find "selected"}}">{{material-design-icon name='directions-transit'}}</a></li>
         <li><a {{action "changePage" "board"}} class="{{if page.board "selected"}}">{{material-design-icon name='query-builder'}}</a></li>
         <li><a {{action "changePage" "likes"}} class="{{if page.likes "selected"}}">{{material-design-icon name='favorite'}}</a></li>
-        <li><a href="#">{{material-design-icon name='face'}}</a></li>
+        <li><a {{action "changePage" "account"}} class="{{if page.account "selected"}}">{{material-design-icon name='face'}}</a></li>
       </ul>
     </div>
   </div>
@@ -38,8 +38,8 @@
     <li class="with-icon" {{action "changePage" "find"}}>{{material-design-icon name='directions-transit'}} <p>Find Trains</p></li>
     <li class="with-icon" {{action "changePage" "board"}}>{{material-design-icon name='query-builder'}} <p>Arrival & Departure Board</p></li>
     <li class="with-icon" {{action "changePage" "likes"}}>{{material-design-icon name='favorite'}} <p>Liked Routes</p></li>
+    <li class="with-icon" {{action "changePage" "account"}}>{{material-design-icon name='face'}} <p>Account</p></li>
 
-    <li class="with-icon">{{material-design-icon name='face'}} <p>Account</p></li>
     <li class="with-icon">{{material-design-icon name='vpn-key'}} <p>Register</p></li>
     <li class="with-icon">{{material-design-icon name='lock-open'}} <p>Login</p></li>
   </ul>

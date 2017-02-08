@@ -1,8 +1,26 @@
 export default function() {
   this.transition(
     this.fromRoute('find'),
-    this.toRoute('board'),
-    this.use('toLeft', { duration: 500 }),
-    this.reverse('toRight', { duration: 500 })
+    this.use('toLeft'),
+    this.reverse('toRight')
   );
+
+  this.transition(
+    this.fromRoute('board'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
+  this.transition(
+    this.fromRoute('likes'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
+  this.transition(
+    this.fromRoute('account'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
 }
