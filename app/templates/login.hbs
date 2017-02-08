@@ -1,0 +1,21 @@
+<div class="login">
+  <div class="row icon">
+    {{material-design-icon name='face'}}
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="identification">Username or Email</label>
+      {{input type="text" class="form-control" id="identification" value=identification}}
+
+      <label for="pass">Password</label>
+      {{input type="password" class="form-control" id="pass" value=password}}
+    </div>
+  </div>
+
+  <div class="row buttons text-center">
+    <button class="btn btn-primary">Login</button>
+    <br><br>
+    {{#link-to "register"}}Register{{/link-to}}
+  </div>
+</div>

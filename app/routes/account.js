@@ -6,12 +6,16 @@ export default Ember.Route.extend({
     return null
   },
   setupController: function(controller, model){
-    controller.set("model", model);
-    controller.set('navigation.page',{
-      find: false,
-      board: false,
-      likes: false,
-      account: true
-    });
+    if(controller.get('session.isAuthenticated')){
+      controller.set("model", model);
+      controller.set('navigation.page', {
+        find: false,
+        board: false,
+        likes: false,
+        account: true
+      });
+    }else{
+      controller.transitionToRoute("login");
+    }
   }
 });

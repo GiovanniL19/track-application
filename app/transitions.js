@@ -23,4 +23,16 @@ export default function() {
     this.reverse('toRight')
   );
 
+  this.transition(
+    this.fromRoute('login'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
+  this.transition(
+    this.fromRoute('register'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
 }

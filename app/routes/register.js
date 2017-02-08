@@ -5,11 +5,11 @@ export default Ember.Route.extend({
     controller.set('navigation.page',{
       find: false,
       board: false,
-      likes: true,
+      likes: false,
       account: false,
       accountAccess: {
         login: false,
-        register: false
+        register: true
       }
     });
   }

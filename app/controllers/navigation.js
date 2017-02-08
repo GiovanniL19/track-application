@@ -8,7 +8,11 @@ export default Ember.Controller.extend({
     find: true,
     board: false,
     likes: false,
-    account: false
+    account: false,
+    accountAccess:{
+      login: false,
+      register: false
+    }
   },
   date: null,
   timeSelected: "1:00",

@@ -18,6 +18,8 @@ $navHeight: 4.5em;
 // 5 - Board Search
 // 6 - Liked Routes
 // 7 - Account
+// 8 - Login
+// 9 - Register
  */
 
 @mixin inputFields() {
@@ -288,7 +290,7 @@ h5 {
 
 /* 2: Navigation */
 .side-menu {
-  background: $darkBlue;
+  background: rgba(34, 49, 63, 0.94);
   li.with-icon:active {
     background: rgba(255, 255, 255, 0.27);
   }
@@ -319,6 +321,10 @@ h5 {
 
 .navbar-nav{
   margin-right:-0.4em;
+  h5 {
+    margin-top: 1em;
+    margin-right: 0.5em;
+  }
 }
 .navbar-default {
   -webkit-transition: ease-in-out 0.1s;
@@ -588,7 +594,6 @@ h5 {
 
 /* 7: Account*/
 .account {
-  overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
   .header {
@@ -644,5 +649,104 @@ h5 {
         width:8em;
       }
     }
+  }
+}
+
+/* 8: Login*/
+.login {
+  height: 100vh;
+  padding-bottom: 2em;
+  background: $darkBlue;
+  padding: 1em;
+  padding-top: 4em;
+  .icon{
+    color:white;
+    text-align: center;
+    i{
+      font-size:4em;
+    }
+  }
+  .form-group{
+    margin:0;
+    margin-top:2em;
+    label{
+      font-weight:400;
+      font-size:0.9em;
+      color: white;
+      margin-top:1.5em;
+    }
+    .form-control{
+      background: white;
+      color:$font;
+      height:3.5em;
+      border:none;
+      border-radius:2px;
+    }
+  }
+  .buttons{
+    margin:0;
+    padding:0;
+    margin-top: 1em;
+    @include btn();
+  }
+  a{
+    color: white;
+    margin-top:2em;
+    display: block;
+  }
+}
+
+
+/* 9: Register*/
+.register {
+  height: 94vh;
+  padding-bottom: 2em;
+  background: $darkBlue;
+  padding: 1em;
+  padding-top: 4em;
+  .icon{
+    color:white;
+    text-align: center;
+    i{
+      font-size:4em;
+    }
+  }
+  .form-group{
+    margin:0;
+    margin-top:2em;
+    label{
+      font-weight:400;
+      font-size:0.9em;
+      color: white;
+      margin-top:1em;
+    }
+    .form-control{
+      background: white;
+      color:$font;
+      height:3.5em;
+      border:none;
+      border-radius:2px;
+    }
+  }
+  .buttons{
+    position: fixed;
+    bottom: 2em;
+    left: 0;
+    width: 100%;
+    padding: 1em;
+    @include btn();
+  }
+  a{
+    color: white;
+    margin-top:2em;
+    display: block;
+  }
+  small{
+    padding:0;
+    margin-top:1em;
+    display: block;
+    color:white;
+    font-size:0.8em;
+    font-weight: 300;
   }
 }

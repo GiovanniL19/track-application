@@ -6,7 +6,11 @@ export default Ember.Route.extend({
       find: true,
       board: false,
       likes: false,
-      account: false
+      account: false,
+      accountAccess: {
+        login: false,
+        register: false
+      }
     });
   }
 });
