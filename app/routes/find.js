@@ -4,7 +4,8 @@ export default Ember.Route.extend({
   setupController: function(controller){
     controller.set('navigation.page',{
       find: true,
-      board: false
+      board: false,
+      likes: false
     });
   }
 });

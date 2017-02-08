@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('find');
   this.route('navigation');
   this.route('board');
+  this.route('likes');
 });
 
 export default Router;

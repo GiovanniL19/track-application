@@ -7,8 +7,17 @@ $red: #F64747;
 $font: #545454;
 $backColour: #F7F7F7;
 $green: #3EC791;
-
 $navHeight: 4.5em;
+
+/*
+// 0 - MODAL
+// 1 - GENERAL
+// 2 - NAVIGATION
+// 3 - CARDS
+// 4 - Find
+// 5 - Board Search
+// 6 - Liked Routes
+ */
 
 @mixin inputFields() {
   .form-control {
@@ -34,7 +43,7 @@ $navHeight: 4.5em;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     color: white;
     text-transform: uppercase;
-    &:active{
+    &:active {
       background: #FF5859;
     }
     &:focus {
@@ -61,40 +70,65 @@ $navHeight: 4.5em;
     }
     .card-train {
       height: auto;
-      .good{
-        color:$green;
+      .good {
+        color: $green;
       }
-      .bad{
-        color:$red;
+      .bad {
+        color: $red;
       }
-      .platform{
-        padding:0.5em 0 0.2em 1.6em;
+      .platform {
+        padding: 0.5em 0 0.2em 1.6em;
         font-weight: 600;
-        font-size:0.9em;
+        font-size: 0.9em;
       }
-      .time{
+      .time {
         font-size: 1.3em;
-        font-weight:600;
-        padding:0em 0 0.3em 0.3em;
+        font-weight: 600;
+        padding: 0em 0 0.3em 0.3em;
       }
-      .status{
-        font-weight:bold;
-        text-align:right;
-        font-size:0.8em;
+      .status {
+        font-weight: bold;
+        text-align: right;
+        font-size: 0.8em;
       }
-      .destination{
-        padding-left:1.5em;
+      .destination {
+        padding-left: 1.5em;
         font-size: 0.9em;
       }
     }
     .card-recommended {
-      .no-route{
+      .no-route {
         margin-top: 1.3em;
         padding-left: 2em;
-        font-size:1em;
-        color:#888;
+        font-size: 1em;
+        color: #888;
       }
       .icon {
+        line-height: 6em;
+        color: $red;
+      }
+      .from-to {
+        margin-top: 0.9em;
+        font-size: 0.9em;
+        line-height: 2em;
+        padding-left: 2em;
+        color: $font;
+      }
+      .stations {
+        margin-top: 0.9em;
+        font-size: 0.9em;
+        line-height: 2em;
+        p {
+          color: $font;
+        }
+      }
+    }
+    .card-route {
+      .icon {
+        line-height: 6em;
+        color: $green;
+      }
+      .remove {
         line-height: 6em;
         color: $red;
       }
@@ -117,7 +151,51 @@ $navHeight: 4.5em;
   }
 }
 
-.alert-warning{
+/* 0: Modal */
+.modal-dialog {
+  .close {
+    opacity: 1;
+    box-shadow: none;
+    color: $font;
+  }
+  .modal-content {
+    border-radius: 3px;
+    color: white;
+    margin-top: 30%;
+    h4 {
+      text-align: center;
+      color: $font;
+    }
+    .form-control {
+      margin: 1em 0;
+      border-radius: 2px;
+      box-shadow: none;
+      border: none;
+      height: 4em;
+      background: #f3f3f3;
+    }
+  }
+  .modal-header {
+    border: none;
+  }
+  .modal-footer {
+    border: none;
+    text-align: center;
+    @include btn;
+    .btn-primary {
+      background: $lighterBlue;
+      border: none;
+      box-shadow: none;
+      color: white;
+      &:focus, &:active {
+        background: white;
+      }
+    }
+  }
+}
+
+/* 1: General */
+.alert-warning {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -129,16 +207,17 @@ $navHeight: 4.5em;
   border: none;
   border-radius: 0;
   font-weight: bold;
-  .close{
-    opacity:1;
+  .close {
+    opacity: 1;
     box-shadow: none;
-    color:white;
+    color: white;
   }
 }
 
 .datepicker-inline {
   width: 100%;
 }
+
 .datepicker table {
   width: 100%;
   tr > td {
@@ -153,64 +232,21 @@ $navHeight: 4.5em;
   tr td.active.active {
     background: $red !important;
     border: none;
-    color:white;
+    color: white;
     border-radius: 0;
   }
 }
 
-/* 0: Modal */
-.modal-dialog {
-  .close {
-    opacity:1;
-    box-shadow: none;
-    color:$font;
-  }
-  .modal-content {
-    border-radius: 3px;
-    color: white;
-    margin-top: 30%;
-    h4{
-      text-align:center;
-      color:$font;
-    }
-    .form-control{
-      margin: 1em 0;
-      border-radius: 2px;
-      box-shadow: none;
-      border: none;
-      height: 4em;
-      background: #f3f3f3;
-    }
-  }
-  .modal-header{
-    border:none;
-  }
-  .modal-footer{
-    border:none;
-    text-align:center;
-    @include btn;
-    .btn-primary{
-      background:$lighterBlue;
-      border:none;
-      box-shadow:none;
-      color: white;
-      &:focus, &:active{
-        background:white;
-      }
-    }
-  }
-}
-
-/* 1: General */
 .content {
   margin-top: $navHeight - 0.1;
 }
-.listMessage{
-  padding:1em;
-  h5{
-    margin-top:20%;
-    color:#888;
-    font-weight:300;
+
+.listMessage {
+  padding: 1em;
+  h5 {
+    margin-top: 20%;
+    color: #888;
+    font-weight: 300;
   }
 }
 
@@ -252,6 +288,9 @@ h5 {
 /* 2: Navigation */
 .side-menu {
   background: $darkBlue;
+  li.with-icon:active {
+    background: rgba(255, 255, 255, 0.27);
+  }
   .nav {
     .with-icon {
       padding: 1em;
@@ -310,26 +349,26 @@ h5 {
 /* 3: Cards*/
 @include cards;
 
-/* 4: Search */
+/* 4: Find */
 .find {
   height: 92vh;
-  .listMessage{
+  .listMessage {
     background: url("images/scene.png") top no-repeat;
-    background-size:cover;
-    height:52%;
-    padding:1em;
-    h5{
-      margin:0;
-      color:white;
-      font-weight:300;
-      font-size:1.1em;
+    background-size: cover;
+    height: 52%;
+    padding: 1em;
+    h5 {
+      margin: 0;
+      color: white;
+      font-weight: 300;
+      font-size: 1.1em;
     }
-    a{
-      font-weight:bold;
-      margin-top:1em;
+    a {
+      font-weight: bold;
+      margin-top: 1em;
       color: white;
       display: block;
-      &:focus, &:active, &:hover{
+      &:focus, &:active, &:hover {
         text-decoration: none;
         transform: scale(1.2);
       }
@@ -437,8 +476,8 @@ h5 {
 
 /* 5: Board Search*/
 .board {
-  overflow-y:scroll;
-  height:100vh;
+  overflow-y: scroll;
+  height: 100vh;
   padding-bottom: 2em;
   .board-search {
     background: $darkBlue;
@@ -523,5 +562,21 @@ h5 {
   .cards {
     overflow: hidden;
     height: auto;
+  }
+}
+
+/* 6: Liked Routes*/
+.liked {
+  overflow-y: scroll;
+  height: 100vh;
+  padding-bottom: 2em;
+  .liked-header {
+    background: $darkBlue;
+    padding: 1.5em 0em;
+  }
+  .cards {
+    overflow: hidden;
+    height: auto;
+    margin-top:1em;
   }
 }
