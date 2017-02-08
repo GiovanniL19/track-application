@@ -1,0 +1,84 @@
+<div class="find">
+  <div class="search">
+    <div class="row">
+      <div class="col-xs-5">
+        <h5>Where to today?</h5>
+      </div>
+
+      <div class="col-xs-7 date-time">
+        <div class="input-group" {{action "showDateTimeSelect"}}>
+          {{input type="text" class="form-control" placeholder=dateSelected readonly="true" describedby="dateTime"}}
+          <span class="input-group-addon" id="dateTime">{{material-design-icon name='arrow-drop-down'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row input-fields">
+      <div class="form-group">
+        <label for="from">from</label>
+        <div class="input-group">
+          {{input type="text" class="form-control" value=fromStation id="from" placeholder="e.g London Euston" describedby="from"}}
+          <span class="input-group-addon" id="from">{{material-design-icon name='my-location'}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="to">to</label>
+        {{input type="text" class="form-control" value=toStation id="to" placeholder="e.g Liverpool Lime Street"}}
+      </div>
+      <div class="row submit">
+        <div class="col-xs-10 buttons">
+          <button class="btn btn-primary">FIND TRAINS</button>
+        </div>
+        <div class="col-xs-2 buttons">
+          <button class="btn btn-star">{{material-design-icon name='favorite-border'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{#unless navigation.isLoggedIn}}
+    <div class="listMessage text-center">
+      <h5>Where could Track take you?</h5>
+      <a>{{material-design-icon name='face'}} <br>Login Here</a>
+    </div>
+  {{else}}
+    <div class="row cards-head">
+      <div class="col-xs-8">
+        <h5>Recommended Routes</h5>
+      </div>
+      <div class="col-xs-4 text-right">
+        <button class="btn btn-generate">{{material-design-icon name='sync'}}</button>
+      </div>
+    </div>
+
+    <div class="cards">
+      {{#each recommendedRoutes as |card|}}
+        <div class="card card-recommended row">
+          <div class="col-xs-1 icon">
+            {{material-design-icon name='cloud'}}
+          </div>
+          <div class="col-xs-2 from-to">
+            <p>
+              From: <br>
+              To:
+            </p>
+          </div>
+          <div class="col-xs-8 stations">
+            <p>
+              <strong>London Euston (EUS)</strong><br>
+              <strong>Liverpool Lime Street (LIV)</strong>
+            </p>
+          </div>
+        </div>
+      {{else}}
+        <div class="card card-recommended row">
+          <div class="col-xs-1 icon">
+            {{material-design-icon name='cloud-off'}}
+          </div>
+          <div class="col-xs-10 no-route">
+            Looks like there is a problem connecting to our servers, please try again
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/unless}}
+</div>

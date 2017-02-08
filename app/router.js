@@ -7,6 +7,13 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('find');
+  this.route('navigation');
+  this.route('board');
+  this.route('likes');
+  this.route('account');
+  this.route('login');
+  this.route('register');
 });
 
 export default Router;

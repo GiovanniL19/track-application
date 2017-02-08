@@ -1,0 +1,38 @@
+<div class="liked">
+  <div class="liked-header">
+    <div class="row">
+      <div class="col-xs-5">
+        <h5>Liked Routes</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    {{#each routes as |route|}}
+      <div class="card card-route row">
+        <div class="col-xs-1 icon">
+          {{material-design-icon name='star'}}
+        </div>
+        <div class="col-xs-2 from-to">
+          <p>
+            From: <br>
+            To:
+          </p>
+        </div>
+        <div class="col-xs-8 stations">
+          <p>
+            <strong>{{route.from}}</strong><br>
+            <strong>{{route.to}}</strong>
+          </p>
+        </div>
+        <div class="col-xs-1 remove">
+          {{material-design-icon name='times'}}
+        </div>
+      </div>
+    {{else}}
+      <div class="text-center listMessage">
+        <h5>Station liked routes</h5>
+      </div>
+    {{/each}}
+  </div>
+</div>

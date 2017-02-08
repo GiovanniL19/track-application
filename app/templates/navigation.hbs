@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="col-xs-2">
+      <ul class="nav navbar-nav">
+        {{#side-menu-toggle}}
+          <li><a><img src="assets/icons/menuIcon.png" width="34px"></a></li>
+        {{/side-menu-toggle}}
+      </ul>
+    </div>
+
+    <div class="col-xs-10 text-right">
+      {{#if page.accountAccess.register}}
+        <ul class="nav navbar-nav navbar-right">
+          <li><h5>Register</h5></li>
+        </ul>
+      {{else}}
+        {{#if page.accountAccess.login}}
+        <ul class="nav navbar-nav navbar-right">
+          <li><h5>Login</h5></li>
+        </ul>
+        {{else}}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a {{action "changePage" "find"}} class="{{if page.find "selected"}}">{{material-design-icon name='directions-transit'}}</a></li>
+            <li><a {{action "changePage" "board"}} class="{{if page.board "selected"}}">{{material-design-icon name='query-builder'}}</a></li>
+            <li><a {{action "changePage" "likes"}} class="{{if page.likes "selected"}}">{{material-design-icon name='favorite'}}</a></li>
+            <li><a {{action "changePage" "account"}} class="{{if page.account "selected"}}">{{material-design-icon name='face'}}</a></li>
+          </ul>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</nav>
+
+{{#side-menu}}
+  <header class="navbar">
+    <div class="col-xs-2">
+      <ul class="nav navbar-nav">
+        {{#side-menu-toggle}}
+          <li><a><img src="assets/icons/closeMenuIcon.png" width="23px"></a></li>
+        {{/side-menu-toggle}}
+      </ul>
+    </div>
+
+    <div class="col-xs-10 text-right">
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </header>
+  <ul class="nav">
+    <li class="with-icon" {{action "changePage" "find"}}>{{material-design-icon name='directions-transit'}} <p>Find Trains</p></li>
+    <li class="with-icon" {{action "changePage" "board"}}>{{material-design-icon name='query-builder'}} <p>Arrival & Departure Board</p></li>
+    <li class="with-icon" {{action "changePage" "likes"}}>{{material-design-icon name='favorite'}} <p>Liked Routes</p></li>
+    <li class="with-icon" {{action "changePage" "account"}}>{{material-design-icon name='face'}} <p>Account</p></li>
+    {{#unless session.isAuthenticated}}
+      <li><br></li>
+      <li class="with-icon" {{action "changePage" "login"}}>{{material-design-icon name='lock-open'}} <p>Login</p></li>
+      <li class="with-icon" {{action "changePage" "register"}}>{{material-design-icon name='vpn-key'}} <p>Register</p></li>
+    {{/unless}}
+  </ul>
+{{/side-menu}}
+{{content-backdrop}}
