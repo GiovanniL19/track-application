@@ -1,8 +1,7 @@
 import DS from 'ember-data';
+import MF from 'model-fragments';
 
-export default DS.Model.extend({
-  type: DS.attr("string", {defaultValue: 'station'}),
-
+export default MF.Fragment.extend({
   name: DS.attr("string"),
   crs: DS.attr("string"),
   message: DS.attr("string"),

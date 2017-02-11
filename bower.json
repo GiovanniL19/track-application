@@ -4,6 +4,7 @@
     "ember": "~2.8.0",
     "ember-cli-shims": "0.1.1",
     "bootstrap-datepicker": "^1.6.4",
-    "blueimp-md5": "^2.6.0"
+    "blueimp-md5": "^2.6.0",
+    "typeahead.js": "^0.11.1"
   }
 }

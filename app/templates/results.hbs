@@ -2,7 +2,7 @@
   <div class="results-header">
     <div class="row">
       <div class="col-xs-1">{{#link-to "find"}}{{material-design-icon name='chevron-left'}}{{/link-to}}</div>
-      <div class="col-xs-11"><h5>{{origin}} to {{destination}}</h5></div>
+      <div class="col-xs-11"><h5>{{origin.name}} to {{destination.name}}</h5></div>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
             <div class="col-xs-1 text-left">{{material-design-icon name='chevron-right'}}</div>
             <div class="col-xs-3">{{train.arrivalTime}}</div>
           </div>
-          <div class="col-xs-3 status bad {{if train.isDelayed "good"}}">
+          <div class="col-xs-3 status {{if train.isDelayed "good"}} {{unless train.isDelayed "bad"}}">
             {{train.etd}}
           </div>
         </div>

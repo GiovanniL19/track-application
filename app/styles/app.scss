@@ -74,11 +74,11 @@ $navHeight: 4.5em;
     }
     .card-train {
       height: auto;
-      .good {
-        color: $green !important;
-      }
       .bad {
-        color: $red;
+        color: $red !important;
+      }
+      .good {
+        color: $green;
       }
       .platform {
         padding: 0.5em 0 0.2em 1.6em;
@@ -363,6 +363,24 @@ h5 {
 /* 4: Find */
 .find {
   height: 92vh;
+  .twitter-typeahead{
+    width:100%;
+    height:3.2em;
+    .tt-open{
+      background:white;
+      border:1px solid $lighterBlue;
+      border-top:none;
+      margin-top:0.3em;
+      padding:0 1em;
+      width:100%;
+      .tt-suggestion{
+        padding:1em 0;
+        &:last-child{
+          display:none;
+        }
+      }
+    }
+  }
   .listMessage {
     background: url("images/scene.png") top no-repeat;
     background-size: cover;

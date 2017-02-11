@@ -6,7 +6,7 @@ export default DS.Model.extend({
   stared: DS.belongsTo("user", {async: true, inverse: "staredRoutes"}),
   history: DS.belongsTo("user", {async: true, inverse: "routesHistory"}),
 
-  to: MF.fragment('station'),
-  from: MF.fragment('station'),
+  to: MF.fragment('station-fragment'),
+  from: MF.fragment('station-fragment'),
   user: DS.belongsTo("user", {async: true})
 });

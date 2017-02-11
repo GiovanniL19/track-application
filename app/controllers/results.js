@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  origin: "",
-  destination: ""
+  navigation: Ember.inject.controller(),
+  origin: null,
+  destination: null
 });
