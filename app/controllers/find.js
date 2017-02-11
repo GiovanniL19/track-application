@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
+  results: Ember.inject.controller(),
   session: Ember.inject.service('session'),
   fromStation: "",
   toStation: "",
@@ -16,6 +17,11 @@ export default Ember.Controller.extend({
     showDateTimeSelect: function(){
       this.set("navigation.date", moment(Date.now())).format("DD/MM/YYYY");
       Ember.$('#timeDateSelect').modal();
+    },
+    getTrains: function(){
+      this.set("results.origin", this.get("fromStation"));
+      this.set("results.destination", this.get("toStation"));
+      this.transitionToRoute("results");
     }
   }
 });

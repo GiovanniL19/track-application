@@ -20,6 +20,7 @@ $navHeight: 4.5em;
 // 7 - Account
 // 8 - Login
 // 9 - Register
+// 10 - Results
  */
 
 @mixin inputFields() {
@@ -65,7 +66,7 @@ $navHeight: 4.5em;
     .card {
       background: white;
       margin: 0 auto;
-      width: 90%;
+      width: 95%;
       border-radius: 2px;
       box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
       height: 5.5em;
@@ -74,7 +75,7 @@ $navHeight: 4.5em;
     .card-train {
       height: auto;
       .good {
-        color: $green;
+        color: $green !important;
       }
       .bad {
         color: $red;
@@ -748,5 +749,32 @@ h5 {
     color:white;
     font-size:0.8em;
     font-weight: 300;
+  }
+}
+
+/* 10: Results*/
+.results{
+  overflow-y: scroll;
+  height: 100vh;
+  padding-bottom: 2em;
+  padding-top:5em;
+  .results-header {
+    z-index:99999999;
+    background: $darkBlue;
+    padding: 1.7em 0em 1.5em 0em;
+    position: fixed;
+    width: 100%;
+    top:0;
+    h5{
+      margin-top: 0.2em;
+    }
+    a{
+      color:white;
+    }
+  }
+  .cards {
+    overflow: hidden;
+    height: auto;
+    margin-top:1em;
   }
 }
