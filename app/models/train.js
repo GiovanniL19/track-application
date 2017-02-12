@@ -16,10 +16,26 @@ export default DS.Model.extend({
   serviceID: DS.attr("string"),
 
   isDelayed: function(){
-    if(this.get("etd") === "On Time"){
+    if(this.get("etd") === "On time"){
       return false;
     }else{
       return true;
+    }
+  }.property("etd"),
+
+  status: function(){
+    if(this.get("etd") === "On time"){
+      return "On time";
+    }else{
+      return "Delayed";
+    }
+  }.property("etd"),
+
+  delayedDepartureTime: function(){
+    if(this.get("etd") === "Delayed"){
+      return "Awaiting";
+    }else{
+      return this.get("etd");
     }
   }.property("etd")
 });
