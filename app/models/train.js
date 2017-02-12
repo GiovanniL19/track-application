@@ -13,7 +13,6 @@ export default DS.Model.extend({
   operator: DS.attr("string"),
   operatorCode: DS.attr("string"),
   etd: DS.attr("string"),
-  serviceID: DS.attr("string"),
 
   isDelayed: function(){
     if(this.get("etd") === "On time"){
