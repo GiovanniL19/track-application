@@ -178,6 +178,11 @@ $navHeight: 4.5em;
     box-shadow: none;
     color: $font;
   }
+  .modal-body{
+    p{
+      color: #232323;
+    }
+  }
   .modal-content {
     border-radius: 3px;
     color: white;
