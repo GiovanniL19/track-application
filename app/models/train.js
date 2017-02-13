@@ -3,7 +3,7 @@ import MF from 'model-fragments';
 
 export default DS.Model.extend({
   type: DS.attr("string", {defaultValue: 'train'}),
-  callingPoints: MF.fragmentArray("station"),
+  callingPoints: MF.fragmentArray("station-fragment"),
   std: DS.attr("string"),
   arrivalStatus: DS.attr("string"),
   arrivalTime: DS.attr("string"),
@@ -36,5 +36,8 @@ export default DS.Model.extend({
     }else{
       return this.get("etd");
     }
-  }.property("etd")
+  }.property("etd"),
+  dateNow: function(){
+    return moment().format("DD/MM/YYYY");
+  }.property()
 });

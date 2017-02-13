@@ -68,7 +68,7 @@ $navHeight: 4.5em;
       margin: 0 auto;
       width: 95%;
       border-radius: 2px;
-      box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
+      //box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
       height: 5.5em;
       margin-bottom: 1em;
     }
@@ -114,6 +114,50 @@ $navHeight: 4.5em;
       .destination {
         padding-left: 1.5em;
         font-size: 0.9em;
+      }
+    }
+    .card-point {
+      position:relative;
+      margin-bottom:1.5em;
+      &:first-child:before {
+        display: none;
+      }
+      &:before{
+        position: absolute;
+        border: 0.2em solid $darkBlue;
+        width: 0;
+        height: 1.5em;
+        display: block;
+        content: '';
+        left: 50%;
+        z-index: 1;
+        top: -21px;
+        margin-left: -0.2em;
+      }
+      .icon {
+        line-height: 6em;
+      }
+      .good{
+        color: $green;
+      }
+      .bad{
+        color: $red
+      }
+      .name{
+        margin-top: 0.9em;
+        font-size: 0.9em;
+        line-height: 4em;
+        padding-left: 2em;
+        color: $font;
+        font-weight:bold;
+      }
+      .time {
+        margin-top: 0.5em;
+        line-height: 2em;
+        font-size: 1em;
+        p {
+          color: $font;
+        }
       }
     }
     .card-recommended {
@@ -270,7 +314,7 @@ $navHeight: 4.5em;
   padding: 1em;
   h5 {
     margin-top: 20%;
-    color: #888;
+    color: white;
     font-weight: 300;
   }
 }
@@ -291,6 +335,13 @@ body, html {
   height: 100vh;
   background: $backColour;
   color: $font;
+
+  //Fixes lag
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 h5 {
@@ -796,24 +847,78 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
-  padding-top:5em;
   .results-header {
     z-index:99999999;
     background: $darkBlue;
     padding: 1.7em 0em 1.5em 0em;
-    position: fixed;
     width: 100%;
     top:0;
+    color:white;
+    position:fixed;
+    @include btn;
+    .btn-buy {
+      height: 2.5em;
+      width: 6em;
+      margin-top: 5em;
+      position: absolute;
+      right: 1em;
+    }
     h5{
+      -webkit-transition: ease-in 0.4s;
       margin-top: 0.2em;
     }
     a{
       color:white;
     }
+    .platform{
+      font-size: 1em;
+      padding:0;
+      margin-top:1.1em;
+    }
+    .delayed{
+      color:$red;
+      font-size:0.7em;
+      font-weight:bold;
+    }
+    .notDelayed{
+      color: $green;
+      font-size:0.7em;
+      font-weight:bold;
+    }
+    .times{
+      font-size:1.4em;
+      padding-left:0.4em;
+      margin-top:1em;
+      i{
+        font-size:1.5em;
+      }
+    }
+  }
+  .selected-train{
+    color:white;
+    margin-top: 14em;
+  }
+  .list{
+    margin-top:5.5em;
+  }
+  .cards-head {
+    height: 2em;
+    margin-top: 1em;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    h5 {
+      font-size: 0.8em;
+      color: $font;
+      font-weight: 400;
+      margin-bottom: 1em;
+    }
   }
   .cards {
     overflow: hidden;
     height: auto;
-    margin-top:1em;
+  }
+  .large{
+    font-size:1.3em;
+    margin:0 !important;
   }
 }

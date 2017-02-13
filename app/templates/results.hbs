@@ -1,14 +1,7 @@
 <div class="results">
-  <div class="results-header">
-    <div class="row">
-      <div class="col-xs-1"><a {{action "back"}}>{{material-design-icon name='chevron-left'}}</a></div>
-      <div class="col-xs-11"><h5>{{origin.name}} to {{destination.name}}</h5></div>
-    </div>
-  </div>
-
-  {{#liquid-if service class="selectTrain"}}
+  {{#if service}}
     {{partial "partials/selected-train"}}
   {{else}}
     {{partial "partials/train-cards"}}
-  {{/liquid-if}}
+  {{/if}}
 </div>

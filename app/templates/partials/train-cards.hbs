@@ -1,4 +1,12 @@
-<div class="cards">
+<div class="results-header">
+  <div class="row">
+    <div class="col-xs-1"><a {{action "back"}}>{{material-design-icon name='chevron-left'}}</a></div>
+    <div class="col-xs-11 {{if service "col-xs-12"}}">
+      <h5 class="text-right">{{origin.name}} to {{destination.name}}</h5>
+    </div>
+  </div>
+</div>
+<div class="cards list">
   {{#each model as |train|}}
     <div class="card card-train" {{action "selectService" train}}>
       <div class="row">
