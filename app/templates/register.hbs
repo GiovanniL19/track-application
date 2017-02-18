@@ -6,19 +6,20 @@
 
   <div class="row">
     <div class="form-group">
-      <label for="newUsername">Username</label>
-      {{input type="text" class="form-control" id="newUsername" value=username}}
+      <label for="newEmail">Email</label>
+      {{input type="text" class="form-control" id="newEmail" value=email}}
 
       <label for="fName">Full Name</label>
       {{input type="text" class="form-control" id="fName" value=fullName}}
 
       <label for="newPassword">Password</label>
-      {{input type="text" class="form-control" id="newPassword" value=password}}
+      {{input type="password" class="form-control" id="newPassword" value=password}}
+      <small>Must be at least 8 characters long, contain minimum of one upper and lower case, and include one digit</small>
     </div>
   </div>
 
   <div class="row buttons text-center">
-    <button class="btn btn-primary">Register</button>
+    <button class="btn btn-primary" {{action "registerAccount"}}>Register</button>
     <small>By registering an account with us, you accept to the terms and conditions. Your data is safe, we do not share information to third parties</small>
   </div>
 </div>
