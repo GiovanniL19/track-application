@@ -35,4 +35,8 @@ export default function() {
     this.reverse('toRight')
   );
 
+  this.transition(
+    this.hasClass('selectTrain'),
+    this.use('fade')
+  );
 }

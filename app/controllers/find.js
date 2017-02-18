@@ -2,7 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
+  results: Ember.inject.controller(),
   session: Ember.inject.service('session'),
+  stations: [],
+  filter: [],
   fromStation: "",
   toStation: "",
   dateTime: null,
@@ -16,6 +19,33 @@ export default Ember.Controller.extend({
     showDateTimeSelect: function(){
       this.set("navigation.date", moment(Date.now())).format("DD/MM/YYYY");
       Ember.$('#timeDateSelect').modal();
+    },
+    getTrains: function(){
+      let controller = this;
+
+      if(this.get("fromStation") && this.get("toStation")){
+        if(this.get('fromStation') !== this.get("toStation")){
+          var from = "";
+          var to = "";
+
+          this.get("stations").forEach(function (station) {
+            if (station.get("name") === controller.get("fromStation")) {
+              from = station;
+            }
+
+            if (station.get("name") === controller.get("toStation")) {
+              to = station;
+            }
+          });
+          this.set("results.origin", from);
+          this.set("results.destination", to);
+          this.transitionToRoute("results");
+        }else{
+          this.set("navigation.message", "From and to stations must be valid");
+        }
+      }else{
+        this.set("navigation.message", "Please ensure you have a to and from station");
+      }
     }
   }
 });

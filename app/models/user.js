@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import MF from 'model-fragments';
 
 export default DS.Model.extend({
-  type: DS.attr("string", {defaultValue: 'User'}),
+  type: DS.attr("string", {defaultValue: 'user'}),
   dateCreated: DS.attr("number"),
 
   //Basic information

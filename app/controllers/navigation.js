@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   sideMenu: Ember.inject.service(),
+  board: Ember.inject.controller(),
   find: Ember.inject.controller(),
   page:{
     find: true,
