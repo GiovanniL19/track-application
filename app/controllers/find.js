@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
   results: Ember.inject.controller(),
   session: Ember.inject.service('session'),
   stations: [],
-  filter: [],
   fromStation: "",
   toStation: "",
   dateTime: null,
@@ -37,6 +36,7 @@ export default Ember.Controller.extend({
               to = station;
             }
           });
+
           this.set("results.origin", from);
           this.set("results.destination", to);
           this.transitionToRoute("results");

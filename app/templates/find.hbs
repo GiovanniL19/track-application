@@ -16,13 +16,15 @@
       <div class="form-group">
         <label for="from">from</label>
         <div class="input-group">
-          {{twitter-typeahead class="form-control" content=stations filterContent=filter footerTemplate=find displayKey="name" valueToken="name" value=fromStation id="from" placeholder="e.g London Euston" describedby="from"}}
+          {{station-search content=stations value=fromStation id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
           <span class="input-group-addon" id="from">{{material-design-icon name='my-location'}}</span>
         </div>
       </div>
       <div class="form-group">
         <label for="to">to</label>
-        {{twitter-typeahead class="form-control" content=stations filterContent=filter displayKey="name" valueToken="name" value=toStation id="to" placeholder="e.g Liverpool Lime Street"}}
+        <div class="input-group">
+          {{station-search content=stations value=toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+        </div>
       </div>
       <div class="row submit">
         <div class="col-xs-10 buttons">

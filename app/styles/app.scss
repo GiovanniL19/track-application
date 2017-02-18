@@ -63,13 +63,15 @@ $navHeight: 4.5em;
     overflow: auto;
     height: 38vh;
     padding-bottom: 2em;
+    padding-top:2em;
     .card {
       background: white !important;
       margin: 0 auto 1em auto;
-      width: 95%;
+      width: 96%;
       border-radius: 2px;
-      //box-shadow: 0 3px 6px rgba(0, 2, 4, 0.14);
       height: 5.5em;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
     .card-train {
       height: auto;
@@ -117,7 +119,8 @@ $navHeight: 4.5em;
     }
     .card-point {
       position:relative;
-      margin-bottom:1.5em;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
       &:first-child:before {
         display: none;
       }
@@ -125,13 +128,14 @@ $navHeight: 4.5em;
         position: absolute;
         border: 0.2em solid $darkBlue;
         width: 0;
-        height: 1.5em;
+        height: 1em;
         display: block;
         content: '';
         left: 50%;
         z-index: 1;
-        top: -21px;
+        top: -14px;
         margin-left: -0.2em;
+        border-radius: 18%;
       }
       .icon {
         line-height: 6em;
@@ -263,6 +267,25 @@ $navHeight: 4.5em;
 }
 
 /* 1: General */
+.autoComplete{
+  position: absolute;
+  width: 84%;
+  margin-top: 4em;
+  z-index: 9999999;
+  padding: 0;
+  overflow: scroll;
+  max-height: 50vh;
+  background: white;
+  border:1px solid $darkBlue;
+  .item{
+    list-style: none;
+    padding: 1em;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin: 0.5em 0;
+    border-radius: 2px;
+  }
+}
 .alert-warning {
   position: fixed;
   top: 0em;
@@ -313,7 +336,7 @@ $navHeight: 4.5em;
 }
 
 .listMessage {
-  padding: 1em;
+  padding: 2em 1em 1em 1em;
   h5 {
     margin-top: 20%;
     color: $darkBlue;
@@ -514,9 +537,11 @@ h5 {
       .input-group {
         width: 100%;
         .form-control {
+          height:4em;
           border-radius: 2px;
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
+          font-size:1em;
         }
         .input-group-addon {
           background: $red;

@@ -1,0 +1,11 @@
+{{input value=station key-up=(action 'autoComplete') focus-out=(action "focusOut") class=class placeholder=placeholder describedby=describedby id=id}}
+
+{{#if showResults}}
+  {{#if filteredResults}}
+    <ul class="autoComplete">
+      {{#each filteredResults as |item|}}
+        <li class="item" {{action 'select' item}}>{{item.name}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/if}}
