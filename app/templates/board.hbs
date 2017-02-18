@@ -7,11 +7,11 @@
     </div>
     <div class="row input-fields">
       <div class="form-group">
-        <div class="col-xs-8 col">
+        <div class="col-xs-7 col">
           <label for="station">Station</label>
           {{input type="text" class="form-control" value=station placeholder="e.g London Euston" describedby="station"}}
         </div>
-        <div class="col-xs-4 col">
+        <div class="col-xs-5 col">
           <label for="type" class="type">Board</label>
           <select class="form-control type" onchange={{action 'selectType' value="target.value"}} describedby="type">
             <option value="AM">Departures</option>
