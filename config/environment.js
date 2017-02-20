@@ -6,6 +6,15 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     defaultLocationType: 'auto',
+    contentSecurityPolicy: {
+      'default-src': "'self' http://localhost:3002",
+      'script-src': "'self' 'unsafe-inline'",
+      'style-src': "'self' 'unsafe-inline'",
+      'font-src': "'self'",
+      'connect-src': "'self' http://localhost:3002, http://[::1]:3002/",
+      'img-src': "'self' data:",
+      'media-src': "'self'"
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -22,16 +31,6 @@ module.exports = function(environment) {
       rebuildOnChange: false,
       emulate: false
     }
-  };
-
-  ENV.contentSecurityPolicy = {
-    'default-src': "'none'",
-    'script-src': "'self' 'unsafe-inline'",
-    'style-src': "'self' 'unsafe-inline'",
-    'font-src': "'self'",
-    'connect-src': "'self'",
-    'img-src': "'self' data:",
-    'media-src': "'self'"
   };
 
   if (environment === 'development') {

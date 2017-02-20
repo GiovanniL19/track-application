@@ -21,8 +21,8 @@ export default DS.Model.extend({
   fromStations: MF.fragmentArray("station", {async: true, defaultValue: []}),
 
   //Routes
-  staredRoutes: DS.hasMany("route", {async: true, defaultValue: [], inverse: "stared"}),
-  routesHistory: DS.hasMany("route", {async: true, defaultValue: [], inverse: "history"}),
+  starredJourneys: DS.hasMany("journey", {async: true, defaultValue: [], inverse: "starred"}),
+  journeyHistory: DS.hasMany("journey", {async: true, defaultValue: [], inverse: "history"}),
 
   fullName: function(){
     return this.get("firstName") + " " + this.get("lastName");
