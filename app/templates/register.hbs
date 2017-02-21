@@ -1,20 +1,28 @@
 <div class="register">
   <div class="row icon">
-    {{material-design-icon name='face'}}
-    <h5>Hello! I’m Track, and you are?...</h5>
+    {{#if userImage}}
+      <span {{action "selectImage"}}>
+        <div class="profilePicture" style="background:url('{{selectedImage.image}}'); background-size:cover;"></div>
+      </span>
+    {{else}}
+      <span {{action "selectImage"}}>
+        {{material-design-icon name='face'}}
+        <h5>Hello! I’m Track, and you are?...</h5>
+      </span>
+    {{/if}}
   </div>
 
   <div class="row">
     <div class="form-group">
       <label for="newEmail">Email</label>
-      {{input type="text" class="form-control" id="newEmail" value=email}}
+      {{input type="text" class="form-control" id="newEmail" value=email placeholder="email@example.com"}}
 
       <label for="fName">Full Name</label>
-      {{input type="text" class="form-control" id="fName" value=fullName}}
+      {{input type="text" class="form-control" id="fName" value=fullName placeholder="Your Name"}}
 
       <label for="newPassword">Password</label>
-      {{input type="password" class="form-control" id="newPassword" value=password}}
-      <small>Must be at least 8 characters long, contain minimum of one upper and lower case, and include one digit</small>
+      {{input type="password" class="form-control" id="newPassword" value=password placeholder="*******"}}
+      {{upload-file type="file" id="selectImage" class="uploadImage" accept="image/*" file=selectedImage.image fileSize=selectedImage.imageSize fileType=selectedImage.imageType accept="image/*;capture=camera" capture="camera"}}
     </div>
   </div>
 

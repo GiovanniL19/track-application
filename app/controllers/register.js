@@ -7,6 +7,34 @@ export default Ember.Controller.extend({
   fullName: "",
   password: "",
 
+  selectedImage: {
+    image: null,
+    imageSize: 0,
+    imageType: ""
+  },
+  userImage: null,
+
+  uploadProfileImage: function(){
+    var controller = this;
+    controller.set('userImage', null);
+    try {
+      if(this.get('selectedImage.imageSize') > 3000000){
+        controller.set("navigation.message", "Image is too large, (max 30MB)")
+      }else{
+        let type = this.get('selectedImage.imageType');
+        if(type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png'){
+          controller.set('userImage', this.get('selectedImage'));
+        }else{
+          controller.set("navigation.message", "Image must be .JPG, .JPEG, or .PNG");
+        }
+      }
+    } catch(err){
+      console.log('No profile picture selected');
+      console.log(err);
+    }
+
+  }.observes('selectedImage.image'),
+
   emailValidation: function(email) {
     //Uses Regular Expression and javaScript test to check the email matches the expression
     let regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -16,24 +44,15 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+    selectImage: function(){
+      $('#selectImage').click();
+    },
     registerAccount: function(){
       //Check email is valid
       if(this.emailValidation(this.get("email"))) {
         //Check full name
         if (this.get("fullName")) {
-
-          /*
-          //Regular expression for password
-          //Password must:
-          //Be 8 characters long
-          //Contain at least one lower case
-          //Contain at least one upper case
-          //Contain at least one digit
-          */
-
-          let passwordRegularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-
-          if(this.get("password").match(passwordRegularExpression)){
+          if(this.get("password")){
             let controller = this;
             //Set current timestamp to dateCreated
             let dateCreated = moment().unix();
@@ -63,6 +82,7 @@ export default Ember.Controller.extend({
             user.save().then(function () {
               //Success
               controller.set("navigation.message", "Account Created!");
+              controller.transitionToRoute("login");
             }, function (error) {
               //An error occurred
               console.log(error);
