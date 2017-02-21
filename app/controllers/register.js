@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   password: "",
 
   selectedImage: {
-    image: null,
+    image: "",
     imageSize: 0,
     imageType: ""
   },
@@ -36,6 +36,19 @@ export default Ember.Controller.extend({
 
   }.observes('selectedImage.image'),
 
+  clearInput: function(){
+    this.set("selectedImage", {
+      "image": "",
+      "imageSize": "",
+      "imageType": "",
+    });
+
+    this.set("emailExists", "");
+    this.set("fullName", "");
+    this.set("password", "");
+    this.set("email", "");
+    this.set("selectedImage.image", "");
+  },
   emailValidation: function(email) {
     //Uses Regular Expression and javaScript test to check the email matches the expression
     let regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -92,11 +105,13 @@ export default Ember.Controller.extend({
                     email: controller.get("email"),
                     username: controller.get("email"),
                     password: hashedPassword,
-                    dateCreated: dateCreated
+                    dateCreated: dateCreated,
+                    image: controller.get("selectedImage.image")
                   });
 
                   //Save user
                   user.save().then(function () {
+                    controller.clearInput();
                     //Success
                     controller.set("navigation.message", "Account Created!");
                     controller.transitionToRoute("login");

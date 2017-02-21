@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
     }else{
       return false;
     }
-  }.property('session'),
+  }.property('session.isAuthenticated'),
   actions:{
     selectTime: function(value){
       this.set("timeSelected", value);

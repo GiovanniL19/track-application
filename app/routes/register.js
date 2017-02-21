@@ -12,5 +12,10 @@ export default Ember.Route.extend({
         register: true
       }
     });
+  },
+
+  deactivate: function(){
+    let controller = this.controllerFor("register");
+    controller.clearInput();
   }
 });
