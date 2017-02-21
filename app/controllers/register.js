@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
     imageSize: 0,
     imageType: ""
   },
+  emailExists: false,
   userImage: null,
 
   uploadProfileImage: function(){
@@ -50,50 +51,73 @@ export default Ember.Controller.extend({
     registerAccount: function(){
       //Check email is valid
       if(this.emailValidation(this.get("email"))) {
-        //Check full name
-        if (this.get("fullName")) {
-          if(this.get("password")){
-            let controller = this;
-            //Set current timestamp to dateCreated
-            let dateCreated = moment().unix();
+        //Set email to lowercase
+        this.set("email", this.get("email").toLowerCase());
+        let controller = this;
 
-            //Get last word (last name) from fullName
-            let fullName = this.get("fullName");
-            let lastName = fullName.match(/\w+$/)[0];
+        //Check if email exists
+        Ember.$.ajax({
+          url: 'http://localhost:3002/users/check/exists/' + this.get("email"),
+          type: 'GET',
+          headers: {
+            Accept : "application/json"
+          },
+          success: function(data) {
+            if(data.exist){
+              controller.set("navigation.message", "Email already exists");
+              controller.set("emailExists", true);
+            }else{
+              controller.set("emailExists", false);
+              //Check full name
+              if (controller.get("fullName")) {
+                if(controller.get("password")){
+                  //Set current timestamp to dateCreated
+                  let dateCreated = moment().unix();
 
-            //Remove last word leaving the first (may include middle) name
-            let indexOfLast = fullName.lastIndexOf(" ");
-            let firstName = fullName.substring(0, indexOfLast);
+                  //Get last word (last name) from fullName
+                  let fullName = controller.get("fullName");
+                  let lastName = fullName.match(/\w+$/)[0];
 
-            //Encrypt password
-            let hashedPassword = md5("TRACK" + this.get("email") + this.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
+                  //Remove last word leaving the first (may include middle) name
+                  let indexOfLast = fullName.lastIndexOf(" ");
+                  let firstName = fullName.substring(0, indexOfLast);
 
-            //Create user object
-            var user = this.store.createRecord("user", {
-              firstName: firstName,
-              lastName: lastName,
-              email: this.get("email"),
-              username: this.get("email"),
-              password: hashedPassword,
-              dateCreated: dateCreated
-            });
+                  //Encrypt password
+                  let hashedPassword = md5("TRACK" + controller.get("email") + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
 
-            //Save user
-            user.save().then(function () {
-              //Success
-              controller.set("navigation.message", "Account Created!");
-              controller.transitionToRoute("login");
-            }, function (error) {
-              //An error occurred
-              console.log(error);
-              controller.set("navigation.message", "There was an error, try again later");
-            });
-          }else{
-            this.set("navigation.message", "Password is not valid");
+                  //Create user object
+                  var user = controller.store.createRecord("user", {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: controller.get("email"),
+                    username: controller.get("email"),
+                    password: hashedPassword,
+                    dateCreated: dateCreated
+                  });
+
+                  //Save user
+                  user.save().then(function () {
+                    //Success
+                    controller.set("navigation.message", "Account Created!");
+                    controller.transitionToRoute("login");
+                  }, function (error) {
+                    //An error occurred
+                    console.log(error);
+                    controller.set("navigation.message", "There was an error, try again later");
+                  });
+                }else{
+                  controller.set("navigation.message", "Password is not valid");
+                }
+              } else {
+                controller.set("navigation.message", "Please enter your full name");
+              }
+            }
+          },
+          error: function(err) {
+            console.log(err);
+            controller.set("navigation.message", "There was an error, try again later");
           }
-        } else {
-          this.set("navigation.message", "Please enter your full name");
-        }
+        });
       }else{
         this.set("navigation.message", "Invalid email address");
       }

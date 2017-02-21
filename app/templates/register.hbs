@@ -16,7 +16,6 @@
     <div class="form-group">
       <label for="newEmail">Email</label>
       {{input type="text" class="form-control" id="newEmail" value=email placeholder="email@example.com"}}
-
       <label for="fName">Full Name</label>
       {{input type="text" class="form-control" id="fName" value=fullName placeholder="Your Name"}}
 
@@ -29,5 +28,9 @@
   <div class="row buttons text-center">
     <button class="btn btn-primary" {{action "registerAccount"}}>Register</button>
     <small>By registering an account with us, you accept to the terms and conditions. Your data is safe, we do not share information to third parties</small>
+    {{#if emailExists}}
+      <br><br>
+      {{#link-to "login"}}Login Here{{/link-to}}
+    {{/if}}
   </div>
 </div>
