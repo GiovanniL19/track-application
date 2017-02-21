@@ -14,7 +14,7 @@
   </div>
 
   <div class="row buttons text-center">
-    <button class="btn btn-primary">Login</button>
+    <button class="btn btn-primary" {{action "authenticate"}}>Login {{#if loggingIn}}{{fa-icon "circle-o-notch" spin=true}}{{/if}}</button>
     <br><br>
     {{#link-to "register"}}Register{{/link-to}}
   </div>
