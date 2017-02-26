@@ -9,20 +9,22 @@
       <div class="form-group">
         <div class="col-xs-7 col">
           <label for="station">Station</label>
-          {{input type="text" class="form-control" value=station placeholder="e.g London Euston" describedby="station"}}
+          <div class="input-group">
+            {{station-search content=stations value=station id="station" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+          </div>
         </div>
         <div class="col-xs-5 col">
           <label for="type" class="type">Board</label>
           <select class="form-control type" onchange={{action 'selectType' value="target.value"}} describedby="type">
-            <option value="AM">Departures</option>
-            <option value="PM">Arrivals</option>
+            <option value=departure>Departures</option>
+            <option value="arrival">Arrivals</option>
           </select>
         </div>
       </div>
 
       <div class="col-xs-12 submit">
         <div class="buttons">
-          <button class="btn btn-primary">GET TRAINS</button>
+          <button class="btn btn-primary" {{action "get"}}>GET TRAINS</button>
         </div>
       </div>
     </div>
@@ -30,7 +32,7 @@
 
   <div class="row cards-head">
     <div class="col-xs-4 text-right right col-xs-offset-8">
-      {{#if station}}
+      {{#if stationMessage}}
         <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
       {{/if}}
     </div>
@@ -38,32 +40,47 @@
 
   <div class="cards">
     {{#each trains as |train|}}
-      <div class="card card-train">
+      <div class="card card-train" {{action "selectService" train}}>
         <div class="row">
-          <div class="col-xs-11 col-xs-offset-1 platform">
+          <div class="col-xs-11 col-xs-offset-1 col-sm-11 col-sm-offset-1 platform">
             Platform: {{train.platform}}
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-1 icon good">
+          <div class="col-xs-1 col-sm-1 icon good">
             {{material-design-icon name='directions-transit'}}
           </div>
-          <div class="col-xs-8 time">
-            <div class="col-xs-3">14:30</div>
-            <div class="col-xs-1 text-left">{{material-design-icon name='chevron-right'}}</div>
-            <div class="col-xs-3">19:15</div>
+          <div class="col-xs-7 col-sm-7 time">
+            <div class="row">
+              {{#if train.sta}}
+                <div class="col-xs-12 col-sm-12">{{train.sta}}</div>
+              {{else}}
+                <div class="col-xs-3 col-sm-3">{{train.std}}</div>
+                <div class="col-xs-1 col-sm-1 text-left">{{material-design-icon name='chevron-right'}}</div>
+                <div class="col-xs-3 col-sm-3">{{train.arrivalTime}}</div>
+              {{/if}}
+
+            </div>
+            <div class="col-xs-12 col-sm-12">
+              {{#if train.isDelayed}}<small>Arrival: {{train.delayedTime}}</small>{{/if}}
+            </div>
           </div>
-          <div class="col-xs-3 status good">
-            On Time
+          <div class="col-xs-4 col-sm-4 status {{unless train.isDelayed "good"}} {{if train.isDelayed "bad"}}">
+            {{train.status}}<br>
+            <small>{{train.operator}}</small>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-9 col-xs-offset-1 destination">
-            Destination: <strong>{{train.destination}}</strong>
+          <div class="col-xs-9 col-sm-9 col-sm-offset-1 col-xs-offset-1 destination">
+            {{#if train.sta}}
+              Origin: <strong>{{train.origin.name}}</strong>
+            {{else}}
+              Destination: <strong>{{train.destination.name}}</strong>
+            {{/if}}
           </div>
 
-          <div class="col-xs-2">
+          <div class="col-xs-2 col-sm-2 more">
             {{material-design-icon name='more-horiz'}}
           </div>
 

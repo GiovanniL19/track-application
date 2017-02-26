@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   id: "",
 
   station: null,
-  content: null,
+  content: [],
   output: [],
   value: "",
   showResults: true,
@@ -36,7 +36,7 @@ export default Ember.Component.extend({
     focusOut: function() {
       let controller = this;
       setTimeout(function(){
-        //controller.set("showResults", false);
+        controller.set("showResults", false);
       },300);
     },
     autoComplete: function() {

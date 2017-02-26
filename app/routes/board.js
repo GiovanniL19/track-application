@@ -12,5 +12,9 @@ export default Ember.Route.extend({
         register: false
       }
     });
+
+    this.store.findAll("station").then(function(stations){
+      controller.set("stations", stations);
+    });
   }
 });
