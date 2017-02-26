@@ -24,7 +24,11 @@
 
       <div class="col-xs-12 submit">
         <div class="buttons">
-          <button class="btn btn-primary" {{action "get"}}>GET TRAINS</button>
+          {{#if navigation.isLoading}}
+            <button class="btn btn-primary">{{fa-icon "circle-o-notch" spin=true}}</button>
+          {{else}}
+            <button class="btn btn-primary" {{action "get"}}>GET TRAINS</button>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -32,7 +36,7 @@
 
   <div class="row cards-head">
     <div class="col-xs-4 text-right right col-xs-offset-8">
-      {{#if stationMessage}}
+      {{#if navigation.crs}}
         <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
       {{/if}}
     </div>
@@ -40,52 +44,7 @@
 
   <div class="cards">
     {{#each trains as |train|}}
-      <div class="card card-train" {{action "selectService" train}}>
-        <div class="row">
-          <div class="col-xs-11 col-xs-offset-1 col-sm-11 col-sm-offset-1 platform">
-            Platform: {{train.platform}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-1 col-sm-1 icon good">
-            {{material-design-icon name='directions-transit'}}
-          </div>
-          <div class="col-xs-7 col-sm-7 time">
-            <div class="row">
-              {{#if train.sta}}
-                <div class="col-xs-12 col-sm-12">{{train.sta}}</div>
-              {{else}}
-                <div class="col-xs-3 col-sm-3">{{train.std}}</div>
-                <div class="col-xs-1 col-sm-1 text-left">{{material-design-icon name='chevron-right'}}</div>
-                <div class="col-xs-3 col-sm-3">{{train.arrivalTime}}</div>
-              {{/if}}
-
-            </div>
-            <div class="col-xs-12 col-sm-12">
-              {{#if train.isDelayed}}<small>Arrival: {{train.delayedTime}}</small>{{/if}}
-            </div>
-          </div>
-          <div class="col-xs-4 col-sm-4 status {{unless train.isDelayed "good"}} {{if train.isDelayed "bad"}}">
-            {{train.status}}<br>
-            <small>{{train.operator}}</small>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-9 col-sm-9 col-sm-offset-1 col-xs-offset-1 destination">
-            {{#if train.sta}}
-              Origin: <strong>{{train.origin.name}}</strong>
-            {{else}}
-              Destination: <strong>{{train.destination.name}}</strong>
-            {{/if}}
-          </div>
-
-          <div class="col-xs-2 col-sm-2 more">
-            {{material-design-icon name='more-horiz'}}
-          </div>
-
-        </div>
-      </div>
+      {{partial "partial/train-card"}}
     {{else}}
       <div class="text-center listMessage">
         <h5>Station not selected</h5>

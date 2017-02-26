@@ -5,6 +5,8 @@ export default Ember.Controller.extend({
   sideMenu: Ember.inject.service(),
   board: Ember.inject.controller(),
   find: Ember.inject.controller(),
+  isLoading: false,
+  crs:"",
   page:{
     find: true,
     board: false,

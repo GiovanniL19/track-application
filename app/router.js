@@ -15,6 +15,7 @@ Router.map(function() {
   this.route('login');
   this.route('register');
   this.route('results');
+  this.route('train-information');
 });
 
 export default Router;

@@ -4,8 +4,8 @@
 $darkBlue: #22313F;
 $lighterBlue: #304355;
 $red: #F64747;
-$font: #545454;
-$backColour: #F7F7F7;
+$font: #444;
+$backColour: $darkBlue;
 $green: #3EC791;
 $navHeight: 4.5em;
 
@@ -20,7 +20,7 @@ $navHeight: 4.5em;
 // 7 - Account
 // 8 - Login
 // 9 - Register
-// 10 - Results
+// 11 - Selected Trains
  */
 
 @mixin inputFields() {
@@ -67,10 +67,11 @@ $navHeight: 4.5em;
       background: white !important;
       margin: 0 auto 1em auto;
       width: 96%;
-      border-radius: 2px;
+      border-radius: 7px;
       height: 5.5em;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      color:#444;
     }
     .card-train {
       height: auto;
@@ -150,7 +151,6 @@ $navHeight: 4.5em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 2em;
-        color: $font;
         font-weight:bold;
       }
       .time {
@@ -231,7 +231,7 @@ $navHeight: 4.5em;
   }
   .modal-content {
     border-radius: 3px;
-    color: white;
+    color: #444;
     margin-top: 30%;
     h4 {
       text-align: center;
@@ -350,7 +350,7 @@ $navHeight: 4.5em;
   padding: 2em 1em 1em 1em;
   h5 {
     margin-top: 20%;
-    color: $darkBlue;
+    color: white;
     font-weight: 300;
   }
 }
@@ -620,7 +620,7 @@ h5 {
   padding-bottom: 2em;
   .board-search {
     background: $darkBlue;
-    padding: 1.5em 0em;
+    padding: 1.5em 0em 0em 0em;
     .col {
       margin: 0;
       padding: 0;
@@ -689,7 +689,7 @@ h5 {
     .btn-message {
       height: 2.5em;
       width: 6em;
-      margin-top: -2em;
+      margin-top: -0.5em;
     }
     h5 {
       font-size: 0.8em;
@@ -925,7 +925,7 @@ h5 {
     }
     .delayed{
       color:$red;
-      font-size:0.7em;
+      font-size:0.6em;
       font-weight:bold;
     }
     .notDelayed{
@@ -964,6 +964,89 @@ h5 {
   .cards {
     overflow: hidden;
     height: auto;
+    padding-top: 1em;
+  }
+  .large{
+    font-size:1.3em;
+    margin:0 !important;
+  }
+}
+
+/* 11: Selected Trains*/
+.selectedTrain{
+  overflow-y: scroll;
+  height: 100vh;
+  padding-bottom: 2em;
+  .header {
+    z-index:99999999;
+    background: $darkBlue;
+    padding: 1.7em 0em 1.5em 0em;
+    width: 100%;
+    top:0;
+    color:white;
+    position:fixed;
+    @include btn;
+    .btn-buy {
+      height: 2.5em;
+      width: 6em;
+      margin-top: 5em;
+      position: absolute;
+      right: 1em;
+    }
+    h5{
+      -webkit-transition: ease-in 0.4s;
+      margin-top: 0.2em;
+    }
+    a{
+      color:white;
+    }
+    .platform{
+      font-size: 1em;
+      padding:0;
+      margin-top:1.1em;
+    }
+    .delayed{
+      color:$red;
+      font-size:0.7em;
+      font-weight:bold;
+    }
+    .notDelayed{
+      color: $green;
+      font-size:0.6em;
+      font-weight:bold;
+    }
+    .times{
+      font-size:1.4em;
+      padding-left:0.4em;
+      margin-top:1em;
+      i{
+        font-size:1.5em;
+      }
+    }
+  }
+  .selected-train{
+    color:white;
+    margin-top: 14em;
+  }
+  .list{
+    margin-top:5.5em;
+  }
+  .cards-head {
+    height: 2em;
+    margin-top: 1em;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    h5 {
+      font-size: 0.8em;
+      color: $font;
+      font-weight: 400;
+      margin-bottom: 1em;
+    }
+  }
+  .cards {
+    overflow: hidden;
+    height: auto;
+    padding-top: 1em;
   }
   .large{
     font-size:1.3em;
