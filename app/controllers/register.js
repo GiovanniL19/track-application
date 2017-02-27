@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
@@ -20,7 +21,7 @@ export default Ember.Controller.extend({
     controller.set('userImage', null);
     try {
       if(this.get('selectedImage.imageSize') > 3000000){
-        controller.set("navigation.message", "Image is too large, (max 30MB)")
+        controller.set("navigation.message", "Image is too large, (max 30MB)");
       }else{
         let type = this.get('selectedImage.imageType');
         if(type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png'){
@@ -59,7 +60,7 @@ export default Ember.Controller.extend({
 
   actions: {
     selectImage: function(){
-      $('#selectImage').click();
+      Ember.$('#selectImage').click();
     },
     registerAccount: function(){
       //Check email is valid

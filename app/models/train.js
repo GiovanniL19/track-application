@@ -1,23 +1,33 @@
 import DS from 'ember-data';
 import MF from 'model-fragments';
+import moment from 'moment';
+
+const {
+  attr
+} = DS;
+
+const {
+  fragment,
+  fragmentArray
+} = MF;
 
 export default DS.Model.extend({
-  type: DS.attr("string", {defaultValue: 'train'}),
-  callingPoints: MF.fragmentArray("station-fragment"),
-  std: DS.attr("string"),
-  etd: DS.attr("string"),
-  origin: MF.fragment("station-fragment"),
-  destination: MF.fragment("station-fragment"),
-  platform: DS.attr("string"),
-  operator: DS.attr("string"),
-  operatorCode: DS.attr("string"),
+  type: attr("string", {defaultValue: 'train'}),
+  callingPoints: fragmentArray("station-fragment"),
+  std: attr("string"),
+  etd: attr("string"),
+  origin: fragment("station-fragment"),
+  destination: fragment("station-fragment"),
+  platform: attr("string"),
+  operator: attr("string"),
+  operatorCode: attr("string"),
 
   //Arrival Information
-  arrivalStatus: DS.attr("string"),
-  arrivalTime: DS.attr("string"),
-  sta: DS.attr("string"),
-  eta: DS.attr("string"),
-  at: DS.attr("string"),
+  arrivalStatus: attr("string"),
+  arrivalTime: attr("string"),
+  sta: attr("string"),
+  eta: attr("string"),
+  at: attr("string"),
 
   isDelayed: function(){
     if(this.get("etd")) {

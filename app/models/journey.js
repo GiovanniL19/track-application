@@ -1,12 +1,21 @@
 import DS from 'ember-data';
 import MF from 'model-fragments';
 
-export default DS.Model.extend({
-  type: DS.attr("string", {defaultValue: 'Route'}),
-  starred: DS.belongsTo("user", {async: true, inverse: "starredJourneys"}),
-  history: DS.belongsTo("user", {async: true, inverse: "journeyHistory"}),
+const {
+  attr,
+  belongsTo
+} = DS;
 
-  to: MF.fragment('station-fragment'),
-  from: MF.fragment('station-fragment'),
-  user: DS.belongsTo("user", {async: true})
+const {
+  fragment,
+} = MF;
+
+export default DS.Model.extend({
+  type: attr("string", {defaultValue: 'Route'}),
+  starred: belongsTo("user", {async: true, inverse: "starredJourneys"}),
+  history: belongsTo("user", {async: true, inverse: "journeyHistory"}),
+
+  to: fragment('station-fragment'),
+  from: fragment('station-fragment'),
+  user: belongsTo("user", {async: true})
 });

@@ -1,11 +1,15 @@
 import DS from 'ember-data';
 import MF from 'model-fragments';
 
+const {
+  attr
+} = DS;
+
 export default MF.Fragment.extend({
-  name: DS.attr("string"),
-  crs: DS.attr("string"),
-  et: DS.attr("string"),
-  st: DS.attr("string"),
+  name: attr("string"),
+  crs: attr("string"),
+  et: attr("string"),
+  st: attr("string"),
 
   isDelayed: function(){
     if(this.get("et") === "On time"){

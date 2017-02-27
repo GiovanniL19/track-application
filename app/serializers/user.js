@@ -15,6 +15,10 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     journeyHistory: {
       serialize: 'ids',
       deserialize: 'ids'
+    },
+    contexts: {
+      serialize: 'ids',
+      deserialize: 'ids'
     }
   }
 });

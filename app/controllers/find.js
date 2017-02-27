@@ -1,9 +1,12 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
   findResults: Ember.inject.controller(),
   session: Ember.inject.service('session'),
+  geolocation: Ember.inject.service(),
+
   stations: [],
   fromStation: "",
   toStation: "",
@@ -37,9 +40,14 @@ export default Ember.Controller.extend({
             }
           });
 
-          this.set("findResults.origin", from);
-          this.set("findResults.destination", to);
-          this.transitionToRoute("find-results");
+          this.get('geolocation').getLocation().then(function(geo) {
+            //TODO: Mine data here
+            debugger;
+
+            controller.set("findResults.origin", from);
+            controller.set("findResults.destination", to);
+            controller.transitionToRoute("find-results");
+          });
         }else{
           this.set("navigation.message", "From and to stations must be valid");
         }
