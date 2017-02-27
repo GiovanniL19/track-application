@@ -36,7 +36,7 @@ export default function() {
   );
 
   this.transition(
-    this.fromRoute('results'),
+    this.fromRoute('find-results'),
     this.use('toLeft'),
     this.reverse('toRight')
   );

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
-  results: Ember.inject.controller(),
+  findResults: Ember.inject.controller(),
   session: Ember.inject.service('session'),
   stations: [],
   fromStation: "",
@@ -37,9 +37,9 @@ export default Ember.Controller.extend({
             }
           });
 
-          this.set("results.origin", from);
-          this.set("results.destination", to);
-          this.transitionToRoute("results");
+          this.set("findResults.origin", from);
+          this.set("findResults.destination", to);
+          this.transitionToRoute("find-results");
         }else{
           this.set("navigation.message", "From and to stations must be valid");
         }
