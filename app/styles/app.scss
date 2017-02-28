@@ -5,7 +5,7 @@ $darkBlue: #22313F;
 $lighterBlue: #304355;
 $red: #F64747;
 $font: #444;
-$backColour: $darkBlue;
+$backColour: #efefef;//$darkBlue;
 $green: #3EC791;
 $navHeight: 4.5em;
 
@@ -61,13 +61,12 @@ $navHeight: 4.5em;
   .cards {
     padding-top: 0.5em;
     overflow: auto;
-    height: 38vh;
-    padding-bottom: 2em;
+    max-height: 78vh;
     .card {
       background: white !important;
       margin: 0 auto 1em auto;
       width: 96%;
-      border-radius: 7px;
+      border-radius: 4px;
       height: 5.5em;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -117,28 +116,19 @@ $navHeight: 4.5em;
         font-size: 0.9em;
       }
     }
+    .good-border {
+      border-left: 5px solid $green;
+    }
+    .bad-border{
+      border-left: 5px solid $red;
+    }
     .card-point {
       position:relative;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-      &:first-child:before {
-        display: none;
-      }
-      &:before{
-        position: absolute;
-        border: 0.2em solid $darkBlue;
-        width: 0;
-        height: 1em;
-        display: block;
-        content: '';
-        left: 50%;
-        z-index: 1;
-        top: -14px;
-        margin-left: -0.2em;
-        border-radius: 18%;
-      }
+      box-shadow: none;
+      height:5em;
+      margin-bottom:5px;
       .icon {
-        line-height: 6em;
+        line-height: 5em;
       }
       .good{
         color: $green;
@@ -147,16 +137,18 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
+        margin-top: 0.4em;
+        font-size: 0.9em;
+        line-height: 4em;
+        padding-left: 1em;
+        font-weight:bold;
+      }
+      .time {
         margin-top: 0.9em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 2em;
-        font-weight:bold;
-      }
-      .time {
-        margin-top: 0.5em;
-        line-height: 2em;
-        font-size: 1em;
+        font-weight: bold;
         p {
           color: $font;
         }
@@ -365,7 +357,7 @@ $navHeight: 4.5em;
   padding: 2em 1em 1em 1em;
   h5 {
     margin-top: 20%;
-    color: white;
+    color: $font;
     font-weight: 300;
   }
 }
@@ -621,7 +613,7 @@ h5 {
     }
     h5 {
       font-size: 0.8em;
-      color: white  ;
+      color: $font;
       font-weight: 400;
       margin-bottom: 1em;
     }
@@ -630,12 +622,23 @@ h5 {
 
 /* 5: Board Search*/
 .board {
-  overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+
+  @include btn;
+  .btn-message {
+    height: 2.5em;
+    width: 6em;
+    margin-top: -0.5em;
+  }
+
   .board-search {
     background: $darkBlue;
     padding: 1.5em 0em 0em 0em;
+    position: fixed;
+    width: 100%;
+    top:0;
+    z-index: 99999;
     .col {
       margin: 0;
       padding: 0;
@@ -699,23 +702,10 @@ h5 {
       margin: 0;
     }
   }
-  .cards-head {
-    @include btn;
-    .btn-message {
-      height: 2.5em;
-      width: 6em;
-      margin-top: -0.5em;
-    }
-    h5 {
-      font-size: 0.8em;
-      color: $font;
-      font-weight: 400;
-      margin-bottom: 1em;
-    }
-  }
   .cards {
-    overflow: hidden;
-    height: auto;
+    height: 64vh;
+    overflow:scroll;
+    margin-top:15em;
   }
 }
 
@@ -926,16 +916,24 @@ h5 {
       color: white;
     }
   }
+  .cards-head {
+    height: 3em;
+    margin-top: 1em;
+    padding: 0.5em;
+    background: $lighterBlue;
+  }
+  .cards{
+    max-height:80vh;
+  }
 }
 
 /* 11: Selected Trains*/
 .selectedTrain{
-  overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
   .header {
     z-index:99999999;
-    background: $lighterBlue;
+    background: $darkBlue;
     padding: 1.7em 0em 1.5em 0em;
     width: 100%;
     top:0;
@@ -986,27 +984,28 @@ h5 {
     margin-top: 13em;
   }
   .arrival{
-    margin-top: 11em;
+    margin-top: 10.8em;
   }
   .list{
     margin-top:5.5em;
   }
   .cards-head {
-    height: 2em;
+    height: 3em;
     margin-top: 1em;
     padding: 0.5em;
-    margin-bottom: 0.5em;
+    background: $lighterBlue;
     h5 {
       font-size: 0.8em;
-      color: $font;
+      color: white;
       font-weight: 400;
-      margin-bottom: 1em;
+      padding:0.5em;
     }
   }
   .cards {
-    overflow: hidden;
-    height: auto;
-    padding-top: 1em;
+    overflow: scroll;
+    padding-top: 0.5em;
+    margin-bottom:0.5em;
+    height:65vh
   }
   .large{
     font-size:1.3em;

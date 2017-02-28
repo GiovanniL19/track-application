@@ -37,22 +37,20 @@
 
   </div>
   <div class="selected-train {{if train.isArrival "arrival"}}">
+    <div class="cards-head"><h5>Service is calling at:</h5></div>
     <div class="cards">
       {{#each train.callingPoints as |callingPoint|}}
-        <div class="card card-point row">
-          <div class="col-xs-1 icon {{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">
-            {{material-design-icon name='directions-transit'}}
-          </div>
-          <div class="col-xs-8 col-sm-8 name">
+        <div class="card card-point row {{if callingPoint.isDelayed "bad-border"}} {{unless callingPoint.isDelayed "good-border"}}">
+          <div class="col-xs-7 col-sm-7 name">
             <p>
               {{callingPoint.name}}
             </p>
           </div>
+          <div class="col-xs-2 col-sm-2 text-right time">
+            <strong>{{callingPoint.st}}</strong>
+          </div>
           <div class="col-xs-3 col-sm-3 text-right time">
-            <p>
-              <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small><br>
-              <strong>{{callingPoint.st}}</strong>
-            </p>
+            <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small><br>
           </div>
         </div>
       {{/each}}
