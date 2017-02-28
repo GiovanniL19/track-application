@@ -15,6 +15,8 @@ export default Ember.Controller.extend({
       this.transitionToRoute("train-information");
     },
     get: function(){
+      this.set("navigation.crs", "");
+
       let controller = this;
       var station;
 

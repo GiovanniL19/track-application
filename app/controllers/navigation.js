@@ -2,10 +2,17 @@ import Ember from 'ember';
 import moment from 'moment';
 
 export default Ember.Controller.extend({
+  geolocation: Ember.inject.service(),
   session: Ember.inject.service('session'),
   sideMenu: Ember.inject.service(),
   board: Ember.inject.controller(),
   find: Ember.inject.controller(),
+
+  user: null,
+  location:{
+    longitude: "",
+    latitude: ""
+  },
   isLoading: false,
   crs:"",
   page:{
@@ -59,6 +66,7 @@ export default Ember.Controller.extend({
       }, 5000);
     }
   }.observes("message"),
+
   isLoggedIn: function(){
     if(this.get('session.isAuthenticated')){
       return true;

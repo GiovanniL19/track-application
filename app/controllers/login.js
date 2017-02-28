@@ -5,13 +5,12 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   identification: "",
   password: "",
-  loggingIn: false,
   actions: {
     authenticate() {
       let controller = this;
       if(this.get('identification')){
        if(this.get('password')){
-         this.set("loggingIn", true);
+         this.set("navigation.isLoading", true);
 
          //Get credentials
          var credentials = {
@@ -29,10 +28,10 @@ export default Ember.Controller.extend({
          this.get('session').authenticate(authenticator, credentials).then(() => {
            controller.set('navigation.message', '');
            controller.transitionToRoute('find');
-           controller.set("loggingIn", false);
+           controller.set("navigation.isLoading", false);
          }, (err) => {
            console.log(err);
-           controller.set("loggingIn", false);
+           controller.set("navigation.isLoading", false);
            if(err === "Incorrect Username"){
              controller.set('navigation.message', 'Username does not exist');
            }else if(err === "Incorrect Password"){

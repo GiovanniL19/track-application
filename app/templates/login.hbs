@@ -14,7 +14,7 @@
   </div>
 
   <div class="row buttons text-center">
-    <button class="btn btn-primary" {{action "authenticate"}}>{{#if loggingIn}}{{fa-icon "circle-o-notch" spin=true}}{{else}}Login{{/if}}</button>
+    <button class="btn btn-primary" {{action "authenticate"}}>{{#if navigation.loggingIn}}{{fa-icon "circle-o-notch" spin=true}}{{else}}Login{{/if}}</button>
     <br><br>
     {{#link-to "register"}}Register{{/link-to}}
   </div>

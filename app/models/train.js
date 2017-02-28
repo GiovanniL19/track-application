@@ -29,6 +29,13 @@ export default DS.Model.extend({
   eta: attr("string"),
   at: attr("string"),
 
+  isArrival: function(){
+    if(this.get("sta")){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("sta", "at"),
   isDelayed: function(){
     if(this.get("etd")) {
       if (this.get("etd") === "On time") {

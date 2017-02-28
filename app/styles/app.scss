@@ -246,6 +246,21 @@ $navHeight: 4.5em;
       background: #f3f3f3;
     }
   }
+  .messageContent{
+    border-radius: 3px;
+    color: #444;
+    margin-top: 17%;
+    max-height: 88vh;
+    overflow: scroll;
+    font-weight:bold;
+    color: $red;
+    .btn{
+      display: none;
+    }
+    p{
+      font-weight:normal;
+    }
+  }
   .modal-header {
     border: none;
   }
@@ -606,7 +621,7 @@ h5 {
     }
     h5 {
       font-size: 0.8em;
-      color: $font;
+      color: white  ;
       font-weight: 400;
       margin-bottom: 1em;
     }
@@ -725,6 +740,7 @@ h5 {
 .account {
   height: 100vh;
   padding-bottom: 2em;
+  background: #f9f9f9;
   .header {
     background: $darkBlue;
     padding: 1.5em 0em;
@@ -896,79 +912,19 @@ h5 {
   height: 100vh;
   padding-bottom: 2em;
   .results-header {
-    z-index:99999999;
+    z-index: 99999999;
     background: $darkBlue;
     padding: 1.7em 0em 1.5em 0em;
     width: 100%;
-    top:0;
-    color:white;
-    position:fixed;
-    @include btn;
-    .btn-buy {
-      height: 2.5em;
-      width: 6em;
-      margin-top: 5em;
-      position: absolute;
-      right: 1em;
-    }
-    h5{
+    top: 0;
+    color: white;
+    h5 {
       -webkit-transition: ease-in 0.4s;
       margin-top: 0.2em;
     }
-    a{
-      color:white;
+    a {
+      color: white;
     }
-    .platform{
-      font-size: 1em;
-      padding:0;
-      margin-top:1.1em;
-    }
-    .delayed{
-      color:$red;
-      font-size:0.6em;
-      font-weight:bold;
-    }
-    .notDelayed{
-      color: $green;
-      font-size:0.7em;
-      font-weight:bold;
-    }
-    .times{
-      font-size:1.4em;
-      padding-left:0.4em;
-      margin-top:1em;
-      i{
-        font-size:1.5em;
-      }
-    }
-  }
-  .selected-train{
-    color:white;
-    margin-top: 14em;
-  }
-  .list{
-    margin-top:5.5em;
-  }
-  .cards-head {
-    height: 2em;
-    margin-top: 1em;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
-    h5 {
-      font-size: 0.8em;
-      color: $font;
-      font-weight: 400;
-      margin-bottom: 1em;
-    }
-  }
-  .cards {
-    overflow: hidden;
-    height: auto;
-    padding-top: 1em;
-  }
-  .large{
-    font-size:1.3em;
-    margin:0 !important;
   }
 }
 
@@ -979,7 +935,7 @@ h5 {
   padding-bottom: 2em;
   .header {
     z-index:99999999;
-    background: $darkBlue;
+    background: $lighterBlue;
     padding: 1.7em 0em 1.5em 0em;
     width: 100%;
     top:0;
@@ -1019,6 +975,7 @@ h5 {
       font-size:1.4em;
       padding-left:0.4em;
       margin-top:1em;
+      margin-left:1.1em;
       i{
         font-size:1.5em;
       }
@@ -1026,7 +983,10 @@ h5 {
   }
   .selected-train{
     color:white;
-    margin-top: 14em;
+    margin-top: 13em;
+  }
+  .arrival{
+    margin-top: 11em;
   }
   .list{
     margin-top:5.5em;

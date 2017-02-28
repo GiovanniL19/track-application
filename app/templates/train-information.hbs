@@ -19,19 +19,24 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-4 col-sm-4">{{train.std}}</div>
-          <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
-          <div class="col-xs-4 col-sm-4">{{train.arrivalTime}}</div>
+          {{#if train.std}}
+            <div class="col-xs-4 col-sm-4">{{train.std}}</div>
+            <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
+            <div class="col-xs-4 col-sm-4">{{train.arrivalTime}}</div>
+          {{else}}
+            <div class="col-xs-12 col-sm-12 time">{{train.sta}}</div>
+          {{/if}}
         </div>
       </div>
-      <div class="col-xs-6 col-sm-6 text-right">
-        <button class="btn btn-buy">Buy</button>
-      </div>
+      {{#unless train.isArrival}}
+        <div class="col-xs-5 col-sm-5 text-right">
+          <button class="btn btn-buy">Buy</button>
+        </div>
+      {{/unless}}
     </div>
 
   </div>
-  <div class="selected-train">
-
+  <div class="selected-train {{if train.isArrival "arrival"}}">
     <div class="cards">
       {{#each train.callingPoints as |callingPoint|}}
         <div class="card card-point row">
