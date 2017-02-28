@@ -1,11 +1,16 @@
 import DS from 'ember-data';
 
+const {
+  attr
+} = DS;
+
+
 export default DS.Model.extend({
-  type: DS.attr("string", {defaultValue: 'station'}),
+  type: attr("string", {defaultValue: 'station'}),
 
-  name: DS.attr("string"),
-  crs: DS.attr("string"),
-  message: DS.attr("string"),
+  name: attr("string"),
+  crs: attr("string"),
+  message: attr("string"),
 
-  viewCount: DS.attr("string")
+  viewCount: attr("string")
 });

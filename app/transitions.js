@@ -36,7 +36,8 @@ export default function() {
   );
 
   this.transition(
-    this.hasClass('selectTrain'),
-    this.use('fade')
+    this.fromRoute('find-results'),
+    this.use('toLeft'),
+    this.reverse('toRight')
   );
 }

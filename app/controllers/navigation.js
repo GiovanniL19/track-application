@@ -1,10 +1,20 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
+  geolocation: Ember.inject.service(),
   session: Ember.inject.service('session'),
   sideMenu: Ember.inject.service(),
   board: Ember.inject.controller(),
   find: Ember.inject.controller(),
+
+  user: null,
+  location:{
+    longitude: "",
+    latitude: ""
+  },
+  isLoading: false,
+  crs:"",
   page:{
     find: true,
     board: false,
@@ -56,13 +66,14 @@ export default Ember.Controller.extend({
       }, 5000);
     }
   }.observes("message"),
+
   isLoggedIn: function(){
     if(this.get('session.isAuthenticated')){
       return true;
     }else{
       return false;
     }
-  }.property('session'),
+  }.property('session.isAuthenticated'),
   actions:{
     selectTime: function(value){
       this.set("timeSelected", value);
@@ -72,25 +83,13 @@ export default Ember.Controller.extend({
       console.log(this.get("date"));
     },
     changePage: function(route){
-      //Resets page type
-      this.set("page", {
-        find: false,
-        board: false
-      });
-
-      //Set the page for page indication in navigation
-      switch(route){
-        case "find":
-          this.set('page.find', true);
-          break;
-
-        case "board":
-          this.set('page.board', true);
-          break;
+      if(route === "account" && this.get("isLoggedIn") === false){
+        //Transition to route
+        this.transitionToRoute("login");
+      }else {
+        //Transition to route
+        this.transitionToRoute(route);
       }
-
-      //Transition to route
-      this.transitionToRoute(route);
 
       //Close menu when linked clicked if menu is open
       if(this.get("sideMenu.isOpen")){

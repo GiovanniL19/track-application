@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function(){
     //TODO: Get user and return
-    return null
+    return null;
   },
   setupController: function(controller, model){
     if(controller.get('session.isAuthenticated')){

@@ -1,11 +1,13 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
-  results: Ember.inject.controller(),
+  findResults: Ember.inject.controller(),
   session: Ember.inject.service('session'),
+  geolocation: Ember.inject.service(),
+
   stations: [],
-  filter: [],
   fromStation: "",
   toStation: "",
   dateTime: null,
@@ -22,9 +24,9 @@ export default Ember.Controller.extend({
     },
     getTrains: function(){
       let controller = this;
-
       if(this.get("fromStation") && this.get("toStation")){
         if(this.get('fromStation') !== this.get("toStation")){
+          controller.set("navigation.isLoading", true);
           var from = "";
           var to = "";
 
@@ -37,9 +39,10 @@ export default Ember.Controller.extend({
               to = station;
             }
           });
-          this.set("results.origin", from);
-          this.set("results.destination", to);
-          this.transitionToRoute("results");
+
+          controller.set("findResults.origin", from);
+          controller.set("findResults.destination", to);
+          controller.transitionToRoute("find-results");
         }else{
           this.set("navigation.message", "From and to stations must be valid");
         }
