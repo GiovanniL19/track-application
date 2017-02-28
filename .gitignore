@@ -48,5 +48,8 @@ cordova/platforms/wp8/*.csproj.user
 cordova/platforms/browser/build
 cordova/platforms/browser/www
 
+#cordova plugins
+cordova/plugins
+
 #intellij
 .idea
