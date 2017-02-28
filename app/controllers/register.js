@@ -19,20 +19,22 @@ export default Ember.Controller.extend({
   uploadProfileImage: function(){
     var controller = this;
     controller.set('userImage', null);
-    try {
-      if(this.get('selectedImage.imageSize') > 3000000){
-        controller.set("navigation.message", "Image is too large, (max 30MB)");
-      }else{
-        let type = this.get('selectedImage.imageType');
-        if(type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png'){
-          controller.set('userImage', this.get('selectedImage'));
-        }else{
-          controller.set("navigation.message", "Image must be .JPG, .JPEG, or .PNG");
+    if(this.get("selectedImage.imageType")) {
+      try {
+        if (this.get('selectedImage.imageSize') > 3000000) {
+          controller.set("navigation.message", "Image is too large, (max 30MB)");
+        } else {
+          let type = this.get('selectedImage.imageType');
+          if (type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png') {
+            controller.set('userImage', this.get('selectedImage'));
+          } else {
+            controller.set("navigation.message", "Image must be .JPG, .JPEG, or .PNG");
+          }
         }
+      } catch (err) {
+        console.log('No profile picture selected');
+        console.log(err);
       }
-    } catch(err){
-      console.log('No profile picture selected');
-      console.log(err);
     }
 
   }.observes('selectedImage.image'),

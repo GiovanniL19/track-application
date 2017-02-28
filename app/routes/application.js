@@ -4,11 +4,26 @@ export default Ember.Route.extend({
   controllerName: 'navigation',
   beforeModel: function(){
     let controller = this.controllerFor("navigation");
-    controller.get('geolocation').getLocation().then(function(geo) {
-      controller.set("location.longitude", geo.coords.longitude);
-      controller.set("location.latitude", geo.coords.latitude);
-      console.log("Location is:" + controller.get("location.longitude") + ", " + controller.get("location.latitude"));
-    });
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      navigator.geolocation.getCurrentPosition (onSuccess, onError, { enableHighAccuracy: true });
+
+      function onSuccess(position) {
+        controller.set("location.longitude", position.coords.longitude);
+        controller.set("location.latitude", position.coords.latitude);
+
+        console.log("Location is:" + controller.get("location.longitude") + ", " + controller.get("location.latitude"));
+      };
+
+      function onError(error) {
+        controller.get('geolocation').getLocation().then(function(geo) {
+          controller.set("location.longitude", geo.coords.longitude);
+          controller.set("location.latitude", geo.coords.latitude);
+          console.log("Location is:" + controller.get("location.longitude") + ", " + controller.get("location.latitude"));
+        });
+      }
+    }
   },
   setupController: function(controller){
 

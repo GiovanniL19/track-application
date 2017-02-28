@@ -15,7 +15,14 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "uk.co.giovannilenguito.track"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "uk.co.giovannilenguito.track"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "uk.co.giovannilenguito.track"
+        }
+    }
 }

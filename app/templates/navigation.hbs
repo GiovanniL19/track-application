@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="col-xs-2">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav menuOption">
         {{#side-menu-toggle}}
-          <li><a><img src="assets/icons/menuIcon.png" width="34px"></a></li>
+          <li><a>{{material-design-icon name='menu'}}</a></li>
         {{/side-menu-toggle}}
       </ul>
     </div>
@@ -22,9 +22,9 @@
 {{#side-menu}}
   <header class="navbar">
     <div class="col-xs-2">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav menuOption">
         {{#side-menu-toggle}}
-          <li><a><img src="assets/icons/closeMenuIcon.png" width="23px"></a></li>
+          <li><a>{{material-design-icon name='close'}}</a></li>
         {{/side-menu-toggle}}
       </ul>
     </div>

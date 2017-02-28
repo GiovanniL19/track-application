@@ -4,11 +4,12 @@ export default Ember.Component.extend({
   crs: "",
   message: "",
   getMessage: function(){
+    let host = "10.205.205.198";
     let controller = this;
     if(this.get("crs")){
       //Check if email exists
       return Ember.$.ajax({
-        url: 'http://localhost:3002/stations/message?station=' + this.get("crs"),
+        url: 'http://' + host + ':3002/stations/message?station=' + this.get("crs"),
         type: 'GET',
         headers: {
           Accept : "application/json"

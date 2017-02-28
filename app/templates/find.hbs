@@ -39,7 +39,7 @@
   {{#unless navigation.isLoggedIn}}
     <div class="listMessage text-center">
       <h5>Where could Track take you?</h5>
-      <a>{{material-design-icon name='face'}} <br>Login Here</a>
+      {{#link-to "login"}}{{material-design-icon name='face'}} <br>Login Here{{/link-to}}
     </div>
   {{else}}
     <div class="row cards-head">
