@@ -27,7 +27,8 @@ export default Ember.Component.extend({
         return [];
       }
     }catch(ex){
-      console.log(ex);
+      //console.log(ex);
+      //No need to filter
       return [];
     }
   }.property('station'),
