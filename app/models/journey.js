@@ -17,5 +17,6 @@ export default DS.Model.extend({
 
   to: fragment('station-fragment'),
   from: fragment('station-fragment'),
-  user: belongsTo("user", {async: true})
+  user: belongsTo("user", {async: true}),
+  count: attr("number", {defaultValue: 0})
 });
