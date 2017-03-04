@@ -4,8 +4,11 @@ export default Ember.Controller.extend({
   navigation: Ember.inject.controller(),
   trainInformation: Ember.inject.controller(),
 
-  origin: null,
-  destination: null,
+  queryParams: ['origin', 'destination', 'originCRS', 'destinationCRS'],
+  origin: "",
+  destination: "",
+  originCRS: "",
+  destinationCRS: "",
 
   actions:{
     back: function(){

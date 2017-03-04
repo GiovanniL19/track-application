@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function(){
+  model: function(params){
     let controller = this.controllerFor("find-results");
+
     return controller.store.query("train", {
-      origin: controller.get("origin.crs"),
-      destination: controller.get("destination.crs"),
+      origin: params.originCRS,
+      destination: params.destinationCRS,
       rows: "10",
       lng: controller.get("navigation.location.longitude"),
       lat: controller.get("navigation.location.latitude"),

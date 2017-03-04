@@ -1,4 +1,4 @@
-import Ember from 'ember';
+  import Ember from 'ember';
 import moment from 'moment';
 
 export default Ember.Controller.extend({
@@ -50,9 +50,13 @@ export default Ember.Controller.extend({
             }
           });
 
-          controller.set("findResults.origin", from);
-          controller.set("findResults.destination", to);
-          controller.transitionToRoute("find-results");
+          controller.transitionToRoute("find-results", {queryParams: {
+              origin: from.get("name"),
+              destination: to.get("name"),
+              originCRS: from.get("crs"),
+              destinationCRS: to.get("crs")
+            }
+          });
         }else{
           this.set("navigation.message", "From and to stations must be valid");
         }
