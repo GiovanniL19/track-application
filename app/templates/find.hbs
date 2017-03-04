@@ -16,7 +16,7 @@
         <label for="from">from</label>
         <div class="input-group">
           {{station-search content=stations value=fromStation id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
-          <span class="input-group-addon" id="from">{{material-design-icon name='my-location'}}</span>
+          <span class="input-group-addon" id="from" {{action "getNearestStation"}}>{{material-design-icon name='my-location'}}</span>
         </div>
       </div>
       <div class="form-group">

@@ -18,6 +18,11 @@ export default Ember.Controller.extend({
   }.observes("dateTime"),
 
   actions: {
+    getNearestStation: function(){
+      this.store.query("station", {lng: this.get("navigation.location.longitude"), lat: this.get("navigation.location.latitude")}).then(function(){
+
+      });
+    },
     showDateTimeSelect: function(){
       this.set("navigation.date", moment(Date.now())).format("DD/MM/YYYY");
       Ember.$('#timeDateSelect').modal();

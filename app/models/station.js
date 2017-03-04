@@ -10,7 +10,6 @@ export default DS.Model.extend({
 
   name: attr("string"),
   crs: attr("string"),
-  message: attr("string"),
 
   viewCount: attr("string")
 });
