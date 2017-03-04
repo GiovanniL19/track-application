@@ -15,14 +15,14 @@
       <div class="form-group">
         <label for="from">from</label>
         <div class="input-group">
-          {{station-search content=stations value=fromStation id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
+          {{station-search content=stations station=fromStation showResults=showResults id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
           <span class="input-group-addon" id="from" {{action "getNearestStation"}}>{{material-design-icon name='my-location'}}</span>
         </div>
       </div>
       <div class="form-group">
         <label for="to">to</label>
         <div class="input-group">
-          {{station-search content=stations value=toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+          {{station-search content=stations station=toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
         </div>
       </div>
       <div class="row submit">

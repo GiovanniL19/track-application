@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   geolocation: Ember.inject.service(),
 
   stations: [],
+  showResults: true,
   fromStation: "",
   toStation: "",
   dateTime: null,
@@ -19,8 +20,12 @@ export default Ember.Controller.extend({
 
   actions: {
     getNearestStation: function(){
-      this.store.query("station", {lng: this.get("navigation.location.longitude"), lat: this.get("navigation.location.latitude")}).then(function(){
-
+      let controller = this;
+      this.set("navigation.loadingNearbyStations", true);
+      Ember.$('#stationSelect').modal();
+      this.store.query("station", {lng: this.get("navigation.location.longitude"), lat: this.get("navigation.location.latitude")}).then(function(stations){
+        controller.set("navigation.nearbyStations", stations);
+        controller.set("navigation.loadingNearbyStations", false);
       });
     },
     showDateTimeSelect: function(){

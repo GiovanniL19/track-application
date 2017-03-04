@@ -137,7 +137,7 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
-        margin-top: 0.4em;
+        margin-top: 0.8em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 1em;
@@ -268,6 +268,18 @@ $navHeight: 4.5em;
       &:focus, &:active {
         background: white;
       }
+    }
+  }
+}
+#stationSelect{
+  ul{
+    margin:0;
+    padding:0;
+    li{
+      list-style: none;
+      padding:1em 0;
+      font-weight:bold;
+      color: $lighterBlue;
     }
   }
 }
@@ -948,6 +960,7 @@ h5 {
     color:white;
     position:fixed;
     max-height:12.7em;
+    min-height: 12.7em;
     @include btn;
     .btn-buy {
       height: 2.5em;

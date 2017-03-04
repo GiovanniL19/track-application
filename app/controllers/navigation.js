@@ -4,10 +4,12 @@ import moment from 'moment';
 export default Ember.Controller.extend({
   geolocation: Ember.inject.service(),
   session: Ember.inject.service('session'),
+  find: Ember.inject.controller(),
   sideMenu: Ember.inject.service(),
   board: Ember.inject.controller(),
   find: Ember.inject.controller(),
-
+  nearbyStations: [],
+  loadingNearbyStations: true,
   user: null,
   location:{
     longitude: "",
@@ -75,6 +77,11 @@ export default Ember.Controller.extend({
     }
   }.property('session.isAuthenticated'),
   actions:{
+    selectStation: function(station){
+      Ember.$("#stationSelect").modal("hide");
+      this.set("find.fromStation", station.get("name"));
+      this.set("find.showResults", false);
+    },
     selectTime: function(value){
       this.set("timeSelected", value);
     },

@@ -53,6 +53,14 @@
             <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small><br>
           </div>
         </div>
+      {{else}}
+        <div class="card card-point row">
+          <div class="col-xs-12 col-sm-12 name">
+            <p>
+              Calling at {{train.destination.name}} only
+            </p>
+          </div>
+        </div>
       {{/each}}
     </div>
   </div>
