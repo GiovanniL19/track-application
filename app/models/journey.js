@@ -11,7 +11,7 @@ const {
 } = MF;
 
 export default DS.Model.extend({
-  type: attr("string", {defaultValue: 'Route'}),
+  type: attr("string", {defaultValue: 'journey'}),
   starred: belongsTo("user", {async: true, inverse: "starredJourneys"}),
   history: belongsTo("user", {async: true, inverse: "journeyHistory"}),
 

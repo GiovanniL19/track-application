@@ -70,7 +70,12 @@ export default Ember.Controller.extend({
   }.observes("message"),
 
   isLoggedIn: function(){
+    let controller = this;
     if(this.get('session.isAuthenticated')){
+      this.store.find("user", this.get('session.session.authenticated.user')).then(function (user) {
+        controller.set("user", user);
+      });
+
       return true;
     }else{
       return false;

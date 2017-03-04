@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   content: [],
   output: [],
   value: "",
-  showResults: true,
+  showResults: false,
 
   setValue: function(){
     this.set("value", this.get("station"));
