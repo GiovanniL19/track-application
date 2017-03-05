@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   alert: Ember.inject.service('alert-message'),
+  stationMessage: Ember.inject.service(),
   navigation: Ember.inject.service(),
 
   stations: [],
@@ -31,7 +32,7 @@ export default Ember.Controller.extend({
       var station = null;
 
       //Clear existing data
-      this.set("navigation.crs", "");
+      this.set("crs", "");
       this.set("trains", []);
       this.set("navigation.isLoading", true);
 
@@ -44,9 +45,14 @@ export default Ember.Controller.extend({
 
       //If station is found set properties
       if(station != null){
-        this.set("navigation.crs", station.get("crs"));
+        this.set("crs", station.get("crs"));
+
+        //Get message
+        controller.get("stationMessage").getMessage(station.get("crs"));
+
         this.store.query("train", {type: this.get("type") ,location: station.get("crs")}).then(function(trains){
           controller.set("trains", trains);
+
           controller.set("navigation.isLoading", false);
         }, function(err){
           console.log(err);
@@ -59,12 +65,12 @@ export default Ember.Controller.extend({
       }
     },
 
-    showStationMessage: function(){
+    showStationMessage(){
       //Opens modal
       Ember.$('#stationMessage').modal();
     },
 
-    selectType: function(value){
+    selectType(value){
       //Sets type of board
       this.set("type", value);
     }

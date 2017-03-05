@@ -10,10 +10,8 @@ export default Ember.Controller.extend({
   find: Ember.inject.controller(),
   board: Ember.inject.controller(),
 
-  getNearbyStations: false,
+  nearbyStationsToggle: false,
   user: null,
-  isLoading: false,
-  crs:"",
 
   isLoggedIn: function(){
     let controller = this;
@@ -26,7 +24,6 @@ export default Ember.Controller.extend({
       return false;
     }
   }.property('session.isAuthenticated'),
-
 
   actions:{
     changePage(route){

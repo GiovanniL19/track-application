@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
     },
 
     getNearbyStations(){
-      this.set("application.getNearbyStations", !this.get("application.getNearbyStations"));
+      this.set("application.nearbyStationsToggle", !this.get("application.nearbyStationsToggle"));
       Ember.$('#stationSelect').modal();
     },
 

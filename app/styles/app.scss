@@ -210,6 +210,12 @@ $navHeight: 4.5em;
 }
 
 /* 0: Modal */
+.modal{
+  z-index:999999;
+}
+.modal-backdrop.in{
+  z-index:99999;
+}
 .modal-dialog {
   .close {
     opacity: 1;
@@ -328,7 +334,7 @@ $navHeight: 4.5em;
   border: none;
   border-radius: 0;
   font-weight: bold;
-  z-index:999999;
+  z-index:9999;
   line-height:2.8em;
   .close {
     padding-top:0.3em;
