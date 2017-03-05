@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12">
+    {{bootstrap-datepicker placeholder="Today" autoclose=true class="form-control" todayHighlight=true value=date format="dd/mm/yy" keyboardNavigation=false}}
+  </div>
+
+  <div class="col-xs-6">
+    <select class="form-control" onchange={{action 'selectTime' value="target.value"}}>
+      {{#each timeList as |time|}}
+        <option value="{{time}}">{{time}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="col-xs-6">
+    <select class="form-control" onchange={{action 'selectType' value="target.value"}}>
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <button type="button" class="btn btn-primary" {{action "set"}}>DONE</button>
+</div>

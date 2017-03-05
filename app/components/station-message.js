@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   crs: "",
   message: "",
+
   getMessage: function(){
-    //let host = "10.205.205.198";
     let host = "localhost";
     let controller = this;
     if(this.get("crs")){

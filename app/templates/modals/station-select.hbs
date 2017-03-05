@@ -3,21 +3,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4>Nearest Stations</h4>
+        <h4>Nearby Stations</h4>
       </div>
       <div class="row modal-body text-center">
         <div class="col-xs-12 col-sm-12">
-          <ul>
-            {{#if loadingNearbyStations}}
-              {{fa-icon "circle-o-notch" spin=true}}
-            {{else}}
-              {{#each nearbyStations as |station|}}
-                <li {{action "selectStation" station}}>{{station.name}}</li>
-              {{else}}
-                <li>No Stations Nearby</li>
-              {{/each}}
-            {{/if}}
-          </ul>
+          {{nearby-stations toggle=getNearbyStations}}
         </div>
       </div>
     </div>

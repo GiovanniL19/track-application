@@ -10,10 +10,10 @@
 
     <div class="col-xs-10 text-right">
       <ul class="nav navbar-nav navbar-right">
-        <li><a {{action "changePage" "find"}} class="{{if page.find "selected"}}">{{material-design-icon name='directions-transit'}}</a></li>
-        <li><a {{action "changePage" "board"}} class="{{if page.board "selected"}}">{{material-design-icon name='query-builder'}}</a></li>
-        <li><a {{action "changePage" "likes"}} class="{{if page.likes "selected"}}">{{material-design-icon name='favorite'}}</a></li>
-        <li><a {{action "changePage" "account"}} class="{{if page.account "selected"}} {{if page.accountAccess.login "selected"}} {{if page.accountAccess.register "selected"}}">{{material-design-icon name='face'}}</a></li>
+        <li><a {{action "changePage" "find"}} class="{{if navigation.page.find "selected"}}">{{material-design-icon name='directions-transit'}}</a></li>
+        <li><a {{action "changePage" "board"}} class="{{if navigation.page.board "selected"}}">{{material-design-icon name='query-builder'}}</a></li>
+        <li><a {{action "changePage" "likes"}} class="{{if navigation.page.likes "selected"}}">{{material-design-icon name='favorite'}}</a></li>
+        <li><a {{action "changePage" "account"}} class="{{if navigation.page.account "selected"}} {{if navigation.page.accountAccess.login "selected"}} {{if navigation.page.accountAccess.register "selected"}}">{{material-design-icon name='face'}}</a></li>
       </ul>
     </div>
   </div>

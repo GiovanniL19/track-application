@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  train: null,
+  train: Ember.inject.service(),
 
   actions:{
-    back: function(){
+    back(){
       history.back();
     }
   }

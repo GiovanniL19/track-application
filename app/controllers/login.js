@@ -1,10 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
   session: Ember.inject.service('session'),
+  alert: Ember.inject.service('alert-message'),
+  navigation: Ember.inject.service(),
+
   identification: "",
   password: "",
+
   actions: {
     authenticate() {
       let controller = this;
@@ -26,25 +29,25 @@ export default Ember.Controller.extend({
          var authenticator = 'authenticator:token';
 
          this.get('session').authenticate(authenticator, credentials).then(() => {
-           controller.set('navigation.message', '');
+           controller.set('alert.message', '');
            controller.transitionToRoute('find');
            controller.set("navigation.isLoading", false);
          }, (err) => {
            console.log(err);
            controller.set("navigation.isLoading", false);
            if(err === "Incorrect Username"){
-             controller.set('navigation.message', 'Username does not exist');
+             controller.set('alert.message', 'Username does not exist');
            }else if(err === "Incorrect Password"){
-             controller.set('navigation.message', 'Password is incorrect');
+             controller.set('alert.message', 'Password is incorrect');
            }else{
-             controller.set('navigation.message', 'There was an error, try again later');
+             controller.set('alert.message', 'There was an error, try again later');
            }
          });
        }else{
-         controller.set('navigation.message', 'Please enter your password');
+         controller.set('alert.message', 'Please enter your password');
        }
       }else{
-        controller.set('navigation.message', 'Please enter your email');
+        controller.set('alert.message', 'Please enter your email');
       }
     }
   }

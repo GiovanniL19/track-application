@@ -1,51 +1,52 @@
   import Ember from 'ember';
-import moment from 'moment';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
-  findResults: Ember.inject.controller(),
   session: Ember.inject.service('session'),
-  geolocation: Ember.inject.service(),
+  alert: Ember.inject.service("alert-message"),
+  dateTimeSelect: Ember.inject.service(),
+  navigation: Ember.inject.service(),
+  location: Ember.inject.service(),
+
+  application: Ember.inject.controller(),
+  findResults: Ember.inject.controller(),
 
   stations: [],
-  showResults: true,
-  fromStation: "",
-  toStation: "",
   dateTime: null,
-  dateSelected: "Today, now",
-
-  dateChange: function(){
-    this.set("dateSelected", moment.unix(this.get("dateTime")).format("DD/MMM, HH:mm"));
-  }.observes("dateTime"),
 
   actions: {
-    getNearestStation: function(){
-      let controller = this;
-      this.set("navigation.loadingNearbyStations", true);
-      Ember.$('#stationSelect').modal();
-      this.store.query("station", {lng: this.get("navigation.location.longitude"), lat: this.get("navigation.location.latitude")}).then(function(stations){
-        controller.set("navigation.nearbyStations", stations);
-        controller.set("navigation.loadingNearbyStations", false);
-      });
+    swapStations(){
+      //Swaps station inputs
+      let to = this.get("location.toStation");
+      let from = this.get("location.fromStation");
+
+      this.set("location.toStation", from);
+      this.set("location.fromStation", to);
     },
+
+    getNearbyStations(){
+      this.set("application.getNearbyStations", !this.get("application.getNearbyStations"));
+      Ember.$('#stationSelect').modal();
+    },
+
     showDateTimeSelect: function(){
-      this.set("navigation.date", moment(Date.now())).format("DD/MM/YYYY");
+      //Shows date modal
       Ember.$('#timeDateSelect').modal();
     },
+
     getTrains: function(){
       let controller = this;
-      if(this.get("fromStation") && this.get("toStation")){
-        if(this.get('fromStation') !== this.get("toStation")){
+      if(this.get("location.fromStation") && this.get("location.toStation")){
+        if(this.get('location.fromStation') !== this.get("location.toStation")){
           controller.set("navigation.isLoading", true);
           var from = "";
           var to = "";
 
           this.get("stations").forEach(function (station) {
-            if (station.get("name") === controller.get("fromStation")) {
+            if (station.get("name") === controller.get("location.fromStation")) {
               from = station;
             }
 
-            if (station.get("name") === controller.get("toStation")) {
+            if (station.get("name") === controller.get("location.toStation")) {
               to = station;
             }
           });
@@ -58,10 +59,10 @@ export default Ember.Controller.extend({
             }
           });
         }else{
-          this.set("navigation.message", "From and to stations must be valid");
+          this.set("alert.message", "From and to stations must be valid");
         }
       }else{
-        this.set("navigation.message", "Please ensure you have a to and from station");
+        this.set("alert.message", "Please ensure you have a to and from station");
       }
     }
   }

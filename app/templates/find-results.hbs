@@ -9,7 +9,7 @@
   </div>
   <div class="cards list">
     {{#each model as |train|}}
-      {{partial "partial/train-card"}}
+      {{train-card details=train}}
     {{else}}
       <div class="text-center listMessage">
         <h5>No trains found</h5>

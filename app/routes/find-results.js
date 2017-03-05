@@ -8,9 +8,9 @@ export default Ember.Route.extend({
       origin: params.originCRS,
       destination: params.destinationCRS,
       rows: "10",
-      lng: controller.get("navigation.location.longitude"),
-      lat: controller.get("navigation.location.latitude"),
-      user: controller.get("navigation.user.id")
+      lng: controller.get("location.longitude"),
+      lat: controller.get("location.latitude"),
+      user: controller.get("application.user.id")
     }).then(function (trains) {
       controller.set("navigation.isLoading", false);
       return trains;
@@ -19,7 +19,7 @@ export default Ember.Route.extend({
       if (error.errors === undefined) {
         console.log(error.message);
       } else {
-        controller.set("navigation.message", error.errors[0].detail);
+        controller.set("alert.message", error.errors[0].detail);
         controller.transitionToRoute("find");
       }
     });

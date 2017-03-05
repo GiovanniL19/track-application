@@ -259,15 +259,15 @@ $navHeight: 4.5em;
   .modal-footer {
     border: none;
     text-align: center;
-    @include btn;
-    .btn-primary {
-      background: $lighterBlue;
-      border: none;
-      box-shadow: none;
-      color: white;
-      &:focus, &:active {
-        background: white;
-      }
+  }
+  @include btn;
+  .btn-primary {
+    background: $lighterBlue;
+    border: none;
+    box-shadow: none;
+    color: white;
+    &:focus, &:active {
+      background: white;
     }
   }
 }
@@ -521,6 +521,7 @@ h5 {
     background-size: cover;
     height: 52%;
     padding: 1em;
+    padding-top: 3em;
     h5 {
       margin: 0;
       color: white;
@@ -542,6 +543,12 @@ h5 {
     background: $darkBlue;
     height: 23em;
     padding: 1.5em 0em;
+    .swapStations{
+      background: white !important;
+      i{
+        color:#444;
+      }
+    }
     .date-time {
       .form-control {
         background: white;
@@ -603,7 +610,7 @@ h5 {
         padding: 0;
       }
       .btn-star {
-        background: $lighterBlue;
+        background: $green;
         color: white;
         margin: 0 0 0 0.5em;
         width: 90%;
@@ -1026,7 +1033,7 @@ h5 {
     overflow: scroll;
     padding-top: 0.5em;
     margin-bottom:0.5em;
-    height:58vh
+    height:57vh
   }
   .previousCards{
     height:61vh;

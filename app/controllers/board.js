@@ -1,34 +1,49 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
-  trainInformation: Ember.inject.controller(),
+  alert: Ember.inject.service('alert-message'),
+  navigation: Ember.inject.service(),
+
   stations: [],
   station: "",
   crs: "",
   type: "departure",
   trains:[],
 
+  isArrival: function() {
+    if(this.get("type") === "arrival"){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("type"),
+  isDeparture: function() {
+    if(this.get("type") === "departure"){
+      return true;
+    }else{
+      return false;
+    }
+  }.property("type"),
+
   actions:{
-    selectTrain: function(train){
-      this.set("trainInformation.train", train);
-      this.transitionToRoute("train-information");
-    },
-    get: function(){
-      this.set("navigation.crs", "");
-
+    get(){
       let controller = this;
-      var station;
+      var station = null;
 
+      //Clear existing data
+      this.set("navigation.crs", "");
       this.set("trains", []);
       this.set("navigation.isLoading", true);
+
+      //Lookup and get station
       this.get("stations").forEach(function (foundStation) {
         if (foundStation.get("name") === controller.get("station")) {
           station = foundStation;
         }
       });
 
-      if(station){
+      //If station is found set properties
+      if(station != null){
         this.set("navigation.crs", station.get("crs"));
         this.store.query("train", {type: this.get("type") ,location: station.get("crs")}).then(function(trains){
           controller.set("trains", trains);
@@ -36,17 +51,21 @@ export default Ember.Controller.extend({
         }, function(err){
           console.log(err);
           controller.set("navigation.isLoading", false);
-          controller.set("navigation.message", "There was an error, try again later");
+          controller.set("alert.message", err.errors[0].detail);
         });
       }else{
         this.set("navigation.isLoading", false);
-        this.set("navigation.message", "Please enter station");
+        this.set("alert.message", "Please enter station");
       }
     },
+
     showStationMessage: function(){
+      //Opens modal
       Ember.$('#stationMessage').modal();
     },
+
     selectType: function(value){
+      //Sets type of board
       this.set("type", value);
     }
   }

@@ -1,0 +1,11 @@
+<ul>
+  {{#if loadingNearbyStations}}
+    {{fa-icon "circle-o-notch" spin=true}}
+  {{else}}
+    {{#each nearbyStations as |station|}}
+      <li {{action "selectStation" station}}>{{station.name}}</li>
+    {{else}}
+      <li>No stations within a 10 mile radius</li>
+    {{/each}}
+  {{/if}}
+</ul>

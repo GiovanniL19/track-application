@@ -2,12 +2,13 @@ import Ember from 'ember';
 import moment from 'moment';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
   session: Ember.inject.service('session'),
+  alert: Ember.inject.service('alert-message'),
+  navigation: Ember.inject.service(),
+
   email: "",
   fullName: "",
   password: "",
-
   selectedImage: {
     image: "",
     imageSize: 0,
@@ -28,7 +29,7 @@ export default Ember.Controller.extend({
           if (type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png') {
             controller.set('userImage', this.get('selectedImage'));
           } else {
-            controller.set("navigation.message", "Image must be .JPG, .JPEG, or .PNG");
+            controller.set("alert.message", "Image must be .JPG, .JPEG, or .PNG");
           }
         }
       } catch (err) {
@@ -52,6 +53,7 @@ export default Ember.Controller.extend({
     this.set("email", "");
     this.set("selectedImage.image", "");
   },
+
   emailValidation: function(email) {
     //Uses Regular Expression and javaScript test to check the email matches the expression
     let regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -61,10 +63,11 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    selectImage: function(){
+    selectImage(){
       Ember.$('#selectImage').click();
     },
-    registerAccount: function(){
+
+    registerAccount(){
       //Check email is valid
       if(this.emailValidation(this.get("email"))) {
         //Set email to lowercase
@@ -80,7 +83,7 @@ export default Ember.Controller.extend({
           },
           success: function(data) {
             if(data.exist){
-              controller.set("navigation.message", "Email already exists");
+              controller.set("alert.message", "Email already exists");
               controller.set("emailExists", true);
             }else{
               controller.set("emailExists", false);
@@ -116,18 +119,18 @@ export default Ember.Controller.extend({
                   user.save().then(function () {
                     controller.clearInput();
                     //Success
-                    controller.set("navigation.message", "Account Created!");
+                    controller.set("alert.message", "Account Created!");
                     controller.transitionToRoute("login");
                   }, function (error) {
                     //An error occurred
                     console.log(error);
-                    controller.set("navigation.message", "There was an error, try again later");
+                    controller.set("alert.message", "There was an error, try again later");
                   });
                 }else{
-                  controller.set("navigation.message", "Password is not valid");
+                  controller.set("alert.message", "Password is not valid");
                 }
               } else {
-                controller.set("navigation.message", "Please enter your full name");
+                controller.set("alert.message", "Please enter your full name");
               }
             }
           },

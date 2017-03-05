@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
-  trainInformation: Ember.inject.controller(),
+  navigation: Ember.inject.service(),
+  location: Ember.inject.service(),
+  alert: Ember.inject.service('alert-message'),
+
+  application: Ember.inject.controller(),
 
   queryParams: ['origin', 'destination', 'originCRS', 'destinationCRS'],
   origin: "",
@@ -11,12 +14,9 @@ export default Ember.Controller.extend({
   destinationCRS: "",
 
   actions:{
-    back: function(){
+    back(){
+      //Go back
       history.back();
-    },
-    selectTrain: function(train){
-      this.set("trainInformation.train", train);
-      this.transitionToRoute("train-information");
     }
   }
 });

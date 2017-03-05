@@ -13,9 +13,6 @@ export default Ember.Component.extend({
   value: "",
   showResults: false,
 
-  setValue: function(){
-    this.set("value", this.get("station"));
-  }.observes("station"),
   filteredResults: function() {
     try {
       if(this.get("station").length >= 3) {
@@ -33,20 +30,26 @@ export default Ember.Component.extend({
     }
   }.property('station'),
 
+  setValue: function(){
+    this.set("value", this.get("station"));
+  }.observes("station"),
+
   actions: {
-    focusOut: function() {
+    focusOut() {
       let controller = this;
       setTimeout(function(){
         controller.set("showResults", false);
       },300);
     },
-    autoComplete: function() {
+
+    autoComplete() {
       let station = this.get("station");
       this.set("station", station);
 
       this.set("showResults", true);
     },
-    select: function(station) {
+
+    select(station) {
       this.set('station', station.get("name"));
       this.set("showResults", false);
     }
