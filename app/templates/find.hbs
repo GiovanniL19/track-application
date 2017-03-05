@@ -6,7 +6,7 @@
       </div>
       <div class="col-xs-7 date-time">
         <div class="input-group" {{action "showDateTimeSelect"}}>
-          {{input type="text" class="form-control" placeholder=dateSelected readonly="true" describedby="dateTime"}}
+          {{input type="text" class="form-control" placeholder=dateTimeSelect.dateSelected readonly="true" describedby="dateTime"}}
           <span class="input-group-addon" id="dateTime">{{material-design-icon name='arrow-drop-down'}}</span>
         </div>
       </div>
@@ -15,14 +15,15 @@
       <div class="form-group">
         <label for="from">from</label>
         <div class="input-group">
-          {{station-search content=stations value=fromStation id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
-          <span class="input-group-addon" id="from">{{material-design-icon name='my-location'}}</span>
+          {{station-search content=stations station=location.fromStation showResults=showResults id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
+          <span class="input-group-addon" id="from" {{action "getNearbyStations"}}>{{material-design-icon name='my-location'}}</span>
         </div>
       </div>
       <div class="form-group">
         <label for="to">to</label>
         <div class="input-group">
-          {{station-search content=stations value=toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+          {{station-search content=stations station=location.toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+          <span class="input-group-addon swapStations" id="to" {{action "swapStations"}}>{{material-design-icon name='swap-vert'}}</span>
         </div>
       </div>
       <div class="row submit">

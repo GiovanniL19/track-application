@@ -2,10 +2,10 @@
   <div class="board-search">
     <div class="row">
       <div class="col-xs-6">
-        <h5>Departure Board</h5>
+        {{#if isDeparture}}<h5>Departure Board</h5>{{else}}<h5>Arrival Board</h5>{{/if}}
       </div>
       <div class="col-xs-6 text-right right">
-        {{#if navigation.crs}}
+        {{#if stationMessage.message}}
           <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
         {{/if}}
       </div>
@@ -15,14 +15,22 @@
         <div class="col-xs-7 col">
           <label for="station">Station</label>
           <div class="input-group">
-            {{station-search content=stations value=station id="station" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+            {{station-search content=stations station=station id="station" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
           </div>
         </div>
         <div class="col-xs-5 col">
           <label for="type" class="type">Board</label>
           <select class="form-control type" onchange={{action 'selectType' value="target.value"}} describedby="type">
-            <option value=departure>Departures</option>
-            <option value="arrival">Arrivals</option>
+            {{#if isDeparture}}
+              <option value="departure" selected="selected">Departure</option>
+            {{else}}
+              <option value="departure">Departure</option>
+            {{/if}}
+            {{#if isArrival}}
+              <option value="arrival" selected="selected">Arrival</option>
+            {{else}}
+              <option value="arrival">Arrival</option>
+            {{/if}}
           </select>
         </div>
       </div>
@@ -41,10 +49,14 @@
 
   <div class="cards">
     {{#each trains as |train|}}
-      {{partial "partial/train-card"}}
+      {{train-card details=train}}
     {{else}}
       <div class="text-center listMessage">
-        <h5>Station not selected</h5>
+        {{#if crs}}
+          <h5>No Trains Found</h5>
+        {{else}}
+          <h5>Station not selected</h5>
+        {{/if}}
       </div>
     {{/each}}
   </div>

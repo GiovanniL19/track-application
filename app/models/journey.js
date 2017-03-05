@@ -11,11 +11,12 @@ const {
 } = MF;
 
 export default DS.Model.extend({
-  type: attr("string", {defaultValue: 'Route'}),
+  type: attr("string", {defaultValue: 'journey'}),
   starred: belongsTo("user", {async: true, inverse: "starredJourneys"}),
   history: belongsTo("user", {async: true, inverse: "journeyHistory"}),
 
   to: fragment('station-fragment'),
   from: fragment('station-fragment'),
-  user: belongsTo("user", {async: true})
+  user: belongsTo("user", {async: true}),
+  count: attr("number", {defaultValue: 0})
 });

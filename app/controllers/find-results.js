@@ -1,19 +1,28 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.controller(),
-  trainInformation: Ember.inject.controller(),
+  navigation: Ember.inject.service(),
+  location: Ember.inject.service(),
+  stationMessage: Ember.inject.service(),
+  alert: Ember.inject.service('alert-message'),
 
-  origin: null,
-  destination: null,
+  application: Ember.inject.controller(),
+
+  queryParams: ['origin', 'destination', 'originCRS', 'destinationCRS'],
+  origin: "",
+  destination: "",
+  originCRS: "",
+  destinationCRS: "",
 
   actions:{
-    back: function(){
+    back(){
+      //Go back
       history.back();
     },
-    selectTrain: function(train){
-      this.set("trainInformation.train", train);
-      this.transitionToRoute("train-information");
-    }
+
+    showStationMessage(){
+      //Opens modal
+      Ember.$('#stationMessage').modal();
+    },
   }
 });

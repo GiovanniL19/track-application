@@ -137,7 +137,7 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
-        margin-top: 0.4em;
+        margin-top: 0.8em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 1em;
@@ -210,6 +210,12 @@ $navHeight: 4.5em;
 }
 
 /* 0: Modal */
+.modal{
+  z-index:999999;
+}
+.modal-backdrop.in{
+  z-index:99999;
+}
 .modal-dialog {
   .close {
     opacity: 1;
@@ -259,15 +265,27 @@ $navHeight: 4.5em;
   .modal-footer {
     border: none;
     text-align: center;
-    @include btn;
-    .btn-primary {
-      background: $lighterBlue;
-      border: none;
-      box-shadow: none;
-      color: white;
-      &:focus, &:active {
-        background: white;
-      }
+  }
+  @include btn;
+  .btn-primary {
+    background: $lighterBlue;
+    border: none;
+    box-shadow: none;
+    color: white;
+    &:focus, &:active {
+      background: white;
+    }
+  }
+}
+#stationSelect{
+  ul{
+    margin:0;
+    padding:0;
+    li{
+      list-style: none;
+      padding:1em 0;
+      font-weight:bold;
+      color: $lighterBlue;
     }
   }
 }
@@ -316,7 +334,7 @@ $navHeight: 4.5em;
   border: none;
   border-radius: 0;
   font-weight: bold;
-  z-index:999999;
+  z-index:9999;
   line-height:2.8em;
   .close {
     padding-top:0.3em;
@@ -509,6 +527,7 @@ h5 {
     background-size: cover;
     height: 52%;
     padding: 1em;
+    padding-top: 3em;
     h5 {
       margin: 0;
       color: white;
@@ -530,6 +549,12 @@ h5 {
     background: $darkBlue;
     height: 23em;
     padding: 1.5em 0em;
+    .swapStations{
+      background: white !important;
+      i{
+        color:#444;
+      }
+    }
     .date-time {
       .form-control {
         background: white;
@@ -591,7 +616,7 @@ h5 {
         padding: 0;
       }
       .btn-star {
-        background: $lighterBlue;
+        background: $green;
         color: white;
         margin: 0 0 0 0.5em;
         width: 90%;
@@ -909,6 +934,14 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+  @include btn;
+  .btn-message {
+    height: 2.5em;
+    width: 6em;
+    margin-top: 0em;
+    position: absolute;
+    right: 1em;
+  }
   .results-header {
     z-index: 99999999;
     background: $darkBlue;
@@ -948,6 +981,7 @@ h5 {
     color:white;
     position:fixed;
     max-height:12.7em;
+    min-height: 12.7em;
     @include btn;
     .btn-buy {
       height: 2.5em;
@@ -1013,7 +1047,7 @@ h5 {
     overflow: scroll;
     padding-top: 0.5em;
     margin-bottom:0.5em;
-    height:58vh
+    height:57vh
   }
   .previousCards{
     height:61vh;

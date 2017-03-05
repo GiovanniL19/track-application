@@ -2,19 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   setupController: function(controller){
-    controller.set('navigation.page',{
-      find: true,
-      board: false,
-      likes: false,
-      account: false,
-      accountAccess: {
-        login: false,
-        register: false
-      }
-    });
+    controller.get("navigation").setPage("find");
 
     this.store.findAll("station").then(function(stations){
       controller.set("stations", stations);
     });
+  },
+  actions: {
+    willTransition(transition) {
+      if(transition.targetName === "index") {
+        transition.abort();
+      }
+    }
   }
 });
