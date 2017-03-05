@@ -934,6 +934,14 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+  @include btn;
+  .btn-message {
+    height: 2.5em;
+    width: 6em;
+    margin-top: 0em;
+    position: absolute;
+    right: 1em;
+  }
   .results-header {
     z-index: 99999999;
     background: $darkBlue;
