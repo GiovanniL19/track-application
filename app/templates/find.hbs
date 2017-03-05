@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  {{#unless navigation.isLoggedIn}}
+  {{#unless application.isLoggedIn}}
     <div class="listMessage text-center">
       <h5>Where could Track take you?</h5>
       {{#link-to "login"}}{{material-design-icon name='face'}} <br>Login Here{{/link-to}}
