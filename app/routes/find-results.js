@@ -4,6 +4,9 @@ export default Ember.Route.extend({
   model: function(params){
     let controller = this.controllerFor("find-results");
 
+    //Get message
+    controller.get("stationMessage").getMessage(params.originCRS);
+
     return controller.store.query("train", {
       origin: params.originCRS,
       destination: params.destinationCRS,
@@ -14,9 +17,6 @@ export default Ember.Route.extend({
     }).then(function (trains) {
       controller.set("navigation.isLoading", false);
 
-      //Get message
-      controller.get("stationMessage").getMessage(params.originCRS);
-
       return trains;
     }, function (error) {
       controller.set("navigation.isLoading", false);
@@ -24,8 +24,8 @@ export default Ember.Route.extend({
         console.log(error.message);
       } else {
         controller.set("alert.message", error.errors[0].detail);
-        controller.transitionToRoute("find");
       }
+      return [];
     });
   }
 });

@@ -13,7 +13,9 @@
     <div class="row">
       <div class="col-xs-6 col-sm-6 times {{if train.details.isArrival "col-xs-12 col-sm-12"}}">
         <div class="row">
-          <div class="col-xs-6 col-sm-6">{{#if train.details.isDelayed}}<span class="delayed">{{train.details.delayedDepartureTime}}</span>{{else}}<span class="notDelayed">On Time</span>{{/if}}</div>
+          <div class="col-xs-6 col-sm-6">{{#if train.details.isDelayed}}
+            <span class="delayed">{{train.details.delayedDepartureTime}}</span>{{else}}
+            <span class="notDelayed">On Time</span>{{/if}}</div>
           <div class="col-xs-3 col-sm-3"></div>
           <div class="col-xs-3 col-sm-3"></div>
         </div>
@@ -24,7 +26,7 @@
             <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
             <div class="col-xs-4 col-sm-4">{{train.details.arrivalTime}}</div>
           {{else}}
-            <div class="col-xs-12 col-sm-12 time">Arrival Time: {{train.sta}}</div>
+            <div class="col-xs-12 col-sm-12 time">Arrival Time: {{train.details.sta}}</div>
           {{/if}}
         </div>
       </div>
@@ -37,31 +39,61 @@
 
   </div>
   <div class="selected-train {{if train.details.isArrival "arrival"}}">
-    <div class="cards-head">{{#if train.details.isArrival}}<h5>This service called at the following:</h5>{{else}}<h5>This service will call at the following:</h5>{{/if}}</div>
+    <div class="cards-head">{{#if train.details.isArrival}}<h5>This service called at the following:</h5>{{else}}
+      <h5>This service will call at the following:</h5>{{/if}}</div>
     <div class="cards {{if train.details.isArrival "previousCards"}}">
-      {{#each train.details.callingPoints as |callingPoint|}}
-        <div class="card card-point row {{if callingPoint.isDelayed "bad-border"}} {{unless callingPoint.isDelayed "good-border"}}">
-          <div class="col-xs-7 col-sm-7 name">
-            <p>
-              {{callingPoint.name}}
-            </p>
-          </div>
-          <div class="col-xs-2 col-sm-2 text-right time">
-            <strong>{{callingPoint.st}}</strong>
-          </div>
-          <div class="col-xs-3 col-sm-3 text-right time">
-            <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small><br>
-          </div>
+
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          {{#each train.details.callingPoints as |points index|}}
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{index}}" aria-expanded="true" aria-controls="{{index}}">
+                  Destination: {{destinations train.details.destinations index}} {{material-design-icon name='expand-more'}}
+                </a>
+              </h4>
+            </div>
+
+            <div id="{{index}}" class="panel-collapse collapse {{unless index "in"}}" role="tabpanel" aria-labelledby="heading{{index}}">
+              <div class="panel-body">
+                {{#each points as |callingPoint index|}}
+                  <div class="card card-point row {{if callingPoint.isDelayed "bad-border"}} {{unless callingPoint.isDelayed "good-border"}}">
+                    <div class="col-xs-7 col-sm-7 name">
+                      <p>
+                        {{callingPoint.name}}
+                      </p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 text-right time">
+                      <strong>{{callingPoint.st}}</strong>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 text-right time">
+                      <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small>
+                      <br>
+                    </div>
+                  </div>
+                {{else}}
+                  <div class="card card-point row">
+                    <div class="col-xs-12 col-sm-12 name">
+                      <p>
+                        Calling at {{destinations train.details.destinations index}} only
+                      </p>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+
+          {{else}}
+            <div class="card card-point row">
+              <div class="col-xs-12 col-sm-12 name">
+                <p>
+                  Calling at {{train.details.destination}} only
+                </p>
+              </div>
+            </div>
+          {{/each}}
         </div>
-      {{else}}
-        <div class="card card-point row">
-          <div class="col-xs-12 col-sm-12 name">
-            <p>
-              Calling at {{train.details.destination.name}} only
-            </p>
-          </div>
-        </div>
-      {{/each}}
+      </div>
     </div>
   </div>
 </div>
