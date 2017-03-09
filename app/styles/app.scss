@@ -168,29 +168,23 @@ $navHeight: 4.5em;
     }
     .card-recommended {
       .no-route {
-        margin-top: 1.3em;
-        padding-left: 2em;
+        margin-top: 1.4em;
         font-size: 1em;
         color: #888;
       }
       .icon {
-        line-height: 6em;
-        color: $red;
-      }
-      .from-to {
-        margin-top: 0.9em;
-        font-size: 0.9em;
-        line-height: 2em;
-        padding-left: 2em;
-        color: $font;
+        color: $green;
+        line-height: 7em;
       }
       .stations {
-        margin-top: 0.9em;
+        margin-top: 2em;
         font-size: 0.9em;
-        line-height: 2em;
         p {
           color: $font;
         }
+      }
+      .select-tab{
+        line-height: 7em;
       }
     }
     .card-route {
@@ -235,6 +229,8 @@ $navHeight: 4.5em;
     color: $font;
   }
   .modal-body{
+    overflow: scroll;
+    max-height: 30em;
     p{
       color: #232323;
     }
@@ -473,7 +469,10 @@ h5 {
 .navbar-nav{
   margin-right:-0.4em;
   i{
-    color:white;
+    color: white;
+    height: 0.5em;
+    width: 1.5em;
+    text-align: center;
   }
   h5 {
     margin-top: 1em;
@@ -559,8 +558,8 @@ h5 {
   }
   .search {
     background: $darkBlue;
-    height: 23em;
-    padding: 1.5em 0em;
+    height: 25em;
+    padding: 2.5em 0em;
     .swapStations{
       background: white !important;
       i{
@@ -1044,7 +1043,7 @@ h5 {
     margin-top: 12.7em;
   }
   .arrival{
-    margin-top: 10.8em;
+    margin-top: 12.7em;
   }
   .list{
     margin-top:5.5em;

@@ -43,40 +43,28 @@
       {{#link-to "login"}}{{material-design-icon name='face'}} <br>Login Here{{/link-to}}
     </div>
   {{else}}
-    <div class="row cards-head">
-      <div class="col-xs-8">
-        <h5>Recommended Routes</h5>
-      </div>
-      <div class="col-xs-4 text-right">
-        <button class="btn btn-generate">{{material-design-icon name='sync'}}</button>
-      </div>
-    </div>
-
     <div class="cards">
       {{#each recommendedRoutes as |card|}}
         <div class="card card-recommended row">
-          <div class="col-xs-1 icon">
-            {{material-design-icon name='cloud'}}
+          <div class="col-xs-3 icon text-center">
+            {{material-design-icon name='notifications-active'}}
           </div>
-          <div class="col-xs-2 from-to">
-            <p>
-              From: <br>
-              To:
-            </p>
-          </div>
-          <div class="col-xs-8 stations">
+          <div class="col-xs-7 stations">
             <p>
               <strong>London Euston (EUS)</strong><br>
               <strong>Liverpool Lime Street (LIV)</strong>
             </p>
           </div>
+          <div class="col-xs-2 select-tab">
+            {{material-design-icon name='chevron-right'}}
+          </div>
         </div>
       {{else}}
         <div class="card card-recommended row">
-          <div class="col-xs-1 icon">
+          <div class="col-xs-3 icon text-center">
             {{material-design-icon name='cloud-off'}}
           </div>
-          <div class="col-xs-10 no-route">
+          <div class="col-xs-9 no-route">
             Looks like there is a problem connecting to our servers, please try again
           </div>
         </div>
