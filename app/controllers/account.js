@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   currentEmail: "",
   password: "",
 
-  saveUser: function(user){
+  save: function(user){
     let controller = this;
     user.save().then(function () {
       controller.set("alert.message", "Account Updated");
@@ -16,7 +16,18 @@ export default Ember.Controller.extend({
   },
 
   actions:{
-    save(){
+    deleteAccount(){
+      let controller = this;
+      if(confirm("You are about to delete your account. WARNING: You can not undo this process!")){
+        this.get("model").destroyRecord().then(function () {
+          controller.get('session').invalidate();
+          controller.set("navigation.user", null);
+          controller.transitionToRoute("find");
+          controller.set("alert.message", "Account deleted");
+        });
+      }
+    },
+    saveAccount(){
       let controller = this;
       let user = this.get("model");
       if(this.get("password") !== "") {
@@ -26,7 +37,7 @@ export default Ember.Controller.extend({
 
       user.set("username", user.get("email"));
       if(this.get("currentEmail") === user.get("email")){
-        this.saveUser(user);
+        this.save(user);
       }else if(this.get("validate").email(user.get("email"))) {
         Ember.$.ajax({
           url: 'http://localhost:3002/users/check/exists/' + user.get("email"),
@@ -40,10 +51,10 @@ export default Ember.Controller.extend({
             }else{
               if (controller.get("password") !== "") {
                 if (confirm("You are about to update your account with a new password")) {
-                  this.saveUser(user);
+                  this.save(user);
                 }
               } else {
-                this.saveUser(user);
+                this.save(user);
               }
             }
           }
@@ -55,7 +66,7 @@ export default Ember.Controller.extend({
     },
     invalidate(){
       this.get('session').invalidate();
-      this.set("navigation.user",null);
+      this.set("navigation.user", null);
       this.transitionToRoute("find");
     }
   }

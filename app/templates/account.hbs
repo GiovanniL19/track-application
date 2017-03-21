@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <label for="email">Email</label>
-        {{input type="email" class="form-control" id="email" value=model.email}}
+        {{input type="text" class="form-control" id="email" value=model.email}}
       </div>
     </div>
 
@@ -34,10 +34,10 @@
       </div>
     </div>
     <div class="row text-right">
-      <!--<a>Delete Account</a>-->
+      <a {{action "deleteAccount"}}>Delete Account</a>
       <br>
       <div class="col-xs-6 text-left buttons">
-        <button class="btn btn-primary" {{action "save"}}>Save</button>
+        <button class="btn btn-primary" {{action "saveAccount"}}>Save</button>
       </div>
 
       <div class="col-xs-6 text-right buttons">
