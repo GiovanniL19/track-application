@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   alert: Ember.inject.service('alert-message'),
   navigation: Ember.inject.service(),
+  validate: Ember.inject.service("input-validation"),
 
   email: "",
   fullName: "",
@@ -54,13 +55,6 @@ export default Ember.Controller.extend({
     this.set("selectedImage.image", "");
   },
 
-  emailValidation: function(email) {
-    //Uses Regular Expression and javaScript test to check the email matches the expression
-    let regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    //Return the result of test
-    return regularExpression.test(email);
-  },
 
   actions: {
     selectImage(){
@@ -69,7 +63,7 @@ export default Ember.Controller.extend({
 
     registerAccount(){
       //Check email is valid
-      if(this.emailValidation(this.get("email"))) {
+      if(this.get("validate").email(this.get("email"))) {
         //Set email to lowercase
         this.set("email", this.get("email").toLowerCase());
         let controller = this;
@@ -102,7 +96,7 @@ export default Ember.Controller.extend({
                   let firstName = fullName.substring(0, indexOfLast);
 
                   //Encrypt password
-                  let hashedPassword = md5("TRACK" + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
+                  let hashedPassword = controller.get("validate").hashPassword(controller.get("password"));
 
                   //Create user object
                   var user = controller.store.createRecord("user", {
@@ -136,11 +130,11 @@ export default Ember.Controller.extend({
           },
           error: function(err) {
             console.log(err);
-            controller.set("navigation.message", "There was an error, try again later");
+            controller.set("alert.message", "There was an error, try again later");
           }
         });
       }else{
-        this.set("navigation.message", "Invalid email address");
+        this.set("alert.message", "Invalid email address");
       }
     }
   }
