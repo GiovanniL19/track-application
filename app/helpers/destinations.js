@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function destinations([ array, index]) {
+export function destinations([array, index]) {
   return array[index];
 };
 

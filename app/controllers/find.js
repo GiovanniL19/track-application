@@ -11,8 +11,34 @@ export default Ember.Controller.extend({
   findResults: Ember.inject.controller(),
 
   stations: [],
+  recommendedJourneys:[],
   dateTime: null,
+  journey: null,
+  loadingJourneys: true,
 
+  journeyObserver: function(){
+    let journey = this.get("journey");
+    if(journey){
+      this.transitionToRoute("find-results", {
+        queryParams: {
+          origin: journey.get("from.name"),
+          destination: journey.get("to.name"),
+          originCRS: journey.get("from.crs"),
+          destinationCRS: journey.get("to.crs")
+        }
+      });
+    }
+  }.observes("journey"),
+  recommendedJourneys: function(){
+    let controller = this;
+    controller.set("loadingJourneys", true);
+    if(this.get("location.longitude") && this.get("location.latitude")){
+      this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
+        controller.set("loadingJourneys", false);
+        controller.set("recommendedJourneys", journeys);
+      });
+    }
+  }.observes("location.longitude", "location.latitude"),
   actions: {
     swapStations(){
       //Swaps station inputs

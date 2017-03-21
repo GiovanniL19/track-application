@@ -2,12 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(){
-    //TODO: Get user and return
-    return null;
+    let controller = this.controllerFor("account");
+    return this.store.find("user", controller.get('session.session.authenticated.user')).then(function (user) {
+      return user;
+    });
   },
   setupController: function(controller, model){
+    controller.set("model", model);
     if(controller.get('session.isAuthenticated')){
-      controller.set("model", model);
       controller.get("navigation").setPage("account");
     }else{
       controller.transitionToRoute("login");

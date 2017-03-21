@@ -102,7 +102,7 @@ export default Ember.Controller.extend({
                   let firstName = fullName.substring(0, indexOfLast);
 
                   //Encrypt password
-                  let hashedPassword = md5("TRACK" + controller.get("email") + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
+                  let hashedPassword = md5("TRACK" + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
 
                   //Create user object
                   var user = controller.store.createRecord("user", {

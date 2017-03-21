@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
          };
 
          //Create hashed password
-         let hashedPassword = md5("TRACK" + controller.get("identification") + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
+         let hashedPassword = md5("TRACK" + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
          credentials.password = hashedPassword;
 
          //Authenticate User
