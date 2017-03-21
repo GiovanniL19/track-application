@@ -38,8 +38,45 @@ export default Ember.Controller.extend({
         controller.set("recommendedJourneys", journeys);
       });
     }
-  }.observes("location.longitude", "location.latitude"),
+  }.observes("location.longitude", "location.latitude", "application.user"),
+
   actions: {
+    likeJourney: function(){
+      let controller = this;
+      var to = null;
+      var from = null;
+
+      this.get("stations").forEach(function (station) {
+        if (station.get("name") === controller.get("location.fromStation")) {
+          from = station;
+        }
+
+        if (station.get("name") === controller.get("location.toStation")) {
+          to = station;
+        }
+      });
+
+      var journey = this.store.createRecord("journey");
+      var toStation = this.store.createFragment("station-fragment",{
+        name: to.get("name"),
+        crs: to.get("crs")
+      });
+
+      var fromStation = this.store.createFragment("station-fragment",{
+        name: from.get("name"),
+        crs: from.get("crs")
+      });
+
+      journey.set("to", toStation);
+      journey.set("from", fromStation);
+      journey.set("starred", controller.get("application.user"));
+
+      journey.save().then(function(savedJourney){
+        controller.get("application.user.starredJourneys").pushObject(savedJourney);
+        controller.get("application.user").save();
+      });
+    },
+
     swapStations(){
       //Swaps station inputs
       let to = this.get("location.toStation");

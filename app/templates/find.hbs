@@ -27,12 +27,14 @@
         </div>
       </div>
       <div class="row submit">
-        <div class="col-xs-10 buttons">
+        <div class="col-xs-10 buttons {{unless application.user "col-xs-12"}}">
           <button class="btn btn-primary" {{action "getTrains"}}>{{#if navigation.isLoading}}{{fa-icon "circle-o-notch" spin=true}}{{else}}FIND TRAINS{{/if}}</button>
         </div>
-        <div class="col-xs-2 buttons">
-          <button class="btn btn-star">{{material-design-icon name='favorite-border'}}</button>
-        </div>
+        {{#if application.user}}
+          <div class="col-xs-2 buttons" {{action "likeJourney"}}>
+            <button class="btn btn-star">{{material-design-icon name='favorite-border'}}</button>
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

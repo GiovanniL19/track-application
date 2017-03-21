@@ -189,12 +189,13 @@ $navHeight: 4.5em;
       }
     }
     .card-route {
+      height:5.5em;
       .icon {
         line-height: 6em;
-        color: $green;
+        color: $darkBlue;
       }
       .remove {
-        line-height: 6em;
+        line-height: 5em;
         color: $red;
       }
       .from-to {
@@ -778,7 +779,7 @@ h5 {
   .cards {
     overflow: hidden;
     height: auto;
-    margin-top:1em;
+    margin-top:-0.5em;
   }
 }
 
