@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-1 col-sm-1 icon  {{unless details.isDelayed "good"}} {{if details.isDelayed "bad"}}">
+    <div class="col-xs-1 col-sm-1 icon {{unless details.isDelayed "good"}} {{if details.isDelayed "bad"}}">
       {{#if details.trainSplits}}
         {{material-design-icon name='call-split'}}
       {{else}}

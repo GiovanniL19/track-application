@@ -57,7 +57,7 @@
             <div id="{{index}}" class="panel-collapse collapse {{unless index "in"}}" role="tabpanel" aria-labelledby="heading{{index}}">
               <div class="panel-body">
                 {{#each points as |callingPoint index|}}
-                  <div class="card card-point row {{if callingPoint.isDelayed "bad-border"}} {{unless callingPoint.isDelayed "good-border"}}">
+                  <div class="card card-point row {{if callingPoint.isDelayed "bad-border"}} {{unless callingPoint.isDelayed "good-border"}} {{if (selected-point callingPoint.name train.userDestination) "highlight"}}">
                     <div class="col-xs-7 col-sm-7 name">
                       <p>
                         {{callingPoint.name}}

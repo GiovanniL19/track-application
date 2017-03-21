@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   actions:{
     select(){
       this.get("train").setDetails(this.get("details"));
+      this.set("train.userDestination", this.get("destination"));
       this.get("routing").transitionTo("train-information");
     }
   }

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export function arrivalTime(params) {
   let destination = params.get("lastObject");
-  var time;
+  var time = params.get("firstObject.arrivalTime");
   params.get("firstObject.callingPoints").forEach(function(points){
     points.forEach(function(point){
       if(point.name === destination){

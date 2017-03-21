@@ -135,6 +135,10 @@ $navHeight: 4.5em;
     .bad-border{
       border-left: 5px solid $red;
     }
+    .highlight{
+      background: $darkBlue !important;
+      color:white;
+    }
     .card-point {
       position:relative;
       box-shadow: none;
