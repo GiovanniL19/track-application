@@ -9,7 +9,7 @@
 
   <div class="cards">
     {{#each application.user.starredJourneys as |journey|}}
-      <div class="card card-route row" {{action "select" journey}}>
+      <div class="card card-route col-xs-12" {{action "select" journey}}>
         <div class="col-xs-1 icon">
           {{material-design-icon name='star'}}
         </div>

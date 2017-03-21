@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   routing: Ember.inject.service('-routing'),
   train: Ember.inject.service(),
   details: null,
+  destination: "",
 
   actions:{
     select(){

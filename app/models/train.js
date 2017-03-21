@@ -8,7 +8,6 @@ const {
 
 const {
   fragment,
-  fragmentArray,
   array
 } = MF;
 
