@@ -1,4 +1,4 @@
-  import Ember from 'ember';
+import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
@@ -11,9 +11,72 @@ export default Ember.Controller.extend({
   findResults: Ember.inject.controller(),
 
   stations: [],
+  recommendedJourneys:[],
   dateTime: null,
+  journey: null,
+  loadingJourneys: true,
+
+  journeyObserver: function(){
+    let journey = this.get("journey");
+    if(journey){
+      this.transitionToRoute("find-results", {
+        queryParams: {
+          origin: journey.get("from.name"),
+          destination: journey.get("to.name"),
+          originCRS: journey.get("from.crs"),
+          destinationCRS: journey.get("to.crs")
+        }
+      });
+    }
+  }.observes("journey"),
+  recommendedJourneys: function(){
+    let controller = this;
+    controller.set("loadingJourneys", true);
+    if(this.get("location.longitude") && this.get("location.latitude")){
+      this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
+        controller.set("loadingJourneys", false);
+        controller.set("recommendedJourneys", journeys);
+      });
+    }
+  }.observes("location.longitude", "location.latitude", "application.user"),
 
   actions: {
+    likeJourney: function(){
+      let controller = this;
+      var to = null;
+      var from = null;
+
+      this.get("stations").forEach(function (station) {
+        if (station.get("name") === controller.get("location.fromStation")) {
+          from = station;
+        }
+
+        if (station.get("name") === controller.get("location.toStation")) {
+          to = station;
+        }
+      });
+
+      var journey = this.store.createRecord("journey");
+      var toStation = this.store.createFragment("station-fragment",{
+        name: to.get("name"),
+        crs: to.get("crs")
+      });
+
+      var fromStation = this.store.createFragment("station-fragment",{
+        name: from.get("name"),
+        crs: from.get("crs")
+      });
+
+      journey.set("to", toStation);
+      journey.set("from", fromStation);
+      journey.set("starred", controller.get("application.user"));
+
+      journey.save().then(function(savedJourney){
+        controller.get("application.user.starredJourneys").pushObject(savedJourney);
+        controller.get("application.user").save();
+      });
+    },
+
     swapStations(){
       //Swaps station inputs
       let to = this.get("location.toStation");

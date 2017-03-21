@@ -5,19 +5,22 @@
       <div class="col-xs-11 col-sm-11">
         <h5 class="text-right">{{origin}} to {{destination}}</h5>
       </div>
-      <div class="col-xs-12 col-sm-12">
-        {{#if stationMessage.message}}
-          <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
-        {{/if}}
-      </div>
     </div>
+
+    {{#if stationMessage.message}}
+      <div class="col-xs-12 text-right right">
+        <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
+      </div>
+    {{/if}}
   </div>
-  <div class="cards list" style="{{if stationMessage.message "padding-top: 1.5em;"}}">
+
+  <div class="cards list" style="{{if stationMessage.message "padding-top: 2.5em;"}}">
     {{#each model as |train|}}
       {{train-card details=train}}
     {{else}}
       <div class="text-center listMessage">
-        <h5>No trains found</h5>
+        <h5>No Trains Found</h5>
+        <small>Please be sure you are using a direct route, also check the station message for service updates</small>
       </div>
     {{/each}}
   </div>

@@ -9,6 +9,7 @@ $backColour: #efefef;//$darkBlue;
 $green: #3EC791;
 $navHeight: 4.5em;
 
+
 /*
 // 0 - Modal
 // 1 - General
@@ -64,16 +65,22 @@ $navHeight: 4.5em;
     max-height: 78vh;
     .card {
       background: white !important;
-      margin: 0 auto 1em auto;
-      width: 96%;
-      border-radius: 4px;
-      height: 5.5em;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-      color:#444;
+      //margin: 0 auto 1em auto;
+      //width: 96%;
+      //border-radius: 4px;
+      //box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      //transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      color: #444;
+      border-bottom: 1px solid #d8d8d8;
     }
     .card-train {
-      height: auto;
+      min-height: 9em;
+      line-height: 2em;
+      .icon{
+        padding:0 !important;
+        margin:0 !important;
+        padding-left:11px !important;
+      }
       .bad {
         color: $red !important;
       }
@@ -96,6 +103,12 @@ $navHeight: 4.5em;
           width: 130%;
           padding: 1em 0;
           color:$red;
+        }
+        .chev{
+          i{
+            margin-top: 0.1em;
+            margin-left: -0.1em;
+          }
         }
       }
       .status {
@@ -126,7 +139,7 @@ $navHeight: 4.5em;
       position:relative;
       box-shadow: none;
       height:5em;
-      margin-bottom:5px;
+      //margin-bottom:5px;
       .icon {
         line-height: 5em;
       }
@@ -156,38 +169,33 @@ $navHeight: 4.5em;
     }
     .card-recommended {
       .no-route {
-        margin-top: 1.3em;
-        padding-left: 2em;
+        margin-top: 1.4em;
         font-size: 1em;
         color: #888;
       }
       .icon {
-        line-height: 6em;
-        color: $red;
-      }
-      .from-to {
-        margin-top: 0.9em;
-        font-size: 0.9em;
-        line-height: 2em;
-        padding-left: 2em;
-        color: $font;
+        color: $green;
+        line-height: 7em;
       }
       .stations {
-        margin-top: 0.9em;
+        margin-top: 1.3em;
         font-size: 0.9em;
-        line-height: 2em;
         p {
           color: $font;
         }
       }
+      .select-tab{
+        line-height: 7em;
+      }
     }
     .card-route {
+      height:5.5em;
       .icon {
         line-height: 6em;
-        color: $green;
+        color: $darkBlue;
       }
       .remove {
-        line-height: 6em;
+        line-height: 5em;
         color: $red;
       }
       .from-to {
@@ -223,6 +231,8 @@ $navHeight: 4.5em;
     color: $font;
   }
   .modal-body{
+    overflow: scroll;
+    max-height: 30em;
     p{
       color: #232323;
     }
@@ -425,6 +435,7 @@ h5 {
 /* 2: Navigation */
 .side-menu {
   background: rgba(34, 49, 63, 0.94);
+  box-shadow: none;
   li.with-icon:active {
     background: rgba(255, 255, 255, 0.27);
   }
@@ -461,7 +472,10 @@ h5 {
 .navbar-nav{
   margin-right:-0.4em;
   i{
-    color:white;
+    color: white;
+    height: 0.5em;
+    width: 1.5em;
+    text-align: center;
   }
   h5 {
     margin-top: 1em;
@@ -504,6 +518,7 @@ h5 {
 /* 4: Find */
 .find {
   height: 92vh;
+  background: $darkBlue;
   .twitter-typeahead{
     width:100%;
     height:3.2em;
@@ -547,8 +562,8 @@ h5 {
   }
   .search {
     background: $darkBlue;
-    height: 23em;
-    padding: 1.5em 0em;
+    height: 24em;
+    padding: 2.5em 0em;
     .swapStations{
       background: white !important;
       i{
@@ -651,6 +666,16 @@ h5 {
       margin-bottom: 1em;
     }
   }
+  .cards{
+    padding-top:0;
+    height:40.3vh;
+    .card{
+      width: 95%;
+      margin: 0 auto;
+      border-radius: 2px;
+      margin-bottom:0.5em;
+    }
+  }
 }
 
 /* 5: Board Search*/
@@ -736,9 +761,9 @@ h5 {
     }
   }
   .cards {
-    height: 60vh;
+    height: 61.5vh;
     overflow:scroll;
-    margin-top:15em;
+    margin-top:14.2em;
   }
 }
 
@@ -754,7 +779,7 @@ h5 {
   .cards {
     overflow: hidden;
     height: auto;
-    margin-top:1em;
+    margin-top:-0.5em;
   }
 }
 
@@ -934,14 +959,6 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
-  @include btn;
-  .btn-message {
-    height: 2.5em;
-    width: 6em;
-    margin-top: 0em;
-    position: absolute;
-    right: 1em;
-  }
   .results-header {
     z-index: 99999999;
     background: $darkBlue;
@@ -949,6 +966,9 @@ h5 {
     width: 100%;
     top: 0;
     color: white;
+    position: fixed;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     h5 {
       -webkit-transition: ease-in 0.4s;
       margin-top: 0.2em;
@@ -956,6 +976,15 @@ h5 {
     a {
       color: white;
     }
+    @include btn;
+    .btn-message {
+      height: 2.5em;
+      width: 6em;
+      margin-top: 1em;
+      position:absolute;
+      right:0.5em;
+    }
+
   }
   .cards-head {
     height: 3em;
@@ -964,7 +993,8 @@ h5 {
     background: $lighterBlue;
   }
   .cards{
-    max-height:80vh;
+    max-height:81.2vh;
+    margin-top:4.6em;
   }
 }
 
@@ -1027,7 +1057,7 @@ h5 {
     margin-top: 12.7em;
   }
   .arrival{
-    margin-top: 10.8em;
+    margin-top: 12.7em;
   }
   .list{
     margin-top:5.5em;
@@ -1045,9 +1075,42 @@ h5 {
   }
   .cards {
     overflow: scroll;
-    padding-top: 0.5em;
+    padding-top: 0em;
     margin-bottom:0.5em;
-    height:57vh
+    height:61vh;
+
+    .panel-default{
+      background: none;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      color: #444;
+      .panel-heading{
+        padding:0;
+        .panel-title{
+          a{
+            background: $darkBlue;
+            border: none;
+            color: #fff;
+            display:block;
+            width:100%;
+            height:100%;
+            padding:1em;
+          }
+          font-size:0.9em;
+          i{
+            font-size:1.2em;
+            position: absolute;
+            right: 1em;
+          }
+        }
+      }
+      .panel-body{
+        border:none;
+        padding:0;
+        margin:0;
+      }
+    }
   }
   .previousCards{
     height:61vh;
@@ -1055,5 +1118,32 @@ h5 {
   .large{
     font-size:1.3em;
     margin:0 !important;
+  }
+}
+
+
+//Loading https://codepen.io/exah/pen/VYLNJG
+.loader{
+  margin:20% auto 0 auto;
+}
+svg {
+  //position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  margin: auto;
+}
+
+.rect {
+  fill: none;
+  stroke-width: 8px;
+  stroke: white;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 50%;
+
+  animation: movedash 1.5s forwards 0s infinite;
+}
+
+@keyframes movedash {
+  to {
+    stroke-dashoffset: 250%;
   }
 }

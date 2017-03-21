@@ -1,12 +1,12 @@
-<div class="board">
+ <div class="board">
   <div class="board-search">
     <div class="row">
       <div class="col-xs-6">
         {{#if isDeparture}}<h5>Departure Board</h5>{{else}}<h5>Arrival Board</h5>{{/if}}
       </div>
       <div class="col-xs-6 text-right right">
-        {{#if stationMessage.message}}
-          <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
+        {{#if stationmessage.message}}
+          <button class="btn btn-message" {{action "showstationmessage"}}>{{material-design-icon name='message'}}</button>
         {{/if}}
       </div>
     </div>
@@ -56,6 +56,7 @@
           <h5>No Trains Found</h5>
         {{else}}
           <h5>Station not selected</h5>
+          <small>Enter the station above and select the type of board you would like to view</small>
         {{/if}}
       </div>
     {{/each}}

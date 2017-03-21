@@ -8,12 +8,13 @@ const {
 
 const {
   fragment,
-  fragmentArray
+  fragmentArray,
+  array
 } = MF;
 
 export default DS.Model.extend({
   type: attr("string", {defaultValue: 'train'}),
-  callingPoints: fragmentArray("station-fragment"),
+  callingPoints: array(),
   std: attr("string"),
   etd: attr("string"),
   origin: fragment("station-fragment"),
@@ -28,7 +29,11 @@ export default DS.Model.extend({
   sta: attr("string"),
   eta: attr("string"),
   at: attr("string"),
+  trainSplits: attr("boolean"),
 
+  destinations: function(){
+    return this.get("destination.name").split(" & ");
+  }.property("destination"),
   isArrival: function(){
     if(this.get("sta")){
       return true;

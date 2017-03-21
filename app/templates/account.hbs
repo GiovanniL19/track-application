@@ -1,5 +1,5 @@
 <div class="account">
-  <div class="header col-xs-12">
+  <div class="header col-xs-12" style="{{unless model.image "height: 5em;"}}">
     <div class="row">
       <div class="col-xs-12 text-center">
         <h5>Hello<br><strong>{{model.fullName}}</strong></h5>
@@ -12,35 +12,37 @@
     <div class="row">
       <h5>Personal Information</h5>
       <div class="form-group">
-        <label for="fullName">Full Name</label>
-        {{input type="text" class="form-control" id="fullName" value=model.fullName}}
+        <label for="fullName">First Name</label>
+        {{input type="text" class="form-control" id="firstName" value=model.firstName}}
+      </div>
+      <div class="form-group">
+        <label for="fullName">Last Name</label>
+        {{input type="text" class="form-control" id="lastName" value=model.lastName}}
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        {{input type="email" class="form-control" id="email" value=model.email}}
+        {{input type="text" class="form-control" id="email" value=model.email}}
       </div>
     </div>
 
     <div class="row">
       <h5>Account Information</h5>
       <div class="form-group">
-        <label for="username">Username</label>
-        {{input type="text" class="form-control" id="username" value=model.username}}
-      </div>
-
-      <div class="form-group">
         <label for="password">Password</label>
-        {{input type="password" class="form-control" id="password" value=model.password}}
+        {{input type="password" class="form-control" id="password" value=password placeholder="****"}}
       </div>
     </div>
-    <div class="row">
+    <div class="row text-right">
+      <br>
+      <a {{action "deleteAccount"}}>Delete Account</a>
+      <br>
       <div class="col-xs-6 text-left buttons">
-        <button class="btn btn-danger">Delete Account</button>
+        <button class="btn btn-primary" {{action "saveAccount"}}>Save</button>
       </div>
 
       <div class="col-xs-6 text-right buttons">
-        <button class="btn btn-primary" {{action "invalidate"}}>Logout</button>
+        <button class="btn btn-danger" {{action "invalidate"}}>Logout</button>
       </div>
     </div>
   </div>

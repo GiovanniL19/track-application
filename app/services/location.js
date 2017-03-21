@@ -21,7 +21,7 @@ export default Ember.Service.extend({
     function onSuccess(position) {
       controller.set("longitude", position.coords.longitude);
       controller.set("latitude", position.coords.latitude);
-    };
+    }
 
     function onError(error) {
       console.log(error);

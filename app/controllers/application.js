@@ -21,9 +21,10 @@ export default Ember.Controller.extend({
         return true;
       });
     }else{
+      this.set("user", null);
       return false;
     }
-  }.property('session.isAuthenticated'),
+  }.property('session.isAuthenticated', "session.session.authenticated.user"),
 
   actions:{
     changePage(route){

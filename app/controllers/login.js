@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   alert: Ember.inject.service('alert-message'),
   navigation: Ember.inject.service(),
+  validate: Ember.inject.service("input-validation"),
 
   identification: "",
   password: "",
@@ -22,7 +23,7 @@ export default Ember.Controller.extend({
          };
 
          //Create hashed password
-         let hashedPassword = md5("TRACK" + controller.get("identification") + controller.get('password') + "gfdfJguhgEf896tSd@&*&dhdUhfhdlS");
+         let hashedPassword = this.get("validate").hashPassword(controller.get("password"));
          credentials.password = hashedPassword;
 
          //Authenticate User
