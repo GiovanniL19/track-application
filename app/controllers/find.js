@@ -43,6 +43,7 @@ export default Ember.Controller.extend({
   checkLikedJourney: function(){
     let controller = this;
     this.set("journeyLiked", false);
+    this.set("journeyLikedID", "");
 
     if(this.get("location.fromStation") && this.get("location.toStation")) {
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
@@ -84,16 +85,18 @@ export default Ember.Controller.extend({
     unlikeJourney(){
       let controller = this;
 
-      this.store.find("journey", this.get("journeyLikedID")).then(function(journey){
-        controller.store.find("user", controller.get("application.user.id")).then(function (user) {
-          user.get("starredJourneys").removeObject(journey);
-          user.save().then(function(){
-            journey.destroyRecord().then(function(){
-              controller.set("journeyLiked", false);
+      if(this.get("journeyLikedID")) {
+        this.store.find("journey", this.get("journeyLikedID")).then(function (journey) {
+          controller.store.find("user", controller.get("application.user.id")).then(function (user) {
+            user.get("starredJourneys").removeObject(journey);
+            user.save().then(function () {
+              journey.destroyRecord().then(function () {
+                controller.set("journeyLiked", false);
+              });
             });
           });
         });
-      })
+      }
     },
 
     likeJourney(){
@@ -128,6 +131,7 @@ export default Ember.Controller.extend({
 
       journey.save().then(function(savedJourney){
         controller.set("journeyLiked", true);
+        controller.set("journeyLikedID", savedJourney.get("id"));
         controller.get("application.user.starredJourneys").pushObject(savedJourney);
         controller.get("application.user").save();
       });
