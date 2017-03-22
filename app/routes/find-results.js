@@ -16,7 +16,7 @@ export default Ember.Route.extend({
       user: controller.get("application.user.id")
     }).then(function (trains) {
       controller.set("navigation.isLoading", false);
-
+      controller.get("find").getRecommendedJourneys();
       return trains;
     }, function (error) {
       controller.set("navigation.isLoading", false);

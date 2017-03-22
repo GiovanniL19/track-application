@@ -42,19 +42,26 @@ $navHeight: 4.5em;
   .btn {
     border-radius: 0.2em;
     border: none;
-    background: $red;
+    background: transparent;
     height: 3.5em;
     width: 100%;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     color: white;
     text-transform: uppercase;
+    border:1px solid white;
     &:active {
-      background: #FF5859;
+      outline: 0;
+      color: $darkBlue;
+      background: white;
     }
     &:focus {
+      color: $darkBlue;
       outline: 0;
-      background: #FF5859;
+      background: white;
     }
+  }
+  .btn-danger{
+    background: $red;
   }
 }
 
@@ -64,6 +71,7 @@ $navHeight: 4.5em;
     overflow: auto;
     max-height: 78vh;
     .card {
+      cursor:pointer !important;
       background: white !important;
       //margin: 0 auto 1em auto;
       //width: 96%;
@@ -135,6 +143,13 @@ $navHeight: 4.5em;
     .bad-border{
       border-left: 5px solid $red;
     }
+    .highlight{
+      background: #f3f3f3 !important;
+      color: #22313f;
+      .name, .time{
+        font-weight: bold !important;
+      }
+    }
     .card-point {
       position:relative;
       box-shadow: none;
@@ -154,14 +169,14 @@ $navHeight: 4.5em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 1em;
-        font-weight:bold;
+        font-weight:400;
       }
       .time {
         margin-top: 0.9em;
         font-size: 0.9em;
         line-height: 4em;
         padding-left: 2em;
-        font-weight: bold;
+        font-weight: 400;
         p {
           color: $font;
         }
@@ -189,14 +204,30 @@ $navHeight: 4.5em;
       }
     }
     .card-route {
-      height:5.5em;
+      min-height:5.5em;
+      margin:0;
+      padding:0;
       .icon {
         line-height: 6em;
         color: $darkBlue;
       }
       .remove {
-        line-height: 5em;
+        line-height: 3em;
         color: $red;
+        border: 1px solid $red;
+        padding: 0;
+        text-align: center;
+        display: block;
+        width: 5em;
+        height: 3em;
+        margin: 1.4em 0;
+        font-size: 0.9em;
+        float: right;
+        right: 1em;
+        &:hover, &:focus, &:active{
+          background:$red;
+          color:white;
+        }
       }
       .from-to {
         margin-top: 0.9em;
@@ -262,6 +293,9 @@ $navHeight: 4.5em;
     overflow: scroll;
     font-weight:bold;
     color: $red;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
     .btn{
       display: none;
     }
@@ -518,7 +552,6 @@ h5 {
 /* 4: Find */
 .find {
   height: 92vh;
-  background: $darkBlue;
   .twitter-typeahead{
     width:100%;
     height:3.2em;
@@ -542,7 +575,6 @@ h5 {
     background-size: cover;
     height: 52%;
     padding: 1em;
-    padding-top: 3em;
     h5 {
       margin: 0;
       color: white;
@@ -562,12 +594,25 @@ h5 {
   }
   .search {
     background: $darkBlue;
-    height: 24em;
-    padding: 2.5em 0em;
+    height: 27em;
+    padding: 2em 0em;
+    border-top: 10px solid #273848;
+    border-bottom: 10px solid #273848;
+    h5{
+      text-transform: uppercase;
+    }
+    .date-time{
+      margin-top: -0.5em;
+      margin-bottom: 1em;
+    }
     .swapStations{
       background: white !important;
       i{
         color:#444;
+      }
+      &:hover, &:focus, &:active{
+        background:$red;
+        color:white;
       }
     }
     .date-time {
@@ -595,6 +640,7 @@ h5 {
       color: white;
       font-weight: 400;
       font-size: 11px;
+      text-transform: uppercase;
     }
     .form-group {
       @include inputFields;
@@ -608,6 +654,7 @@ h5 {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
           font-size:1em;
+          text-transform: uppercase;
         }
         .input-group-addon {
           background: $red;
@@ -631,12 +678,20 @@ h5 {
         padding: 0;
       }
       .btn-star {
-        background: $green;
-        color: white;
+        border: 1px solid $green;
+        color: $green;
         margin: 0 0 0 0.5em;
         width: 90%;
         height: 3.5em;
         line-height: 3.5em;
+        &:hover, &:focus, &:active{
+          background:$green;
+          color:white;
+        }
+      }
+      .filled{
+        background:$green;
+        color:white;
       }
 
     }
@@ -667,13 +722,15 @@ h5 {
     }
   }
   .cards{
-    padding-top:0;
-    height:40.3vh;
+    height:32vh;
+    padding-top: 1em;
+    background: $lighterBlue;
     .card{
       width: 95%;
       margin: 0 auto;
       border-radius: 2px;
       margin-bottom:0.5em;
+      background: rgba(255, 255, 255, 0.89) !important
     }
   }
 }
@@ -763,7 +820,7 @@ h5 {
   .cards {
     height: 61.5vh;
     overflow:scroll;
-    margin-top:14.2em;
+    margin-top:13.5em;
   }
 }
 
@@ -959,6 +1016,9 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+  .large{
+    height:7.1em;
+  }
   .results-header {
     z-index: 99999999;
     background: $darkBlue;
@@ -967,8 +1027,6 @@ h5 {
     top: 0;
     color: white;
     position: fixed;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     h5 {
       -webkit-transition: ease-in 0.4s;
       margin-top: 0.2em;
@@ -980,9 +1038,11 @@ h5 {
     .btn-message {
       height: 2.5em;
       width: 6em;
-      margin-top: 1em;
-      position:absolute;
-      right:0.5em;
+      margin-top: 0.1em;
+      position: absolute;
+      right: 1em;
+      background:transparent;
+      box-shadow:none;
     }
 
   }
@@ -1016,7 +1076,7 @@ h5 {
     .btn-buy {
       height: 2.5em;
       width: 6em;
-      margin-top: 1.5em;
+      margin-top: 2em;
       position: absolute;
       right: 1em;
     }
@@ -1045,7 +1105,6 @@ h5 {
     .times{
       font-size:1.4em;
       padding-left:0.4em;
-      margin-top:1em;
       margin-left:1.1em;
       i{
         font-size:1.5em;

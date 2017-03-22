@@ -13,12 +13,64 @@ export default Ember.Controller.extend({
   stations: [],
   recommendedJourneys:[],
   dateTime: null,
-  journey: null,
   loadingJourneys: true,
+  journeyLiked: false,
+  journeyLikedID: "",
 
-  journeyObserver: function(){
-    let journey = this.get("journey");
-    if(journey){
+  getRecommendedJourneys: function(){
+    let controller = this;
+    controller.set("loadingJourneys", true);
+    this.set("recommendedJourneys", []);
+
+    if(this.get("location.longitude") && this.get("location.latitude")){
+      this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
+        controller.set("loadingJourneys", false);
+        controller.set("recommendedJourneys", journeys);
+      }, function(error){
+        controller.set("loadingJourneys", false);
+        console.log(error);
+      });
+    }
+  },
+  locationReady: function(){
+    this.getRecommendedJourneys();
+  }.observes("location.done"),
+
+  userReady: function(){
+    this.getRecommendedJourneys();
+  }.observes("application.user"),
+
+  checkLikedJourney: function(){
+    let controller = this;
+    this.set("journeyLiked", false);
+
+    if(this.get("location.fromStation") && this.get("location.toStation")) {
+      if (this.get('location.fromStation') !== this.get("location.toStation")) {
+        //Check if email exists
+        Ember.$.ajax({
+          url: 'http://localhost:3002/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
+          type: 'GET',
+          headers: {
+            Accept : "application/json"
+          },
+          success: function(data) {
+            if(data.found){
+              controller.set("journeyLiked", true);
+              controller.set("journeyLikedID", data.id);
+            }else {
+              controller.set("journeyLiked", false);
+            }
+          },
+          error: function(err) {
+            console.log(err);
+            controller.set("alert.message", "There was an error checking liked journey");
+          }
+        });
+      }
+    }
+  }.observes("location.fromStation", "location.toStation"),
+  actions: {
+    findTrains(journey){
       this.transitionToRoute("find-results", {
         queryParams: {
           origin: journey.get("from.name"),
@@ -27,21 +79,24 @@ export default Ember.Controller.extend({
           destinationCRS: journey.get("to.crs")
         }
       });
-    }
-  }.observes("journey"),
-  recommendedJourneys: function(){
-    let controller = this;
-    controller.set("loadingJourneys", true);
-    if(this.get("location.longitude") && this.get("location.latitude")){
-      this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
-        controller.set("loadingJourneys", false);
-        controller.set("recommendedJourneys", journeys);
-      });
-    }
-  }.observes("location.longitude", "location.latitude", "application.user"),
+    },
 
-  actions: {
-    likeJourney: function(){
+    unlikeJourney(){
+      let controller = this;
+
+      this.store.find("journey", this.get("journeyLikedID")).then(function(journey){
+        controller.store.find("user", controller.get("application.user.id")).then(function (user) {
+          user.get("starredJourneys").removeObject(journey);
+          user.save().then(function(){
+            journey.destroyRecord().then(function(){
+              controller.set("journeyLiked", false);
+            });
+          });
+        });
+      })
+    },
+
+    likeJourney(){
       let controller = this;
       var to = null;
       var from = null;
@@ -72,6 +127,7 @@ export default Ember.Controller.extend({
       journey.set("starred", controller.get("application.user"));
 
       journey.save().then(function(savedJourney){
+        controller.set("journeyLiked", true);
         controller.get("application.user.starredJourneys").pushObject(savedJourney);
         controller.get("application.user").save();
       });
@@ -91,12 +147,12 @@ export default Ember.Controller.extend({
       Ember.$('#stationSelect').modal();
     },
 
-    showDateTimeSelect: function(){
+    showDateTimeSelect(){
       //Shows date modal
       Ember.$('#timeDateSelect').modal();
     },
 
-    getTrains: function(){
+    getTrains(){
       let controller = this;
       if(this.get("location.fromStation") && this.get("location.toStation")){
         if(this.get('location.fromStation') !== this.get("location.toStation")){

@@ -1,10 +1,14 @@
 export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
-    stared: {
+    starred: {
       serialize: 'ids',
       deserialize: 'ids'
     },
     history: {
+      serialize: 'ids',
+      deserialize: 'ids'
+    },
+    user: {
       serialize: 'ids',
       deserialize: 'ids'
     }

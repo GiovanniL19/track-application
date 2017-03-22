@@ -20,9 +20,9 @@ export default Ember.Route.extend({
       try {
         if (cordova.platformId === 'android') {
           StatusBar.backgroundColorByHexString("#304355");
+          controller.get("location").getLocation();
         }
       } catch (ignored) {}
-      controller.get("location").getLocation();
     }
   }
 

@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   alert: Ember.inject.service('alert-message'),
 
   application: Ember.inject.controller(),
+  find: Ember.inject.controller(),
 
   queryParams: ['origin', 'destination', 'originCRS', 'destinationCRS'],
   origin: "",

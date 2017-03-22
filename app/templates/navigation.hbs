@@ -43,6 +43,7 @@
       <li class="with-icon" {{action "changePage" "register"}}>{{material-design-icon name='vpn-key'}} <p>Register</p></li>
     {{else}}
       <li class="with-icon" {{action "changePage" "account"}}>{{material-design-icon name='face'}} <p>Account</p></li>
+      <li class="with-icon" {{action "logout"}}>{{material-design-icon name='lock'}} <p>Logout</p></li>
     {{/unless}}
   </ul>
 {{/side-menu}}

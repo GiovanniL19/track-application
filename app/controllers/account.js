@@ -65,9 +65,9 @@ export default Ember.Controller.extend({
 
     },
     invalidate(){
+      this.transitionToRoute("find");
       this.get('session').invalidate();
       this.set("navigation.user", null);
-      this.transitionToRoute("find");
     }
   }
 });
