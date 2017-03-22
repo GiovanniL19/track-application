@@ -27,6 +27,11 @@ export default Ember.Controller.extend({
   }.property('session.isAuthenticated', "session.session.authenticated.user"),
 
   actions:{
+    logout(){
+      this.get("session").invalidate();
+      this.transitionToRoute("find");
+      this.get("sideMenu").close();
+    },
     changePage(route){
       if(route === "account" && this.get("isLoggedIn") === false){
         //Transition to route

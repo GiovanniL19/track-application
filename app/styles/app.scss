@@ -594,8 +594,17 @@ h5 {
   }
   .search {
     background: $darkBlue;
-    height: 25em;
+    height: 28em;
     padding: 2.5em 0em;
+    border-top: 10px solid #273848;
+    border-bottom: 10px solid #273848;
+    h5{
+      text-transform: uppercase;
+    }
+    .date-time{
+      margin-top: -0.5em;
+      margin-bottom: 1em;
+    }
     .swapStations{
       background: white !important;
       i{
@@ -631,6 +640,7 @@ h5 {
       color: white;
       font-weight: 400;
       font-size: 11px;
+      text-transform: uppercase;
     }
     .form-group {
       @include inputFields;
@@ -644,6 +654,7 @@ h5 {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
           font-size:1em;
+          text-transform: uppercase;
         }
         .input-group-addon {
           background: $red;
@@ -678,6 +689,10 @@ h5 {
           color:white;
         }
       }
+      .filled{
+        background:$green;
+        color:white;
+      }
 
     }
     small {
@@ -708,7 +723,7 @@ h5 {
   }
   .cards{
     height:38.5vh;
-    padding-top: 0em;
+    padding-top: 1em;
     background: $lighterBlue;
     .card{
       width: 95%;

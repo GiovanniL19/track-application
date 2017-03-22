@@ -1,10 +1,10 @@
 <div class="find">
   <div class="search">
     <div class="row">
-      <div class="col-xs-5">
+      <div class="col-xs-6">
         <h5>Where to today?</h5>
       </div>
-      <div class="col-xs-7 date-time">
+      <div class="col-xs-6 date-time">
         <div class="input-group" {{action "showDateTimeSelect"}}>
           {{input type="text" class="form-control" placeholder=dateTimeSelect.dateSelected readonly="true" describedby="dateTime"}}
           <span class="input-group-addon" id="dateTime">{{material-design-icon name='arrow-drop-down'}}</span>
@@ -31,10 +31,17 @@
           <button class="btn btn-primary" {{action "getTrains"}}>{{#if navigation.isLoading}}{{fa-icon "circle-o-notch" spin=true}}{{else}}FIND TRAINS{{/if}}</button>
         </div>
         {{#if application.user}}
-          <div class="col-xs-2 buttons" {{action "likeJourney"}}>
-            <button class="btn btn-star">{{material-design-icon name='favorite-border'}}</button>
+          <div class="col-xs-2 buttons">
+            {{#if journeyLiked}}
+              <button class="btn btn-star filled" {{action "unlikeJourney"}}>{{material-design-icon name='favorite'}}</button>
+            {{else}}
+              <button class="btn btn-star" {{action "likeJourney"}}>{{material-design-icon name='favorite-border'}}</button>
+            {{/if}}
           </div>
         {{/if}}
+      </div>
+      <div class="row">
+        <small class="center text-center">Licence: Direct routes only</small>
       </div>
     </div>
   </div>
