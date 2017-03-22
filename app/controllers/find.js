@@ -23,8 +23,11 @@ export default Ember.Controller.extend({
         controller.set("loadingJourneys", false);
         controller.set("recommendedJourneys", journeys);
       });
+    }else{
+      controller.set("recommendedJourneys", []);
+      controller.set("loadingJourneys", false);
     }
-  }.observes("location.longitude", "location.latitude", "application.user"),
+  }.observes("location.longitude", "location.latitude"),
 
   actions: {
     findTrains(journey){
