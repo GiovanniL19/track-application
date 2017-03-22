@@ -7,6 +7,10 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     history: {
       serialize: 'ids',
       deserialize: 'ids'
+    },
+    user: {
+      serialize: 'ids',
+      deserialize: 'ids'
     }
   }
 });

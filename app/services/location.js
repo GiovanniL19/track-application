@@ -7,24 +7,35 @@ export default Ember.Service.extend({
   fromStation: null,
   toStation: null,
   showResults: true,
+  done: false,
 
+  init() {
+    this._super(...arguments);
+  },
   getLocation: function() {
-    let controller = this;
+    this.set("done", false);
     //If not on device
     this.get('geolocation').getLocation().then(function (geo) {
-      controller.set("longitude", geo.coords.longitude);
-      controller.set("latitude", geo.coords.latitude);
-    });
+      this.set("longitude", geo.coords.longitude);
+      this.set("latitude", geo.coords.latitude);
+      this.set("done", true);
+    }.bind(this));
 
-    //If on device
-    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
-    function onSuccess(position) {
-      controller.set("longitude", position.coords.longitude);
-      controller.set("latitude", position.coords.latitude);
-    }
+    try {
+      if (cordova) {
+        let controller = this;
+        //If on device
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
+        function onSuccess(position) {
+          controller.set("longitude", position.coords.longitude);
+          controller.set("latitude", position.coords.latitude);
+          controller.set("done", true);
+        }
 
-    function onError(error) {
-      console.log(error);
-    }
+        function onError(error) {
+          console.log(error);
+        }
+      }
+    }catch(ignored){}
   }
 });

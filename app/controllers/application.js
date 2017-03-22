@@ -15,7 +15,9 @@ export default Ember.Controller.extend({
 
   isLoggedIn: function(){
     if(this.get('session.isAuthenticated')){
+      var controller = this;
       return this.store.find("user", this.get('session.session.authenticated.user')).then(function (user) {
+        controller.set("user", user);
         return true;
       });
     }else{

@@ -15,19 +15,28 @@ export default Ember.Controller.extend({
   dateTime: null,
   loadingJourneys: true,
 
-  recommendedJourneys: function(){
+  getRecommendedJourneys: function(){
     let controller = this;
     controller.set("loadingJourneys", true);
+    this.set("recommendedJourneys", []);
+
     if(this.get("location.longitude") && this.get("location.latitude")){
       this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
         controller.set("loadingJourneys", false);
         controller.set("recommendedJourneys", journeys);
+      }, function(error){
+        controller.set("loadingJourneys", false);
+        console.log(error);
       });
-    }else{
-      controller.set("recommendedJourneys", []);
-      controller.set("loadingJourneys", false);
     }
-  }.observes("location.longitude", "location.latitude"),
+  },
+  locationReady: function(){
+    this.getRecommendedJourneys();
+  }.observes("location.done"),
+
+  userReady: function(){
+    this.getRecommendedJourneys();
+  }.observes("application.user"),
 
   actions: {
     findTrains(journey){
