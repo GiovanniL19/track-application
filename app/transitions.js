@@ -40,4 +40,10 @@ export default function() {
     this.use('toLeft'),
     this.reverse('toRight')
   );
+
+  this.transition(
+    this.fromRoute('train-information'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
 }

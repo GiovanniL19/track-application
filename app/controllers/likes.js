@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   navigation: Ember.inject.service(),
   alert: Ember.inject.service("alert-message"),
   application: Ember.inject.controller(),
+  find: Ember.inject.controller(),
 
   actions: {
     removeLiked(journey){
@@ -15,7 +16,7 @@ export default Ember.Controller.extend({
 
         user.save().then(function(){
           journey.destroyRecord().then(function(){
-            controller.set("alert.message", "Journey Removed");
+            controller.get("find").checkLikedJourney();
           });
         });
 

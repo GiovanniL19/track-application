@@ -104,37 +104,45 @@ export default Ember.Controller.extend({
       var to = null;
       var from = null;
 
-      this.get("stations").forEach(function (station) {
-        if (station.get("name") === controller.get("location.fromStation")) {
-          from = station;
+      if(this.get("location.fromStation") && this.get("location.toStation")) {
+        if (this.get('location.fromStation') !== this.get("location.toStation")) {
+          this.get("stations").forEach(function (station) {
+            if (station.get("name") === controller.get("location.fromStation")) {
+              from = station;
+            }
+
+            if (station.get("name") === controller.get("location.toStation")) {
+              to = station;
+            }
+          });
+
+          var journey = this.store.createRecord("journey");
+          var toStation = this.store.createFragment("station-fragment", {
+            name: to.get("name"),
+            crs: to.get("crs")
+          });
+
+          var fromStation = this.store.createFragment("station-fragment", {
+            name: from.get("name"),
+            crs: from.get("crs")
+          });
+
+          journey.set("to", toStation);
+          journey.set("from", fromStation);
+          journey.set("starred", controller.get("application.user"));
+
+          journey.save().then(function (savedJourney) {
+            controller.set("journeyLiked", true);
+            controller.set("journeyLikedID", savedJourney.get("id"));
+            controller.get("application.user.starredJourneys").pushObject(savedJourney);
+            controller.get("application.user").save();
+          });
+        }else{
+          controller.set("alert.message", "Stations can not be the same");
         }
-
-        if (station.get("name") === controller.get("location.toStation")) {
-          to = station;
-        }
-      });
-
-      var journey = this.store.createRecord("journey");
-      var toStation = this.store.createFragment("station-fragment",{
-        name: to.get("name"),
-        crs: to.get("crs")
-      });
-
-      var fromStation = this.store.createFragment("station-fragment",{
-        name: from.get("name"),
-        crs: from.get("crs")
-      });
-
-      journey.set("to", toStation);
-      journey.set("from", fromStation);
-      journey.set("starred", controller.get("application.user"));
-
-      journey.save().then(function(savedJourney){
-        controller.set("journeyLiked", true);
-        controller.set("journeyLikedID", savedJourney.get("id"));
-        controller.get("application.user.starredJourneys").pushObject(savedJourney);
-        controller.get("application.user").save();
-      });
+      }else{
+        controller.set("alert.message", "Please enter from and to stations");
+      }
     },
 
     swapStations(){
