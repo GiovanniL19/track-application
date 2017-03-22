@@ -64,7 +64,7 @@
                       </p>
                     </div>
                     <div class="col-xs-2 col-sm-2 text-right time">
-                      <strong>{{callingPoint.st}}</strong>
+                      {{callingPoint.st}}
                     </div>
                     <div class="col-xs-3 col-sm-3 text-right time">
                       <small class="{{if callingPoint.isDelayed "bad"}} {{unless callingPoint.isDelayed "good"}}">{{#if callingPoint.isDelayed}}{{callingPoint.delayedTime}}{{else}}On time{{/if}}</small>

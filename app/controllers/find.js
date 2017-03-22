@@ -13,22 +13,8 @@ export default Ember.Controller.extend({
   stations: [],
   recommendedJourneys:[],
   dateTime: null,
-  journey: null,
   loadingJourneys: true,
 
-  journeyObserver: function(){
-    let journey = this.get("journey");
-    if(journey){
-      this.transitionToRoute("find-results", {
-        queryParams: {
-          origin: journey.get("from.name"),
-          destination: journey.get("to.name"),
-          originCRS: journey.get("from.crs"),
-          destinationCRS: journey.get("to.crs")
-        }
-      });
-    }
-  }.observes("journey"),
   recommendedJourneys: function(){
     let controller = this;
     controller.set("loadingJourneys", true);
@@ -41,6 +27,16 @@ export default Ember.Controller.extend({
   }.observes("location.longitude", "location.latitude", "application.user"),
 
   actions: {
+    findTrains(journey){
+      this.transitionToRoute("find-results", {
+        queryParams: {
+          origin: journey.get("from.name"),
+          destination: journey.get("to.name"),
+          originCRS: journey.get("from.crs"),
+          destinationCRS: journey.get("to.crs")
+        }
+      });
+    },
     likeJourney: function(){
       let controller = this;
       var to = null;
