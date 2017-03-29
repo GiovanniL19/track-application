@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import MF from 'model-fragments';
+import MF from 'ember-data-model-fragments';
 
 
 const {
