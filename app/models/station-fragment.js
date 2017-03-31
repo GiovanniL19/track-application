@@ -58,5 +58,5 @@ export default MF.Fragment.extend({
         }
       }
     }
-  }.property("at", "et"),
+  }.property("at", "et")
 });

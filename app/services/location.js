@@ -12,6 +12,7 @@ export default Ember.Service.extend({
   init() {
     this._super(...arguments);
   },
+
   getLocation: function() {
     this.set("done", false);
     //If not on device

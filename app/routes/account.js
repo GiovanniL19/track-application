@@ -9,6 +9,7 @@ export default Ember.Route.extend({
       controller.transitionToRoute("login");
     }
   },
+
   model: function(){
     let controller = this.controllerFor("account");
     return this.store.find("user", controller.get('session.session.authenticated.user')).then(function (user) {
@@ -16,6 +17,7 @@ export default Ember.Route.extend({
       return user;
     });
   },
+
   setupController: function(controller, model){
     controller.set("model", model);
   }

@@ -33,6 +33,7 @@ export default DS.Model.extend({
   destinations: function(){
     return this.get("destination.name").split(" & ");
   }.property("destination"),
+
   isArrival: function(){
     if(this.get("sta")){
       return true;
@@ -40,6 +41,7 @@ export default DS.Model.extend({
       return false;
     }
   }.property("sta", "at"),
+
   isDelayed: function(){
     if(this.get("etd")) {
       if (this.get("etd") === "On time") {

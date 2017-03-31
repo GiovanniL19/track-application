@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   alert: Ember.inject.service("alert-message"),
-  dateTimeSelect: Ember.inject.service(),
   navigation: Ember.inject.service(),
+  dateTimeSelect: Ember.inject.service(),
   location: Ember.inject.service(),
 
   application: Ember.inject.controller(),
@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
       });
     }
   },
+
   locationReady: function(){
     this.getRecommendedJourneys();
   }.observes("location.done"),
@@ -70,6 +71,7 @@ export default Ember.Controller.extend({
       }
     }
   }.observes("location.fromStation", "location.toStation"),
+
   actions: {
     findTrains(journey){
       this.transitionToRoute("find-results", {
