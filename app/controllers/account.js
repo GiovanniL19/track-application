@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  navigation: Ember.inject.service(),
   session: Ember.inject.service('session'),
   alert: Ember.inject.service("alert-message"),
+  navigation: Ember.inject.service(),
   validate: Ember.inject.service("input-validation"),
   currentEmail: "",
   password: "",
@@ -27,6 +27,7 @@ export default Ember.Controller.extend({
         });
       }
     },
+
     saveAccount(){
       let controller = this;
       let user = this.get("model");
@@ -64,6 +65,7 @@ export default Ember.Controller.extend({
       }
 
     },
+
     invalidate(){
       this.transitionToRoute("find");
       this.get('session').invalidate();

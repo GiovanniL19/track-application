@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   alert: Ember.inject.service("alert-message"),
-  dateTimeSelect: Ember.inject.service(),
   navigation: Ember.inject.service(),
+  dateTimeSelect: Ember.inject.service(),
   location: Ember.inject.service(),
 
   application: Ember.inject.controller(),
@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
       });
     }
   },
+
   locationReady: function(){
     this.getRecommendedJourneys();
   }.observes("location.done"),
@@ -43,6 +44,7 @@ export default Ember.Controller.extend({
   checkLikedJourney: function(){
     let controller = this;
     this.set("journeyLiked", false);
+    this.set("journeyLikedID", "");
 
     if(this.get("location.fromStation") && this.get("location.toStation")) {
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
@@ -69,6 +71,7 @@ export default Ember.Controller.extend({
       }
     }
   }.observes("location.fromStation", "location.toStation"),
+
   actions: {
     findTrains(journey){
       this.transitionToRoute("find-results", {
@@ -84,16 +87,18 @@ export default Ember.Controller.extend({
     unlikeJourney(){
       let controller = this;
 
-      this.store.find("journey", this.get("journeyLikedID")).then(function(journey){
-        controller.store.find("user", controller.get("application.user.id")).then(function (user) {
-          user.get("starredJourneys").removeObject(journey);
-          user.save().then(function(){
-            journey.destroyRecord().then(function(){
-              controller.set("journeyLiked", false);
+      if(this.get("journeyLikedID")) {
+        this.store.find("journey", this.get("journeyLikedID")).then(function (journey) {
+          controller.store.find("user", controller.get("application.user.id")).then(function (user) {
+            user.get("starredJourneys").removeObject(journey);
+            user.save().then(function () {
+              journey.destroyRecord().then(function () {
+                controller.set("journeyLiked", false);
+              });
             });
           });
         });
-      })
+      }
     },
 
     likeJourney(){
@@ -101,36 +106,45 @@ export default Ember.Controller.extend({
       var to = null;
       var from = null;
 
-      this.get("stations").forEach(function (station) {
-        if (station.get("name") === controller.get("location.fromStation")) {
-          from = station;
+      if(this.get("location.fromStation") && this.get("location.toStation")) {
+        if (this.get('location.fromStation') !== this.get("location.toStation")) {
+          this.get("stations").forEach(function (station) {
+            if (station.get("name") === controller.get("location.fromStation")) {
+              from = station;
+            }
+
+            if (station.get("name") === controller.get("location.toStation")) {
+              to = station;
+            }
+          });
+
+          var journey = this.store.createRecord("journey");
+          var toStation = this.store.createFragment("station-fragment", {
+            name: to.get("name"),
+            crs: to.get("crs")
+          });
+
+          var fromStation = this.store.createFragment("station-fragment", {
+            name: from.get("name"),
+            crs: from.get("crs")
+          });
+
+          journey.set("to", toStation);
+          journey.set("from", fromStation);
+          journey.set("starred", controller.get("application.user"));
+
+          journey.save().then(function (savedJourney) {
+            controller.set("journeyLiked", true);
+            controller.set("journeyLikedID", savedJourney.get("id"));
+            controller.get("application.user.starredJourneys").pushObject(savedJourney);
+            controller.get("application.user").save();
+          });
+        }else{
+          controller.set("alert.message", "Stations can not be the same");
         }
-
-        if (station.get("name") === controller.get("location.toStation")) {
-          to = station;
-        }
-      });
-
-      var journey = this.store.createRecord("journey");
-      var toStation = this.store.createFragment("station-fragment",{
-        name: to.get("name"),
-        crs: to.get("crs")
-      });
-
-      var fromStation = this.store.createFragment("station-fragment",{
-        name: from.get("name"),
-        crs: from.get("crs")
-      });
-
-      journey.set("to", toStation);
-      journey.set("from", fromStation);
-      journey.set("starred", controller.get("application.user"));
-
-      journey.save().then(function(savedJourney){
-        controller.set("journeyLiked", true);
-        controller.get("application.user.starredJourneys").pushObject(savedJourney);
-        controller.get("application.user").save();
-      });
+      }else{
+        controller.set("alert.message", "Please enter from and to stations");
+      }
     },
 
     swapStations(){

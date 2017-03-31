@@ -305,6 +305,10 @@ $navHeight: 4.5em;
   }
   .modal-header {
     border: none;
+    .header{
+      padding: 0 0.8em;
+      text-align: left;
+    }
   }
   .modal-footer {
     border: none;
@@ -329,7 +333,7 @@ $navHeight: 4.5em;
       list-style: none;
       padding:1em 0;
       font-weight:bold;
-      color: $lighterBlue;
+      color: #444444;
     }
   }
 }
@@ -722,7 +726,7 @@ h5 {
     }
   }
   .cards{
-    height:32vh;
+    height:34vh;
     padding-top: 1em;
     background: $lighterBlue;
     .card{

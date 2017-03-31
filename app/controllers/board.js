@@ -18,6 +18,7 @@ export default Ember.Controller.extend({
       return false;
     }
   }.property("type"),
+
   isDeparture: function() {
     if(this.get("type") === "departure"){
       return true;
