@@ -18,5 +18,22 @@ export default DS.Model.extend({
   to: fragment('station-fragment'),
   from: fragment('station-fragment'),
   user: belongsTo("user", {async: true}),
-  count: attr("number", {defaultValue: 0})
+  count: attr("number", {defaultValue: 0}),
+  hour: attr("number"),
+
+  hourFormatted: function(){
+    if(this.get("hour") < 10){
+      if(this.get("hour") < 12) {
+        return "0:" + this.get("hour") + ":00AM";
+      }else{
+        return this.get("hour") + ":00AM";
+      }
+    }else{
+      if(this.get("hour") < 12) {
+        return this.get("hour") + ":00AM";
+      }else{
+        return this.get("hour") + ":00PM";
+      }
+    }
+  }.property("hour")
 });
