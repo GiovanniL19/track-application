@@ -135,6 +135,7 @@ $navHeight: 4.5em;
       .destination {
         padding-left: 1.5em;
         font-size: 0.9em;
+        margin-top: -0.5em;
       }
     }
     .good-border {
@@ -212,6 +213,7 @@ $navHeight: 4.5em;
         color: $darkBlue;
       }
       .remove {
+        border-radius: 2px;
         line-height: 3em;
         color: $red;
         border: 1px solid $red;
@@ -363,8 +365,10 @@ $navHeight: 4.5em;
   padding: 0;
   overflow: scroll;
   max-height: 50vh;
-  background: white;
-  border:1px solid $darkBlue;
+  background: #ffffff;
+  margin-top: 3.7em;
+  border-radius: 2px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.02), 0 10px 10px rgba(0, 0, 0, 0.1);
   .item{
     list-style: none;
     padding: 1em;
@@ -476,7 +480,7 @@ h5 {
 
 /* 2: Navigation */
 .side-menu {
-  background: rgba(34, 49, 63, 0.94);
+  background: $darkBlue;
   box-shadow: none;
   li.with-icon:active {
     background: rgba(255, 255, 255, 0.27);
@@ -560,24 +564,7 @@ h5 {
 /* 4: Find */
 .find {
   height: 92vh;
-  .twitter-typeahead{
-    width:100%;
-    height:3.2em;
-    .tt-open{
-      background:white;
-      border:1px solid $lighterBlue;
-      border-top:none;
-      margin-top:0.3em;
-      padding:0 1em;
-      width:100%;
-      .tt-suggestion{
-        padding:1em 0;
-        &:last-child{
-          display:none;
-        }
-      }
-    }
-  }
+  background: $darkBlue;
   .listMessage {
     background: url("images/scene.png") top no-repeat;
     background-size: cover;
@@ -733,11 +720,15 @@ h5 {
     height:34vh;
     padding-top: 1em;
     background: $lighterBlue;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+
     .card{
       width: 95%;
       margin: 0 auto;
-      border-radius: 2px;
+      border-radius: 0.5em;
       margin-bottom:0.5em;
+      height:6.5em;
       background: rgba(255, 255, 255, 0.89) !important
     }
   }
@@ -747,7 +738,10 @@ h5 {
 .board {
   height: 100vh;
   padding-bottom: 2em;
-
+  .autoComplete {
+    width: 100%;
+    margin-top: 3.4em;
+  }
   @include btn;
   .btn-message {
     height: 2.5em;
@@ -780,6 +774,7 @@ h5 {
           border-radius: 2px;
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
+          text-transform: uppercase;
         }
       }
     }
@@ -1189,28 +1184,28 @@ h5 {
 }
 
 
-//Loading https://codepen.io/exah/pen/VYLNJG
 .loader{
   margin:20% auto 0 auto;
-}
-svg {
-  //position: absolute;
-  left: 0; right: 0; top: 0; bottom: 0;
-  margin: auto;
-}
+  svg {
+    //position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    margin: auto;
+  }
 
-.rect {
-  fill: none;
-  stroke-width: 8px;
-  stroke: white;
-  stroke-dasharray: 40;
-  stroke-dashoffset: 50%;
+  .rect {
+    fill: none;
+    stroke-width: 8px;
+    stroke: white;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 50%;
 
-  animation: movedash 1.5s forwards 0s infinite;
-}
+    animation: movedash 1.5s forwards 0s infinite;
+  }
 
-@keyframes movedash {
-  to {
-    stroke-dashoffset: 250%;
+  @keyframes movedash {
+    to {
+      stroke-dashoffset: 250%;
+
+    }
   }
 }
