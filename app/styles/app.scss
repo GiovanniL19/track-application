@@ -832,6 +832,9 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+  .listMessage{
+    height:80vh;
+  }
   .liked-header {
     background: $darkBlue;
     padding: 1.5em 0em;
