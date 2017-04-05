@@ -24,7 +24,7 @@ export default DS.Model.extend({
   hourFormatted: function(){
     if(this.get("hour") < 10){
       if(this.get("hour") < 12) {
-        return "0:" + this.get("hour") + ":00AM";
+        return "0" + this.get("hour") + ":00AM";
       }else{
         return this.get("hour") + ":00AM";
       }

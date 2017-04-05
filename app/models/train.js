@@ -44,32 +44,32 @@ export default DS.Model.extend({
 
   isDelayed: function(){
     if(this.get("etd")) {
-      if (this.get("etd") === "On time") {
-        return false;
-      } else {
+      if (this.get("etd") === "Delayed") {
         return true;
+      } else {
+        return false;
       }
     }else{
-      if (this.get("eta") === "On time") {
+      if (this.get("eta") === "Delayed") {
         return false;
       } else {
-        return true;
+        return false;
       }
     }
   }.property("etd", "eta"),
 
   status: function(){
     if(this.get("etd")) {
-      if (this.get("etd") === "On time") {
-        return "On time";
-      } else {
+      if (this.get("etd") === "Delayed") {
         return "Delayed";
+      } else {
+        return "On time";
       }
     }else{
-      if (this.get("eta") === "On time") {
-        return "On time";
-      } else {
+      if (this.get("eta") === "Delayed") {
         return "Delayed";
+      } else {
+        return "On time";
       }
     }
   }.property("etd", "eta"),
