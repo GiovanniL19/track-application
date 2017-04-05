@@ -15,14 +15,15 @@ export default Ember.Controller.extend({
   dateTime: null,
   loadingJourneys: true,
   journeyLiked: false,
-  journeyLikedID: "",
+  likedJourney: null,
+  loadingLike: false,
 
   getRecommendedJourneys: function(){
     let controller = this;
     controller.set("loadingJourneys", true);
     this.set("recommendedJourneys", []);
 
-    if(this.get("location.longitude") && this.get("location.latitude")){
+    if(this.get("location.longitude") && this.get("location.latitude") && this.get("session.isAuthenticated")){
       this.store.query("journey", {longitude: controller.get("location.longitude"), latitude: controller.get("location.latitude"), user: controller.get("session.session.authenticated.user")}).then(function(journeys){
         controller.set("loadingJourneys", false);
         controller.set("recommendedJourneys", journeys);
@@ -44,9 +45,9 @@ export default Ember.Controller.extend({
   checkLikedJourney: function(){
     let controller = this;
     this.set("journeyLiked", false);
-    this.set("journeyLikedID", "");
+    this.set("likedJourney", null);
 
-    if(this.get("location.fromStation") && this.get("location.toStation")) {
+    if(this.get("location.fromStation") && this.get("location.toStation") && this.get("session.isAuthenticated")) {
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
         //Check if email exists
         Ember.$.ajax({
@@ -58,7 +59,7 @@ export default Ember.Controller.extend({
           success: function(data) {
             if(data.found){
               controller.set("journeyLiked", true);
-              controller.set("journeyLikedID", data.id);
+              controller.set("likedJourney", data);
             }else {
               controller.set("journeyLiked", false);
             }
@@ -86,64 +87,76 @@ export default Ember.Controller.extend({
 
     unlikeJourney(){
       let controller = this;
-
-      if(this.get("journeyLikedID")) {
-        this.store.find("journey", this.get("journeyLikedID")).then(function (journey) {
-          controller.store.find("user", controller.get("application.user.id")).then(function (user) {
-            user.get("starredJourneys").removeObject(journey);
-            user.save().then(function () {
-              journey.destroyRecord().then(function () {
-                controller.set("journeyLiked", false);
+      if(this.get("loadingLike") === false) {
+        this.set("loadingLike", true);
+        if(this.get("likedJourney")) {
+          let currentLikedJourney = this.get("likedJourney");
+          this.store.findRecord("journey", currentLikedJourney.id, {reload: true}).then(function(journey){
+            controller.store.find("user", controller.get("application.user.id")).then(function (user) {
+              user.get("starredJourneys").removeObject(journey);
+              user.save().then(function () {
+                journey.destroyRecord().then(function () {
+                  controller.set("journeyLiked", false);
+                  controller.set("loadingLike", false);
+                });
               });
             });
           });
-        });
+        }
       }
     },
 
     likeJourney(){
-      let controller = this;
-      var to = null;
-      var from = null;
+      if(this.get("loadingLike") === false) {
+        this.set("loadingLike", true);
+        let controller = this;
+        var to = null;
+        var from = null;
 
-      if(this.get("location.fromStation") && this.get("location.toStation")) {
-        if (this.get('location.fromStation') !== this.get("location.toStation")) {
-          this.get("stations").forEach(function (station) {
-            if (station.get("name") === controller.get("location.fromStation")) {
-              from = station;
-            }
+        if (this.get("location.fromStation") && this.get("location.toStation")) {
+          if (this.get('location.fromStation') !== this.get("location.toStation")) {
+            this.get("stations").forEach(function (station) {
+              if (station.get("name") === controller.get("location.fromStation")) {
+                from = station;
+              }
 
-            if (station.get("name") === controller.get("location.toStation")) {
-              to = station;
-            }
-          });
+              if (station.get("name") === controller.get("location.toStation")) {
+                to = station;
+              }
+            });
 
-          var journey = this.store.createRecord("journey");
-          var toStation = this.store.createFragment("station-fragment", {
-            name: to.get("name"),
-            crs: to.get("crs")
-          });
+            var journey = this.store.createRecord("journey");
+            var toStation = this.store.createFragment("station-fragment", {
+              name: to.get("name"),
+              crs: to.get("crs")
+            });
 
-          var fromStation = this.store.createFragment("station-fragment", {
-            name: from.get("name"),
-            crs: from.get("crs")
-          });
+            var fromStation = this.store.createFragment("station-fragment", {
+              name: from.get("name"),
+              crs: from.get("crs")
+            });
 
-          journey.set("to", toStation);
-          journey.set("from", fromStation);
-          journey.set("starred", controller.get("application.user"));
+            journey.set("type", "liked");
+            journey.set("to", toStation);
+            journey.set("from", fromStation);
+            journey.set("starred", controller.get("application.user"));
 
-          journey.save().then(function (savedJourney) {
-            controller.set("journeyLiked", true);
-            controller.set("journeyLikedID", savedJourney.get("id"));
-            controller.get("application.user.starredJourneys").pushObject(savedJourney);
-            controller.get("application.user").save();
-          });
-        }else{
-          controller.set("alert.message", "Stations can not be the same");
+            journey.save().then(function (savedJourney) {
+              controller.set("journeyLiked", true);
+              controller.set("likedJourney", savedJourney);
+              controller.get("application.user.starredJourneys").pushObject(savedJourney);
+              controller.get("application.user").save().then(function () {
+                controller.set("loadingLike", false);
+              });
+            });
+          } else {
+            controller.set("loadingLike", false);
+            controller.set("alert.message", "Stations can not be the same");
+          }
+        } else {
+          this.set("loadingLike", false);
+          controller.set("alert.message", "Please enter from and to stations");
         }
-      }else{
-        controller.set("alert.message", "Please enter from and to stations");
       }
     },
 

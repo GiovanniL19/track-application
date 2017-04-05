@@ -13,7 +13,7 @@ export default Ember.Route.extend({
   model: function(){
     let controller = this.controllerFor("account");
     return this.store.find("user", controller.get('session.session.authenticated.user')).then(function (user) {
-      controller.set("currentEmail", user.get("email"))
+      controller.set("currentEmail", user.get("email"));
       return user;
     });
   },

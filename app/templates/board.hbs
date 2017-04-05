@@ -5,8 +5,8 @@
         {{#if isDeparture}}<h5>Departure Board</h5>{{else}}<h5>Arrival Board</h5>{{/if}}
       </div>
       <div class="col-xs-6 text-right right">
-        {{#if stationmessage.message}}
-          <button class="btn btn-message" {{action "showstationmessage"}}>{{material-design-icon name='message'}}</button>
+        {{#if stationMessage.message}}
+          <button class="btn btn-message" {{action "showStationMessage"}}>{{material-design-icon name='message'}}</button>
         {{/if}}
       </div>
     </div>
@@ -49,7 +49,7 @@
 
   <div class="cards">
     {{#each trains as |train|}}
-      {{train-card details=train}}
+      {{train-card details=train destination=station origin=station isPartOfBoard=true}}
     {{else}}
       <div class="text-center listMessage">
         {{#if crs}}

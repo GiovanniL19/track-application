@@ -32,9 +32,10 @@ export default Ember.Controller.extend({
       let controller = this;
       var station = null;
 
+      this.set("trains", []);
+
       //Clear existing data
       this.set("crs", "");
-      this.set("trains", []);
       this.set("navigation.isLoading", true);
 
       //Lookup and get station
@@ -51,9 +52,8 @@ export default Ember.Controller.extend({
         //Get message
         controller.get("stationMessage").getMessage(station.get("crs"));
 
-        this.store.query("train", {type: this.get("type") ,location: station.get("crs")}).then(function(trains){
-          controller.set("trains", trains);
-
+        this.store.query("train", {type: this.get("type") ,location: station.get("crs")}, {reload: true}).then(function(trains){
+          controller.set("trains", trains.toArray());
           controller.set("navigation.isLoading", false);
         }, function(err){
           console.log(err);

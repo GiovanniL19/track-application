@@ -33,9 +33,9 @@
         {{#if application.user}}
           <div class="col-xs-2 buttons">
             {{#if journeyLiked}}
-              <button class="btn btn-star filled" {{action "unlikeJourney"}}>{{material-design-icon name='favorite'}}</button>
+              <button class="btn btn-star filled" {{action "unlikeJourney"}}>{{#if loadingLike}}{{fa-icon "circle-o-notch" spin=true}}{{else}}{{material-design-icon name='favorite'}}{{/if}}</button>
             {{else}}
-              <button class="btn btn-star" {{action "likeJourney"}}>{{material-design-icon name='favorite-border'}}</button>
+              <button class="btn btn-star" {{action "likeJourney"}}>{{#if loadingLike}}{{fa-icon "circle-o-notch" spin=true}}{{else}}{{material-design-icon name='favorite-border'}}{{/if}}</button>
             {{/if}}
           </div>
         {{/if}}
@@ -67,7 +67,7 @@
             </div>
             <div class="col-xs-8 stations">
               <p>
-                <small>Recommendation #{{position index}}</small><br>
+                <small>Recommendation #{{position index}} @{{journey.hourFormatted}}</small><br>
                 <strong>{{journey.from.name}} ({{journey.from.crs}})</strong><br>
                 <strong>{{journey.to.name}} ({{journey.to.crs}})</strong>
               </p>
