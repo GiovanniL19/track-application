@@ -3,9 +3,8 @@
     <div class="row">
       <div class="col-xs-1 col-sm-1"><a {{action "back"}}>{{material-design-icon name='chevron-left'}}</a></div>
       <div class="col-xs-11 col-sm-1">
-        <h5 class="large">{{train.details.origin.name}} to {{train.details.destination.name}}</h5>
+        <h5 class="large">{{train.details.origin.name}} to {{train.userDestination}}</h5>
         <div class="col-xs-6 col-sm-6 platform">
-          Platform <strong>{{train.details.platform}}</strong><br>
           <small>{{train.details.operator}}</small>
         </div>
       </div>
@@ -14,9 +13,13 @@
     <div class="row">
       <div class="col-xs-6 col-sm-6 times {{if train.details.isArrival "col-xs-12 col-sm-12"}}">
         <div class="row">
-          <div class="col-xs-6 col-sm-6">{{#if train.details.isDelayed}}
-            <span class="delayed">{{train.details.delayedDepartureTime}}</span>{{else}}
-            <span class="notDelayed">On Time</span>{{/if}}</div>
+          <div class="col-xs-6 col-sm-6">
+            {{#if train.details.isDelayed}}
+              <span class="delayed">{{train.details.delayedDepartureTime}}</span>
+            {{else}}
+              <span class="notDelayed">On Time</span>
+            {{/if}}
+          </div>
           <div class="col-xs-3 col-sm-3"></div>
           <div class="col-xs-3 col-sm-3"></div>
         </div>
@@ -25,7 +28,7 @@
           {{#if train.details.std}}
             <div class="col-xs-4 col-sm-4">{{train.details.std}}</div>
             <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
-            <div class="col-xs-4 col-sm-4">{{train.details.arrivalTime}}</div>
+            <div class="col-xs-4 col-sm-4">{{arrival-time train.details train.userDestination}}</div>
           {{else}}
             <div class="col-xs-12 col-sm-12 time">Arrival Time: {{train.details.sta}}</div>
           {{/if}}
@@ -33,7 +36,7 @@
       </div>
       {{#unless train.details.isArrival}}
         <div class="col-xs-5 col-sm-5 text-right">
-          <button class="btn btn-buy">Buy</button>
+          <button class="btn btn-buy" {{action "buyTicket"}}>Buy</button>
         </div>
       {{/unless}}
     </div>
