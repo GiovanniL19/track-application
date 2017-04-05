@@ -16,7 +16,7 @@
 
   <div class="cards list" style="{{if stationMessage.message "padding-top: 2.5em;"}}">
     {{#each model as |train|}}
-      {{train-card details=train destination=destination destinationCRS=destinationCRS}}
+      {{train-card details=train destination=destination destinationCRS=destinationCRS originCRS=originCRS origin=origin isPartOfBoard=false}}
     {{else}}
       <div class="text-center listMessage">
         <h5>No Trains Found</h5>

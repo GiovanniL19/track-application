@@ -49,7 +49,7 @@
 
   <div class="cards">
     {{#each trains as |train|}}
-      {{train-card details=train}}
+      {{train-card details=train destination=station origin=station isPartOfBoard=true}}
     {{else}}
       <div class="text-center listMessage">
         {{#if crs}}
