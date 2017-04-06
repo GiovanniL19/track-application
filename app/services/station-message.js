@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'track-application/config/environment';
 
 export default Ember.Service.extend({
   navigation: Ember.inject.service(),
@@ -9,7 +10,6 @@ export default Ember.Service.extend({
 
   getMessage: function(crs){
     let controller = this;
-    let host = "https://83da5908.ngrok.io";
 
     if(crs){
       this.set("crs", crs);
@@ -17,7 +17,7 @@ export default Ember.Service.extend({
 
       //Check if email exists
        Ember.$.ajax({
-        url: host + '/stations/message?station=' + crs,
+          url: ENV.hostURL + '/stations/message?station=' + crs,
         type: 'GET',
         headers: {
           Accept : "application/json"

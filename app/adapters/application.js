@@ -1,8 +1,9 @@
 //Data API
 import DS from "ember-data";
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
+import ENV from 'track-application/config/environment';
 
 export default DS.RESTAdapter.extend(DataAdapterMixin, {
-	host: 'https://83da5908.ngrok.io',
+	host: ENV.hostURL,
   authorizer: 'authorizer:token',
 });
