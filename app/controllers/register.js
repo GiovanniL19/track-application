@@ -71,7 +71,7 @@ export default Ember.Controller.extend({
 
         //Check if email exists
         Ember.$.ajax({
-          url: ENV.hostURL + 'users/check/exists/' + this.get("email"),
+          url: ENV.hostURL + '/users/check/exists/' + this.get("email"),
           type: 'GET',
           headers: {
             Accept : "application/json"
