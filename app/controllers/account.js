@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   validate: Ember.inject.service("input-validation"),
   currentEmail: "",
   password: "",
-
+  host: "https://83da5908.ngrok.io",
   save: function(user){
     let controller = this;
     user.save().then(function () {
@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
         this.save(user);
       }else if(this.get("validate").email(user.get("email"))) {
         Ember.$.ajax({
-          url: 'http://localhost:3002/users/check/exists/' + user.get("email"),
+          url: host + '/users/check/exists/' + user.get("email"),
           type: 'GET',
           headers: {
             Accept: "application/json"

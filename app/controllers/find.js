@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
         //Check if email exists
         Ember.$.ajax({
-          url: 'http://localhost:3002/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
+          url: 'https://83da5908.ngrok.io/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
           type: 'GET',
           headers: {
             Accept : "application/json"
