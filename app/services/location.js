@@ -22,8 +22,9 @@ export default Ember.Service.extend({
       this.set("done", true);
     }.bind(this));
 
-    try {
-      if (cordova) {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      try {
         let controller = this;
         //If on device
         navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
@@ -36,7 +37,7 @@ export default Ember.Service.extend({
         function onError(error) {
           console.log(error);
         }
-      }
-    }catch(ignored){}
+      }catch(ignored){}
+    }
   }
 });

@@ -34,6 +34,7 @@ $navHeight: 4.5em;
     font-size: 0.9em;
     &:focus {
       outline: 0;
+      border-bottom: 4px solid #3ec690;
     }
   }
 }
@@ -1210,5 +1211,16 @@ h5 {
       stroke-dashoffset: 250%;
 
     }
+  }
+}
+
+.card.card-recommended.row{
+  &:focus, &:active {
+    background: rgba(255, 255, 255, 0.74) !important;
+  }
+}
+.find .search .form-group .input-group .input-group-addon{
+  &:focus, &:active {
+    background: #ff7070 !important;
   }
 }
