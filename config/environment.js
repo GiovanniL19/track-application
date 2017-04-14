@@ -61,7 +61,7 @@ module.exports = function(environment) {
 
   if (environment === 'production' || environment === 'release'){
     ENV.hostURL = 'https://83da5908.ngrok.io';
-    
+
     //Sets up authentication
     ENV['ember-simple-auth'] = {
       authorizer: 'authorizer:token'

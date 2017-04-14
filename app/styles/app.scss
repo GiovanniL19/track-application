@@ -328,10 +328,6 @@ $navHeight: 4.5em;
     }
   }
 }
-.fa-spin {
-  margin-top: -0em;
-  display: block;
-}
 #stationSelect{
   ul{
     margin:0;
@@ -566,6 +562,10 @@ h5 {
 .find {
   height: 92vh;
   background: $darkBlue;
+  .fa-spin {
+    margin-top: -0em;
+    display: block;
+  }
   .listMessage {
     background: url("images/scene.png") top no-repeat;
     background-size: cover;
