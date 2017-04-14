@@ -554,7 +554,9 @@ h5 {
     }
   }
 }
-
+.nav > li > a{
+  padding: 10px 11px;
+}
 /* 3: Cards*/
 @include cards;
 
@@ -614,7 +616,7 @@ h5 {
     .date-time {
       .form-control {
         background: white;
-        width: 9em;
+        width: 8em;
         font-size: 11px;
         font-weight: bold;
         float: right;
@@ -871,10 +873,9 @@ h5 {
     }
   }
   .input{
-    padding: 1em;
-    .row{
-      margin-top:1em;
-    }
+    padding: -1em;
+    overflow-y: scroll;
+    height: 77vh;
     h5{
       margin-top:1em;
       margin-bottom:1em;
@@ -1034,6 +1035,7 @@ h5 {
     top: 0;
     color: white;
     position: fixed;
+    height: 5.1em;
     h5 {
       -webkit-transition: ease-in 0.4s;
       margin-top: 0.2em;
