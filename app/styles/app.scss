@@ -720,7 +720,7 @@ h5 {
     }
   }
   .cards{
-    height:34vh;
+    height:37%;
     padding-top: 1em;
     background: $lighterBlue;
     border-top-left-radius: 0.5em;
@@ -1035,10 +1035,14 @@ h5 {
     top: 0;
     color: white;
     position: fixed;
-    height: 5.1em;
+    .back{
+      margin-top: -0.32em;
+    }
+    .arrow{
+     margin-top:-0.3em;
+    }
     h5 {
       -webkit-transition: ease-in 0.4s;
-      margin-top: 0.2em;
     }
     a {
       color: white;
@@ -1063,7 +1067,7 @@ h5 {
   }
   .cards{
     max-height:81.2vh;
-    margin-top:4.6em;
+    margin-top:4.3em;
   }
 }
 
@@ -1078,15 +1082,12 @@ h5 {
     width: 100%;
     top:0;
     color:white;
-    position:fixed;
-    max-height:12.7em;
     min-height: 12.7em;
     @include btn;
     .btn-buy {
       height: 2.5em;
       width: 6em;
       margin-top: 1.6em;
-      position: absolute;
       right: 1em;
     }
     h5{
@@ -1113,8 +1114,7 @@ h5 {
     }
     .times{
       font-size:1.4em;
-      padding-left:0.4em;
-      margin-left:1.1em;
+      padding-left:0em;
       i{
         font-size:1.5em;
       }
@@ -1122,10 +1122,9 @@ h5 {
   }
   .selected-train{
     color:white;
-    margin-top: 12.7em;
   }
   .arrival{
-    margin-top: 12.7em;
+
   }
   .list{
     margin-top:5.5em;
