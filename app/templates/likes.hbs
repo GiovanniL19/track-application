@@ -31,7 +31,14 @@
       </div>
     {{else}}
       <div class="text-center listMessage">
-        <h5>Station liked routes</h5>
+        {{#if application.user}}
+          <h5>You have no liked journeys!</h5>
+        {{else}}
+          {{#link-to "login"}}
+            <h5>Login Required</h5>
+            {{#link-to "login"}}<small>To manage liked journeys, please login</small>{{/link-to}}
+          {{/link-to}}
+        {{/if}}
       </div>
     {{/each}}
   </div>

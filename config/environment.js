@@ -5,16 +5,11 @@ module.exports = function(environment) {
     modulePrefix: 'track-application',
     environment: environment,
     baseURL: '/',
+    hostURL: 'http://localhost:3002', //Local
+    //hostURL: 'https://83da5908.ngrok.io', //Pi
+
+
     defaultLocationType: 'auto',
-    contentSecurityPolicy: {
-      'default-src': "'self' http://localhost:3002",
-      'script-src': "'self' 'unsafe-inline'",
-      'style-src': "'self' 'unsafe-inline'",
-      'font-src': "'self'",
-      'connect-src': "'self' http://localhost:3002, http://[::1]:3002/",
-      'img-src': "'self' data:",
-      'media-src': "'self'"
-    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -32,6 +27,16 @@ module.exports = function(environment) {
       emulate: false
     }
   };
+
+  ENV.contentSecurityPolicy = {
+    'default-src': "'self' https://83da5908.ngrok.io",
+      'script-src': "'self' 'unsafe-inline'",
+      'style-src': "'self' 'unsafe-inline'",
+      'font-src': "'self'",
+      'connect-src': "'self' "+ENV.hostURL+", http://[::1]:3002/",
+      'img-src': "'self' data:",
+      'media-src': "'self'"
+  }
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -55,12 +60,14 @@ module.exports = function(environment) {
 
 
   if (environment === 'production' || environment === 'release'){
+    ENV.hostURL = 'https://83da5908.ngrok.io';
+
     //Sets up authentication
     ENV['ember-simple-auth'] = {
       authorizer: 'authorizer:token'
     };
     ENV['ember-simple-auth-token'] = {
-      serverTokenEndpoint: 'http://localhost:3002/users/auth'
+      serverTokenEndpoint: ENV.hostURL + '/users/auth'
     };
 
     //Minify the CSS and JavaScript
@@ -77,7 +84,7 @@ module.exports = function(environment) {
       authorizer: 'authorizer:token'
     };
     ENV['ember-simple-auth-token'] = {
-      serverTokenEndpoint: 'http://localhost:3002/users/auth'
+      serverTokenEndpoint: ENV.hostURL + '/users/auth'
     };
   }
   return ENV;

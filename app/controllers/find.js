@@ -18,6 +18,9 @@ export default Ember.Controller.extend({
   likedJourney: null,
   loadingLike: false,
 
+  from: "",
+  to: "",
+
   getRecommendedJourneys: function(){
     let controller = this;
     controller.set("loadingJourneys", true);
@@ -51,7 +54,7 @@ export default Ember.Controller.extend({
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
         //Check if email exists
         Ember.$.ajax({
-          url: 'http://localhost:3002/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
+          url: 'https://83da5908.ngrok.io/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
           type: 'GET',
           headers: {
             Accept : "application/json"
@@ -190,24 +193,36 @@ export default Ember.Controller.extend({
           this.get("stations").forEach(function (station) {
             if (station.get("name") === controller.get("location.fromStation")) {
               from = station;
+            }else if(controller.get("from").toLowerCase() === station.get("name").toLowerCase()){
+              from = station;
             }
 
             if (station.get("name") === controller.get("location.toStation")) {
               to = station;
+            }else if(controller.get("to").toLowerCase() === station.get("name").toLowerCase()){
+              to = station;
             }
           });
 
-          controller.transitionToRoute("find-results", {queryParams: {
-              origin: from.get("name"),
-              destination: to.get("name"),
-              originCRS: from.get("crs"),
-              destinationCRS: to.get("crs")
-            }
-          });
+          if(from !== "" && to !== "") {
+            controller.transitionToRoute("find-results", {
+              queryParams: {
+                origin: from.get("name"),
+                destination: to.get("name"),
+                originCRS: from.get("crs"),
+                destinationCRS: to.get("crs")
+              }
+            });
+          }else{
+            this.set("alert.message", "Invalid Stations");
+            controller.set("navigation.isLoading", false);
+          }
         }else{
+          controller.set("navigation.isLoading", false);
           this.set("alert.message", "From and to stations must be valid");
         }
       }else{
+        controller.set("navigation.isLoading", false);
         this.set("alert.message", "Please ensure you have a to and from station");
       }
     }

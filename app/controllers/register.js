@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import moment from 'moment';
+import ENV from 'track-application/config/environment';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
@@ -70,7 +71,7 @@ export default Ember.Controller.extend({
 
         //Check if email exists
         Ember.$.ajax({
-          url: 'http://localhost:3002/users/check/exists/' + this.get("email"),
+          url: ENV.hostURL + '/users/check/exists/' + this.get("email"),
           type: 'GET',
           headers: {
             Accept : "application/json"

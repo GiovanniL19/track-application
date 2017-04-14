@@ -34,6 +34,7 @@ $navHeight: 4.5em;
     font-size: 0.9em;
     &:focus {
       outline: 0;
+      border-bottom: 4px solid #3ec690;
     }
   }
 }
@@ -327,10 +328,6 @@ $navHeight: 4.5em;
     }
   }
 }
-.fa-spin {
-  margin-top: -0em;
-  display: block;
-}
 #stationSelect{
   ul{
     margin:0;
@@ -565,6 +562,10 @@ h5 {
 .find {
   height: 92vh;
   background: $darkBlue;
+  .fa-spin {
+    margin-top: -0em;
+    display: block;
+  }
   .listMessage {
     background: url("images/scene.png") top no-repeat;
     background-size: cover;
@@ -832,6 +833,9 @@ h5 {
   overflow-y: scroll;
   height: 100vh;
   padding-bottom: 2em;
+  .listMessage{
+    height:80vh;
+  }
   .liked-header {
     background: $darkBlue;
     padding: 1.5em 0em;
@@ -1207,5 +1211,16 @@ h5 {
       stroke-dashoffset: 250%;
 
     }
+  }
+}
+
+.card.card-recommended.row{
+  &:focus, &:active {
+    background: rgba(255, 255, 255, 0.74) !important;
+  }
+}
+.find .search .form-group .input-group .input-group-addon{
+  &:focus, &:active {
+    background: #ff7070 !important;
   }
 }

@@ -15,14 +15,14 @@
       <div class="form-group">
         <label for="from">from</label>
         <div class="input-group">
-          {{station-search content=stations station=location.fromStation showResults=showResults id="from" placeholder="e.g London Euston" describedby="from" class="form-control"}}
+          {{station-search content=stations station=location.fromStation showResults=showResults id="from" placeholder="e.g London Euston" describedby="from" class="form-control" value=from}}
           <span class="input-group-addon" id="from" {{action "getNearbyStations"}}>{{material-design-icon name='my-location'}}</span>
         </div>
       </div>
       <div class="form-group">
         <label for="to">to</label>
         <div class="input-group">
-          {{station-search content=stations station=location.toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control"}}
+          {{station-search content=stations station=location.toStation id="to" placeholder="e.g Liverpool Street" describedby="to" class="form-control" value=to}}
           <span class="input-group-addon swapStations" id="to" {{action "swapStations"}}>{{material-design-icon name='swap-vert'}}</span>
         </div>
       </div>

@@ -34,6 +34,10 @@ export default DS.Model.extend({
     return this.get("destination.name").split(" & ");
   }.property("destination"),
 
+  origins: function(){
+    return this.get("origin.name").split(" & ");
+  }.property("origin"),
+
   isArrival: function(){
     if(this.get("sta")){
       return true;

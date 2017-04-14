@@ -66,7 +66,11 @@
             <div class="panel-heading" role="tab" id="headingOne">
               <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{index}}" aria-expanded="true" aria-controls="{{index}}">
-                  Destination: {{destinations train.details.destinations index}} {{material-design-icon name='expand-more'}}
+                  {{#if train.details.isArrival}}
+                    Origin: {{locations train.details.origins index}} {{material-design-icon name='expand-more'}}
+                  {{else}}
+                    Destination: {{locations train.details.destinations index}} {{material-design-icon name='expand-more'}}
+                  {{/if}}
                 </a>
               </h4>
             </div>
@@ -92,7 +96,7 @@
                   <div class="card card-point row">
                     <div class="col-xs-12 col-sm-12 name">
                       <p>
-                        Calling at {{destinations train.details.destinations index}} only
+                        Calling at {{locations train.details.destinations index}} only
                       </p>
                     </div>
                   </div>
