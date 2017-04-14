@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
          //Get credentials
          var credentials = {
-           identification: this.get('identification'),
+           identification: this.get('identification').toLowerCase(),
            password: ""
          };
 
