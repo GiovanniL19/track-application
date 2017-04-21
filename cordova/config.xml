@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.co.giovannilenguito.track" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"
+<widget id="uk.co.giovannilenguito.track" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Track</name>
     <description>
-        A Train management application for mobile with a stunning user interface and smart features such as predictions and recommendations
+        Track is a smart cloud-based train booking solution.
     </description>
     <author email="giovanni16.gl@gmail.com" href="http://giovannilenguito.co.uk">
         Giovanni Lenguito
@@ -27,11 +27,13 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarOverlaysWebView" value="true" /> 
     <preference name="StatusBarBackgroundColor" value="#304355"/>
-    <preference name="FadeSplashScreen" value="false"/>
     <preference name="ShowSplashScreenSpinner" value="false"/>
     <preference name="SplashMaintainAspectRatio" value="true"/>
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="FadeSplashScreen" value="true" />  
+    <preference name="SplashScreenDelay" value="5000" />  
+    <preference name="BackgroundColor" value="#efefef"/>
     <platform name="android">
       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

@@ -9,7 +9,7 @@
 </div>
 
 {{#if alert.visible}}
-  <div class="alert alert-warning">
+  <div class="alert {{if alert.warning "alert-warning"}} {{unless alert.warning "alert-confirmation"}}">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     {{alert.message}}
   </div>

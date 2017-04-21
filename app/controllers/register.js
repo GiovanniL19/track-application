@@ -103,8 +103,8 @@ export default Ember.Controller.extend({
                   var user = controller.store.createRecord("user", {
                     firstName: firstName,
                     lastName: lastName,
-                    email: controller.get("email"),
-                    username: controller.get("email"),
+                    email: controller.get("email").toLowerCase(),
+                    username: controller.get("email").toLowerCase(),
                     password: hashedPassword,
                     dateCreated: dateCreated,
                     image: controller.get("selectedImage.image")
@@ -114,6 +114,7 @@ export default Ember.Controller.extend({
                   user.save().then(function () {
                     controller.clearInput();
                     //Success
+                    controller.set("alert.warning", false);
                     controller.set("alert.message", "Account Created!");
                     controller.transitionToRoute("login");
                   }, function (error) {

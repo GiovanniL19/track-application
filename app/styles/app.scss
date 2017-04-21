@@ -155,7 +155,7 @@ $navHeight: 4.5em;
     .card-point {
       position:relative;
       box-shadow: none;
-      height:5em;
+      min-height: 5em;
       //margin-bottom:5px;
       .icon {
         line-height: 5em;
@@ -167,18 +167,18 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
-        margin-top: 0.8em;
         font-size: 0.9em;
-        line-height: 4em;
+        padding: 1.5em;
         padding-left: 1em;
         font-weight:400;
       }
       .time {
         margin-top: 0.9em;
         font-size: 0.9em;
-        line-height: 4em;
-        padding-left: 2em;
-        font-weight: 400;
+        text-align: center;
+        padding: 1.5em;
+        padding-right:2em;
+        font-weight: bold;
         p {
           color: $font;
         }
@@ -250,7 +250,6 @@ $navHeight: 4.5em;
     }
   }
 }
-
 /* 0: Modal */
 .modal{
   z-index:999999;
@@ -384,6 +383,27 @@ $navHeight: 4.5em;
   margin: 0;
   color: white;
   background: orange;
+  border: none;
+  border-radius: 0;
+  font-weight: bold;
+  z-index:9999;
+  line-height:2.8em;
+  .close {
+    padding-top:0.3em;
+    opacity: 1;
+    box-shadow: none;
+    color: white;
+  }
+}
+.alert-confirmation {
+  position: fixed;
+  top: 0em;
+  left: 0;
+  width: 100%;
+  height: 4.5em;
+  margin: 0;
+  color: white;
+  background: $green;
   border: none;
   border-radius: 0;
   font-weight: bold;
@@ -554,7 +574,9 @@ h5 {
     }
   }
 }
-
+.nav > li > a{
+  padding: 10px 11px;
+}
 /* 3: Cards*/
 @include cards;
 
@@ -614,7 +636,7 @@ h5 {
     .date-time {
       .form-control {
         background: white;
-        width: 9em;
+        width: 8em;
         font-size: 11px;
         font-weight: bold;
         float: right;
@@ -718,7 +740,7 @@ h5 {
     }
   }
   .cards{
-    height:34vh;
+    height:37%;
     padding-top: 1em;
     background: $lighterBlue;
     border-top-left-radius: 0.5em;
@@ -871,10 +893,9 @@ h5 {
     }
   }
   .input{
-    padding: 1em;
-    .row{
-      margin-top:1em;
-    }
+    padding: -1em;
+    overflow-y: scroll;
+    height: 77vh;
     h5{
       margin-top:1em;
       margin-bottom:1em;
@@ -1034,9 +1055,14 @@ h5 {
     top: 0;
     color: white;
     position: fixed;
+    .back{
+      margin-top: -0.32em;
+    }
+    .arrow{
+     margin-top:-0.3em;
+    }
     h5 {
       -webkit-transition: ease-in 0.4s;
-      margin-top: 0.2em;
     }
     a {
       color: white;
@@ -1061,7 +1087,7 @@ h5 {
   }
   .cards{
     max-height:81.2vh;
-    margin-top:4.6em;
+    margin-top:4.3em;
   }
 }
 
@@ -1069,6 +1095,17 @@ h5 {
 .selectedTrain{
   height: 100vh;
   padding-bottom: 2em;
+  .info-message{
+    text-align:center;
+    padding:3em;
+    i{
+      font-size:3em;
+    }
+    h4{
+      color:#444;
+      font-weight:200;
+    }
+  }
   .header {
     z-index:99999999;
     background: $darkBlue;
@@ -1076,15 +1113,12 @@ h5 {
     width: 100%;
     top:0;
     color:white;
-    position:fixed;
-    max-height:12.7em;
     min-height: 12.7em;
     @include btn;
     .btn-buy {
       height: 2.5em;
       width: 6em;
       margin-top: 1.6em;
-      position: absolute;
       right: 1em;
     }
     h5{
@@ -1111,8 +1145,7 @@ h5 {
     }
     .times{
       font-size:1.4em;
-      padding-left:0.4em;
-      margin-left:1.1em;
+      padding-left:0em;
       i{
         font-size:1.5em;
       }
@@ -1120,10 +1153,9 @@ h5 {
   }
   .selected-train{
     color:white;
-    margin-top: 12.7em;
   }
   .arrival{
-    margin-top: 12.7em;
+
   }
   .list{
     margin-top:5.5em;
@@ -1223,4 +1255,8 @@ h5 {
   &:focus, &:active {
     background: #ff7070 !important;
   }
+}
+
+.lowercase{
+  text-transform: lowercase;
 }

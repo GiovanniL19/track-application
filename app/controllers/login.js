@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
          //Get credentials
          var credentials = {
-           identification: this.get('identification'),
+           identification: this.get('identification').toLowerCase(),
            password: ""
          };
 
@@ -33,6 +33,8 @@ export default Ember.Controller.extend({
            controller.set('alert.message', '');
            controller.transitionToRoute('find');
            controller.set("navigation.isLoading", false);
+           controller.set("alert.warning", false);
+           controller.set('alert.message', 'Welcome Back!');
          }, (err) => {
            console.log(err);
            controller.set("navigation.isLoading", false);

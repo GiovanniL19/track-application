@@ -33,16 +33,16 @@
         {{input type="password" class="form-control" id="password" value=password placeholder="****"}}
       </div>
     </div>
-    <div class="row text-right">
-      <br>
-      <a {{action "deleteAccount"}}>Delete Account</a>
-      <br>
-      <div class="col-xs-6 text-left buttons">
-        <button class="btn btn-primary" {{action "saveAccount"}}>Save</button>
-      </div>
 
-      <div class="col-xs-6 text-right buttons">
+    <div class="row text-left buttons">
+    <a {{action "deleteAccount"}}>Delete Account</a>
+    </div>
+    <div class="row text-right buttons">
+      <div class="col-xs-6 text-left buttons">
         <button class="btn btn-danger" {{action "invalidate"}}>Logout</button>
+      </div>
+      <div class="col-xs-6 text-right buttons">
+        <button class="btn btn-primary" {{action "saveAccount"}}>Save</button>
       </div>
     </div>
   </div>
