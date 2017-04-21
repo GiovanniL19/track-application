@@ -195,11 +195,15 @@ export default Ember.Controller.extend({
               from = station;
             }else if(controller.get("from").toLowerCase() === station.get("name").toLowerCase()){
               from = station;
+            }else if(controller.get("from").toLowerCase() === station.get("crs").toLowerCase()){
+              from = station;
             }
 
             if (station.get("name") === controller.get("location.toStation")) {
               to = station;
             }else if(controller.get("to").toLowerCase() === station.get("name").toLowerCase()){
+              to = station;
+            }else if(controller.get("to").toLowerCase() === station.get("crs").toLowerCase()){
               to = station;
             }
           });

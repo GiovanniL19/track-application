@@ -16,15 +16,14 @@ export default Ember.Component.extend({
   filteredResults: function() {
     try {
       if(this.get("station").length >= 3) {
-        let regExp = new RegExp(this.get("station").toLowerCase());
+        let regExp = new RegExp(this.get("station").toLowerCase(), 'g');
         return this.get('content').filter(function (item) {
           return regExp.test(item.get('name').toLowerCase());
         });
       }else{
         return [];
       }
-    }catch(ex){
-      //console.log(ex);
+    }catch(ignored){
       //No need to filter
       return [];
     }
