@@ -155,7 +155,7 @@ $navHeight: 4.5em;
     .card-point {
       position:relative;
       box-shadow: none;
-      height:5em;
+      min-height: 5em;
       //margin-bottom:5px;
       .icon {
         line-height: 5em;
@@ -167,18 +167,18 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
-        margin-top: 0.8em;
         font-size: 0.9em;
-        line-height: 4em;
+        padding: 1.5em;
         padding-left: 1em;
         font-weight:400;
       }
       .time {
         margin-top: 0.9em;
         font-size: 0.9em;
-        line-height: 4em;
-        padding-left: 2em;
-        font-weight: 400;
+        text-align: center;
+        padding: 1.5em;
+        padding-right:2em;
+        font-weight: bold;
         p {
           color: $font;
         }
@@ -1075,6 +1075,17 @@ h5 {
 .selectedTrain{
   height: 100vh;
   padding-bottom: 2em;
+  .info-message{
+    text-align:center;
+    padding:3em;
+    i{
+      font-size:3em;
+    }
+    h4{
+      color:#444;
+      font-weight:200;
+    }
+  }
   .header {
     z-index:99999999;
     background: $darkBlue;

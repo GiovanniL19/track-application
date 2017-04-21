@@ -24,7 +24,7 @@
 
       </div>
       <div class="col-xs-12 col-sm-12">
-        {{#if details.isDelayed}}<small>Arrival: {{details.delayedTime}}</small>{{/if}}
+        {{#if details.isDelayed}}<small>Expected: {{details.delayedTime}}</small>{{/if}}
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 status {{unless details.isDelayed "good"}} {{if details.isDelayed "bad"}}">

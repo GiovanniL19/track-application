@@ -67,14 +67,32 @@ export default DS.Model.extend({
       if (this.get("etd") === "On time") {
         return "On time";
       } else {
-        return "Delayed";
+        if (this.get("etd") === "Cancelled") {
+          return "Cancelled";
+        }else {
+          return "Delayed";
+        }
       }
     }else{
       if (this.get("eta") === "On time") {
         return "On time";
       } else {
-        return "Delayed";
+        if (this.get("eta") === "Cancelled") {
+          return "Cancelled";
+        }else {
+          return "Delayed";
+        }
       }
+    }
+  }.property("etd", "eta"),
+
+  isCancelled: function(){
+    if (this.get("eta") === "Cancelled") {
+      return true;
+    }else if (this.get("etd") === "Cancelled") {
+      return true;
+    }else{
+      return false;
     }
   }.property("etd", "eta"),
 
