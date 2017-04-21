@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   message: "",
   visible: false,
-
+  warning: true,
   messageObserver: function(){
     let controller = this;
     if(this.get("message")){
@@ -11,6 +11,7 @@ export default Ember.Service.extend({
       setTimeout(function(){
         controller.set("message", null);
         controller.set("visible", false);
+        controller.set("warning", true);
       }, 5000);
     }else{
       this.set("visible", false);

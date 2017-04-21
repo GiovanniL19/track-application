@@ -114,6 +114,7 @@ export default Ember.Controller.extend({
                   user.save().then(function () {
                     controller.clearInput();
                     //Success
+                    controller.set("alert.warning", false);
                     controller.set("alert.message", "Account Created!");
                     controller.transitionToRoute("login");
                   }, function (error) {
