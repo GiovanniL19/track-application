@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
            controller.transitionToRoute('find');
            controller.set("navigation.isLoading", false);
            controller.set("alert.warning", false);
-           controller.set('alert.message', 'Welcome Back!');
+           controller.set('alert.message', 'Welcome!');
          }, (err) => {
            console.log(err);
            controller.set("navigation.isLoading", false);

@@ -16,15 +16,25 @@ export default Ember.Component.extend({
   filteredResults: function() {
     try {
       if(this.get("station").length >= 3) {
-        let regExp = new RegExp(this.get("station").toLowerCase());
-        return this.get('content').filter(function (item) {
-          return regExp.test(item.get('name').toLowerCase());
+        let regExp = new RegExp(this.get("station").toLowerCase(), 'g');
+
+        var crsResult = this.get('content').filter(function (item) {
+          return regExp.test(item.get('crs').toLowerCase());
         });
+
+        var nameResult = this.get('content').filter(function (item) {
+          return regExp.test(item.get('name').toLowerCase().replace(/[^\w\s]/gi, ' '));
+        });
+
+
+        //Remove duplicates (if any) and return array
+        var results = Array.from(new Set(crsResult.concat(nameResult)));
+
+        return results;
       }else{
         return [];
       }
-    }catch(ex){
-      //console.log(ex);
+    }catch(ignored){
       //No need to filter
       return [];
     }

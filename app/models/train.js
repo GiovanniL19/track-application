@@ -50,14 +50,34 @@ export default DS.Model.extend({
     if(this.get("etd")) {
       if (this.get("etd") === "On time") {
         return false;
-      } else {
-        return true;
+      } else{
+        try {
+          let etd = parseInt(this.get("etd").replace(/:/g, ''));
+          let std = parseInt(this.get("std").replace(/:/g, ''));
+          if (etd > std) {
+            return true;
+          } else {
+            return false;
+          }
+        }catch(ignored){
+          return true;
+        }
       }
     }else{
       if (this.get("eta") === "On time") {
         return false;
       } else {
-        return true;
+        try {
+          let eta = parseInt(this.get("eta").replace(/:/g, ''));
+          let sta = parseInt(this.get("sta").replace(/:/g, ''));
+          if (eta > sta) {
+            return true;
+          } else {
+            return false;
+          }
+        }catch(ignored){
+          return true;
+        }
       }
     }
   }.property("etd", "eta"),
@@ -70,7 +90,17 @@ export default DS.Model.extend({
         if (this.get("etd") === "Cancelled") {
           return "Cancelled";
         }else {
-          return "Delayed";
+          try {
+            let etd = parseInt(this.get("etd").replace(/:/g, ''));
+            let std = parseInt(this.get("std").replace(/:/g, ''));
+            if (etd > std) {
+              return "Delayed";
+            } else {
+              return this.get("etd");
+            }
+          }catch(ignored){
+            return "Delayed";
+          }
         }
       }
     }else{
@@ -80,7 +110,17 @@ export default DS.Model.extend({
         if (this.get("eta") === "Cancelled") {
           return "Cancelled";
         }else {
-          return "Delayed";
+          try {
+            let eta = parseInt(this.get("eta").replace(/:/g, ''));
+            let sta = parseInt(this.get("sta").replace(/:/g, ''));
+            if (eta > sta) {
+              return "Delayed";
+            } else {
+              return "Arrived at: " + this.get("eta");
+            }
+          }catch(ignored){
+            return "Delayed";
+          }
         }
       }
     }

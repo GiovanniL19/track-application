@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'track-application/config/environment';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
@@ -54,7 +55,7 @@ export default Ember.Controller.extend({
       if (this.get('location.fromStation') !== this.get("location.toStation")) {
         //Check if email exists
         Ember.$.ajax({
-          url: 'https://83da5908.ngrok.io/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
+          url: ENV.hostURL + '/journeys/check/' + this.get("location.fromStation") + '/' + this.get("location.toStation") + '/' + this.get("application.user.id"),
           type: 'GET',
           headers: {
             Accept : "application/json"
@@ -129,13 +130,16 @@ export default Ember.Controller.extend({
             });
 
             var journey = this.store.createRecord("journey");
+
+            var toName = to.get("name").substring(0, 1).toUpperCase() + to.get("name").substring(1).toLowerCase();
             var toStation = this.store.createFragment("station-fragment", {
-              name: to.get("name"),
+              name: toName,
               crs: to.get("crs")
             });
 
+            var fromName = from.get("name").substring(0, 1).toUpperCase() + from.get("name").substring(1).toLowerCase();
             var fromStation = this.store.createFragment("station-fragment", {
-              name: from.get("name"),
+              name: fromName,
               crs: from.get("crs")
             });
 
@@ -170,6 +174,12 @@ export default Ember.Controller.extend({
 
       this.set("location.toStation", from);
       this.set("location.fromStation", to);
+
+      let toValue = this.get("to");
+      let fromValue = this.get("from");
+
+      this.set("to", fromValue);
+      this.set("from", toValue);
     },
 
     getNearbyStations(){
@@ -195,11 +205,15 @@ export default Ember.Controller.extend({
               from = station;
             }else if(controller.get("from").toLowerCase() === station.get("name").toLowerCase()){
               from = station;
+            }else if(controller.get("from").toLowerCase() === station.get("crs").toLowerCase()){
+              from = station;
             }
 
             if (station.get("name") === controller.get("location.toStation")) {
               to = station;
             }else if(controller.get("to").toLowerCase() === station.get("name").toLowerCase()){
+              to = station;
+            }else if(controller.get("to").toLowerCase() === station.get("crs").toLowerCase()){
               to = station;
             }
           });

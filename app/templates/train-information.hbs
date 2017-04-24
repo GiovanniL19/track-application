@@ -1,11 +1,11 @@
 <div class="selectedTrain">
-  <div class="header">
+  <div class="header" style="{{if train.details.isArrival "min-height: 16em !important"}}">
     <div class="row">
       <div class="col-xs-1 col-sm-1"><a {{action "back"}}>{{material-design-icon name='chevron-left'}}</a></div>
       <div class="col-xs-11 col-sm-11">
         {{#if train.isPartOfBoard}}
           {{#if train.details.isArrival}}
-            <h5 class="large">{{train.details.origin.name}} to {{train.userDestination}}</h5>
+            <h5 class="large">{{train.details.origin.name}} to {{train.details.destination.name}}</h5>
           {{else}}
             <h5 class="large">{{train.userOrigin}} to {{train.details.destination.name}}</h5>
           {{/if}}
@@ -14,7 +14,7 @@
         {{/if}}
         {{#unless train.details.isCancelled}}
           <div class="col-xs-12 col-sm-12 platform">
-            Departing From Platform: <strong>{{train.details.platform}}</strong><br>
+            Platform: <strong>{{train.details.platform}}</strong><br>
             <small>{{train.details.operator}}</small>
           </div>
         {{else}}
@@ -26,21 +26,33 @@
 
     <div class="row">
       <div class="col-sm-1 col-xs-1"></div>
-      <div class="times col-sm-7 col-xs-7">
+      <div class="times col-sm-7 col-xs-7 {{if train.details.isArrival "col-sm-12 col-xs-12 arrival"}}">
         <div class="row">
-          <div class="col-xs-12 col-sm-12">
-            {{#if train.details.isDelayed}}
-              <span class="delayed">{{train.details.delayedTime}}</span>
-            {{else}}
-              <span class="notDelayed">On Time</span>
-            {{/if}}
-          </div>
+          {{#unless train.details.isArrival}}
+            <div class="col-xs-6 col-sm-6">
+              {{#if train.details.isDelayed}}
+                <span class="delayed">{{train.details.delayedTime}}</span>
+              {{else}}
+                <span class="notDelayed">On Time</span>
+              {{/if}}
+            </div>
+            <div class="col-xs-6 col-sm-6">
+              {{{delayed-time train}}}
+            </div>
+          {{/unless}}
         </div>
 
         <div class="row">
         {{#if train.isPartOfBoard}}
           {{#if train.details.isArrival}}
-            <div class="col-xs-12 col-sm-12 time">Arrival Time: {{train.details.sta}}</div>
+            <div class="col-xs-12 col-sm-12 time">
+              Arrival: {{train.details.sta}}<br>
+              {{#if train.details.isDelayed}}
+                <span class="delayed">Expected: {{train.details.delayedTime}}</span>
+              {{else}}
+                <span class="notDelayed">{{train.details.status}}</span>
+              {{/if}}
+            </div>
           {{else}}
             <div class="col-xs-4 col-sm-4">{{train.details.std}}</div>
             <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
@@ -62,7 +74,7 @@
 
   </div>
 
-  <div class="selected-train {{if train.details.isArrival "arrival"}}">
+  <div class="selected-train">
     {{#if train.details.isCancelled}}
       <div class="info-message"><h4>{{material-design-icon name='mood-bad'}}<br><br><small>This Service Has Been Cancelled</small><br></h4><small><a {{action "back"}}>See More Trains</a></small></div>
     {{else}}
@@ -87,23 +99,33 @@
 
               <div id="{{index}}" class="panel-collapse collapse {{unless index "in"}}" role="tabpanel" aria-labelledby="heading{{index}}">
                 <div class="panel-body">
-                  <div class="card card-point row {{if train.details.isDelayed "bad-border"}} {{unless train.details.isDelayed "good-border"}}">
-                    <div class="col-xs-10 col-sm-10 name">
-                      <p>
-                        <strong>{{train.userOrigin}}</strong>
-                      </p>
-                      <small>Arrival:</small> <small class="{{if train.details.isDelayed "bad"}} {{unless train.details.isDelayed "good"}}">{{#if train.details.isDelayed}}{{train.details.delayedTime}}{{else}}On time{{/if}}</small>
-                    </div>
 
-                    <div class="col-xs-2 col-sm-2 time">
-                      {{train.details.std}}
+                  {{#unless train.details.isArrival}}
+                    <div class="card card-point row {{if train.details.isDelayed "bad-border"}} {{unless train.details.isDelayed "good-border"}}">
+                      <div class="col-xs-10 col-sm-10 name">
+                        <p>
+                          <strong>{{train.userOrigin}}</strong>
+                        </p>
+                        <small>Arrival:</small> <small class="{{if train.details.isDelayed "bad"}} {{unless train.details.isDelayed "good"}}">{{#if train.details.isDelayed}}{{train.details.delayedTime}}{{else}}On time{{/if}}</small>
+                      </div>
+
+                      <div class="col-xs-2 col-sm-2 time">
+                        {{#if train.details.std}}
+                          {{train.details.std}}
+                        {{else}}
+                          {{train.details.sta}}
+                        {{/if}}
+                      </div>
                     </div>
-                  </div>
+                  {{/unless}}
 
                   {{#each points as |callingPoint index|}}
                     <div class="card card-point row {{if (is-calling-point-delayed callingPoint) "bad-border"}} {{unless (is-calling-point-delayed callingPoint) "good-border"}} {{if (selected-point callingPoint.name train.userDestination) "highlight"}}">
                       <div class="col-xs-10 col-sm-10 name">
                         <p>
+                          {{#if (selected-point callingPoint.name train.userDestination)}}
+                            <small>Your destination:</small><br>
+                          {{/if}}
                           <strong>{{callingPoint.name}}</strong>
                         </p>
                         <small>Arrival:</small> <small class="{{if (is-calling-point-delayed callingPoint) "bad"}} {{unless (is-calling-point-delayed callingPoint) "good"}}">{{#if (is-calling-point-delayed callingPoint)}}{{calling-point-time callingPoint}}{{else}}On time{{/if}}</small>
@@ -122,6 +144,26 @@
                       </div>
                     </div>
                   {{/each}}
+
+                  {{#if train.details.isArrival}}
+                    <div class="card card-point row {{if train.details.isDelayed "bad-border"}} {{unless train.details.isDelayed "good-border"}}">
+                      <div class="col-xs-10 col-sm-10 name">
+                        <p>
+                          <strong>{{train.userOrigin}}</strong>
+                        </p>
+                        <small>Arrival:</small> <small class="{{if train.details.isDelayed "bad"}} {{unless train.details.isDelayed "good"}}">{{#if train.details.isDelayed}}{{train.details.delayedTime}}{{else}}On time{{/if}}</small>
+                      </div>
+
+                      <div class="col-xs-2 col-sm-2 time">
+                        {{#if train.details.std}}
+                          {{train.details.std}}
+                        {{else}}
+                          {{train.details.sta}}
+                        {{/if}}
+                      </div>
+                    </div>
+                  {{/if}}
+
                 </div>
               </div>
 

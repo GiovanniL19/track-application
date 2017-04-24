@@ -4,7 +4,7 @@
   {{#if filteredResults}}
     <ul class="autoComplete">
       {{#each filteredResults as |item|}}
-        <li class="item" {{action 'select' item}}>{{item.name}}</li>
+        <li class="item" {{action 'select' item}}>{{item.name}} ({{item.crs}})</li>
       {{/each}}
     </ul>
   {{/if}}
