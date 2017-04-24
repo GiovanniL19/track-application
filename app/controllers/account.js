@@ -10,8 +10,9 @@ export default Ember.Controller.extend({
   password: "",
   save: function(user){
     let controller = this;
-    user.save().then(function () {
-      controller.set("alert.message", "Account Updated");
+    user.save().then(function(){
+      controller.set("alert.warning", false);
+      controller.set("alert.message", "Account Saved");
     });
   },
 
@@ -38,7 +39,7 @@ export default Ember.Controller.extend({
 
       user.set("username", user.get("email"));
       if(this.get("currentEmail") === user.get("email")){
-        this.save(user);
+        controller.save(user);
       }else if(this.get("validate").email(user.get("email"))) {
         Ember.$.ajax({
           url: ENV.hostURL + '/users/check/exists/' + user.get("email"),
@@ -52,10 +53,11 @@ export default Ember.Controller.extend({
             }else{
               if (controller.get("password") !== "") {
                 if (confirm("You are about to update your account with a new password")) {
-                  this.save(user);
+                  controller.set("currentEmail", user.get("email"));
+                  controller.save(user);
                 }
               } else {
-                this.save(user);
+                controller.save(user);
               }
             }
           }

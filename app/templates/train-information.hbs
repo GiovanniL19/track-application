@@ -36,9 +36,14 @@
                 <span class="notDelayed">On Time</span>
               {{/if}}
             </div>
-            <div class="col-xs-6 col-sm-6">
-              {{{delayed-time train}}}
-            </div>
+
+            {{#unless train.details.isCancelled}}
+              {{#unless train.details.trainSplits}}
+                <div class="col-xs-6 col-sm-6">
+                  {{{delayed-time train}}}
+                </div>
+              {{/unless}}
+            {{/unless}}
           {{/unless}}
         </div>
 
@@ -55,13 +60,21 @@
             </div>
           {{else}}
             <div class="col-xs-4 col-sm-4">{{train.details.std}}</div>
-            <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
-            <div class="col-xs-4 col-sm-4">{{arrival-time train.details train.userDestination}}</div>
+            {{#unless train.details.trainSplits}}
+              <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
+              <div class="col-xs-4 col-sm-4">{{arrival-time train.details train.userDestination}}</div>
+            {{else}}
+              <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='call-split'}}</div>
+            {{/unless}}
           {{/if}}
         {{else}}
           <div class="col-xs-4 col-sm-4">{{train.details.std}}</div>
-          <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
-          <div class="col-xs-4 col-sm-4">{{arrival-time train.details train.userDestination}}</div>
+          {{#unless train.details.trainSplits}}
+            <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='chevron-right'}}</div>
+            <div class="col-xs-4 col-sm-4">{{arrival-time train.details train.userDestination}}</div>
+          {{else}}
+            <div class="col-xs-2 col-sm-2 text-left">{{material-design-icon name='call-split'}}</div>
+          {{/unless}}
         {{/if}}
         </div>
       </div>
@@ -89,9 +102,9 @@
                 <h4 class="panel-title">
                   <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{index}}" aria-expanded="true" aria-controls="{{index}}">
                     {{#if train.details.isArrival}}
-                      Origin: {{locations train.details.origins index}} {{material-design-icon name='expand-more'}}
+                      Origin: {{locations train.details.origins index}}
                     {{else}}
-                      Destination: {{locations train.details.destinations index}} {{material-design-icon name='expand-more'}}
+                      Destination: {{locations train.details.destinations index}}
                     {{/if}}
                   </a>
                 </h4>
