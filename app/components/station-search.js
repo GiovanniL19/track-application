@@ -30,7 +30,7 @@ export default Ember.Component.extend({
         //Remove duplicates (if any) and return array
         var results = Array.from(new Set(crsResult.concat(nameResult)));
 
-        return results.reverse();
+        return results;
       }else{
         return [];
       }

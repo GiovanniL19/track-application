@@ -146,8 +146,7 @@ $navHeight: 4.5em;
       border-left: 5px solid $red;
     }
     .highlight{
-      background: #f3f3f3 !important;
-      color: #22313f;
+      border-left: 5px solid #304355;
       .name, .time{
         font-weight: bold !important;
       }
@@ -167,17 +166,15 @@ $navHeight: 4.5em;
         color: $red
       }
       .name{
-        font-size: 0.9em;
+        font-size: 1em;
         padding: 1.5em;
         padding-left: 1em;
         font-weight:400;
       }
       .time {
-        margin-top: 0.9em;
-        font-size: 0.9em;
+        font-size: 1em;
         text-align: center;
-        padding: 1.5em;
-        padding-right:2em;
+        padding: 2.5em 0;
         font-weight: bold;
         p {
           color: $font;
@@ -1045,12 +1042,12 @@ h5 {
   height: 100vh;
   padding-bottom: 2em;
   .large{
-    height:7.1em;
+    height:6.3em;
   }
   .results-header {
     z-index: 99999999;
     background: $darkBlue;
-    padding: 1.7em 0em 1.5em 0em;
+    padding: 1.5em 0em 1em 0em;
     width: 100%;
     top: 0;
     color: white;
@@ -1087,7 +1084,7 @@ h5 {
   }
   .cards{
     max-height:81.2vh;
-    margin-top:4.3em;
+    margin-top:3.6em;
   }
 }
 
@@ -1107,13 +1104,14 @@ h5 {
     }
   }
   .header {
-    z-index:99999999;
-    background: $darkBlue;
-    padding: 1.7em 0em 1.5em 0em;
+    z-index: 99999999;
+    background: linear-gradient( rgba(24, 33, 41, 0.85), rgba(37, 48, 60, 0.72) ), url(https://images.pexels.com/photos/34167/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb) no-repeat;
+    padding: 2em 0em 1.5em 0em;
     width: 100%;
-    top:0;
-    color:white;
-    min-height: 12.7em;
+    top: 0;
+    color: white;
+    min-height: 17em;
+    background-size: cover;
     @include btn;
     .btn-buy {
       height: 2.5em;
@@ -1155,7 +1153,9 @@ h5 {
     color:white;
   }
   .arrival{
-
+    .time{
+      padding:0.5em 0 0 2.3em;
+    }
   }
   .list{
     margin-top:5.5em;
@@ -1163,7 +1163,8 @@ h5 {
   .cards-head {
     height: 3em;
     padding: 0.5em;
-    background: $lighterBlue;
+    background: rgba(48, 67, 85, 0.76);
+    margin-top: -3em;
     h5 {
       font-size: 0.8em;
       color: white;
@@ -1175,7 +1176,7 @@ h5 {
     overflow: scroll;
     padding-top: 0em;
     margin-bottom:0.5em;
-    height:61vh;
+    height: 58vh;
 
     .panel-default{
       background: none;
@@ -1198,7 +1199,6 @@ h5 {
           font-size:0.9em;
           i{
             font-size:1.2em;
-            position: absolute;
             right: 1em;
           }
         }
