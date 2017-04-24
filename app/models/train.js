@@ -47,36 +47,45 @@ export default DS.Model.extend({
   }.property("sta", "at"),
 
   isDelayed: function(){
-    if(this.get("etd")) {
-      if (this.get("etd") === "On time") {
-        return false;
-      } else{
-        try {
-          let etd = parseInt(this.get("etd").replace(/:/g, ''));
-          let std = parseInt(this.get("std").replace(/:/g, ''));
-          if (etd > std) {
-            return true;
-          } else {
-            return false;
-          }
-        }catch(ignored){
-          return true;
+    if(this.get("arrivalStatus") === "Delayed") {
+      return true;
+    }else {
+      if (this.get("etd")) {
+        if (this.get("etd") === "On time") {
+          return false;
         }
-      }
-    }else{
-      if (this.get("eta") === "On time") {
-        return false;
-      } else {
-        try {
-          let eta = parseInt(this.get("eta").replace(/:/g, ''));
-          let sta = parseInt(this.get("sta").replace(/:/g, ''));
-          if (eta > sta) {
-            return true;
-          } else {
-            return false;
-          }
-        }catch(ignored){
+        if (this.get("etd") === "Delayed") {
           return true;
+        } else {
+          try {
+            let etd = parseInt(this.get("etd").replace(/:/g, ''));
+            let std = parseInt(this.get("std").replace(/:/g, ''));
+            if (etd > std) {
+              return true;
+            } else {
+              return false;
+            }
+          } catch (ignored) {
+            return true;
+          }
+        }
+      } else {
+        if (this.get("eta") === "On time") {
+          return false;
+        } else if (this.get("eta") === "Delayed") {
+          return true;
+        } else {
+          try {
+            let eta = parseInt(this.get("eta").replace(/:/g, ''));
+            let sta = parseInt(this.get("sta").replace(/:/g, ''));
+            if (eta > sta) {
+              return true;
+            } else {
+              return false;
+            }
+          } catch (ignored) {
+            return true;
+          }
         }
       }
     }
@@ -116,7 +125,7 @@ export default DS.Model.extend({
             if (eta > sta) {
               return "Delayed";
             } else {
-              return "Arrived at: " + this.get("eta");
+              return this.get("eta");
             }
           }catch(ignored){
             return "Delayed";
