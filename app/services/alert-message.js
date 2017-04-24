@@ -12,7 +12,7 @@ export default Ember.Service.extend({
         controller.set("message", null);
         controller.set("visible", false);
         controller.set("warning", true);
-      }, 5000);
+      }, 3000);
     }else{
       this.set("visible", false);
     }
